@@ -16,6 +16,7 @@ import { moonPhase, sunTimes, dayLengthLabel } from "./astronomy.js";
 import { seasonsActive, categoryColor } from "./seasonal.js";
 import { formatLongDate, isoWeek, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
 import { loadPollen, renderPollenFullForecast } from "./pollen.js";
+import { buildWheelSVG, buildWheelLegend } from "./seasonWheel.js";
 
 const modal = () => document.getElementById("modal");
 const modalBody = () => document.getElementById("modalBody");
@@ -209,6 +210,12 @@ function openSeasonDeepDive(date) {
   openModal(`
     <h2>Säsongshjulet</h2>
     <p class="intro">${formatLongDate(date)}</p>
+
+    <div class="wheel-modal">
+      <div class="wheel-modal-svg">${buildWheelSVG(date)}</div>
+      ${buildWheelLegend()}
+    </div>
+
     ${active.length
       ? `<p>Just nu är följande säsonger igång:</p>${sections}`
       : `<p>Ingen specifik svensk säsong är aktiv just nu — vinterns vila eller mellan blomningar.</p>`}

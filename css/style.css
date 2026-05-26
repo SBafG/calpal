@@ -1120,6 +1120,43 @@ button {
   border-radius: 1px;
 }
 
+/* Stort säsongshjul i modal */
+.wheel-modal {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px 0 8px;
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 8px;
+}
+.wheel-modal-svg .wheel-svg {
+  width: 240px;
+  height: 240px;
+  display: block;
+}
+.wheel-modal .wheel-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 18px;
+  font-size: 13px;
+}
+.wheel-modal .wheel-legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+}
+.wheel-modal .wheel-legend .swatch {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+@media (max-width: 580px) {
+  .wheel-modal {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .wheel-modal-svg .wheel-svg { width: 200px; height: 200px; }
+}
+
 /* Pollen-tabell i modal */
 .pollen-table {
   width: 100%;

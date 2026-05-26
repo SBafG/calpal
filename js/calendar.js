@@ -48,6 +48,7 @@ function navigate(delta) {
 }
 
 export function getSelectedDate() { return selectedDate; }
+export function getCurrentMonth() { return currentMonth; }
 export function setSelectedDate(d) {
   selectedDate = new Date(d);
   currentMonth = new Date(d.getFullYear(), d.getMonth(), 1);
@@ -92,7 +93,7 @@ function render() {
     });
   }
 
-  if (onSelectCallback) onSelectCallback(selectedDate);
+  if (onSelectCallback) onSelectCallback(selectedDate, currentMonth);
 }
 
 function renderDayCell(date, today, holidays) {
@@ -154,7 +155,7 @@ function renderDayCell(date, today, holidays) {
   cell.addEventListener("click", () => {
     selectedDate = date;
     render();
-    if (onSelectCallback) onSelectCallback(selectedDate);
+    if (onSelectCallback) onSelectCallback(selectedDate, currentMonth);
   });
 
   return cell;

@@ -15,7 +15,8 @@ const CAT_RADII = {
   "jakt":   { inner: 86, outer: 98 }
 };
 
-export function renderSeasonWheel(container, date) {
+// Bygg själva SVG-grafiken — återanvänds av kort och modal
+export function buildWheelSVG(date) {
   const cx = 100, cy = 100, r = 100;
   const arcs = [];
 
@@ -48,6 +49,29 @@ export function renderSeasonWheel(container, date) {
     monthLabels.push(`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="8" fill="#a0907d" font-weight="600">${lbl}</text>`);
   }
 
+  return `<svg class="wheel-svg" viewBox="0 0 220 220">
+    ${arcs.join("\n")}
+    <circle cx="${cx}" cy="${cy}" r="16" fill="#faf5e9" stroke="#e3dac7"/>
+    <text x="${cx}" y="${cy - 1}" text-anchor="middle" font-size="8" fill="#a0907d" font-weight="600">DAG</text>
+    <text x="${cx}" y="${cy + 10}" text-anchor="middle" font-size="12" fill="#271c14" font-weight="700">${Math.round(today)}</text>
+    ${monthLabels.join("\n")}
+    <line x1="${lineX2}" y1="${lineY2}" x2="${tx}" y2="${ty}" stroke="#271c14" stroke-width="2"/>
+    <circle cx="${tx}" cy="${ty}" r="4" fill="#a87233" stroke="#fffdf8" stroke-width="2"/>
+  </svg>`;
+}
+
+export function buildWheelLegend() {
+  return `<div class="wheel-legend">
+    ${CATEGORIES.map(c => `
+      <span style="color:${categoryColor(c)}">
+        <span class="swatch" style="background:${categoryColor(c)}"></span>
+        ${capitalize(c)}
+      </span>
+    `).join("")}
+  </div>`;
+}
+
+export function renderSeasonWheel(container, date) {
   const active = seasonsActive(date);
   const activeNames = active.map(s => s.name).slice(0, 4);
 
@@ -61,24 +85,9 @@ export function renderSeasonWheel(container, date) {
       <h4 class="card-title">Säsongshjulet</h4>
     </div>
     <div class="wheel-row">
-      <svg class="wheel-svg" viewBox="0 0 220 220">
-        ${arcs.join("\n")}
-        <circle cx="${cx}" cy="${cy}" r="16" fill="#faf5e9" stroke="#e3dac7"/>
-        <text x="${cx}" y="${cy - 1}" text-anchor="middle" font-size="8" fill="#a0907d" font-weight="600">DAG</text>
-        <text x="${cx}" y="${cy + 10}" text-anchor="middle" font-size="12" fill="#271c14" font-weight="700">${Math.round(today)}</text>
-        ${monthLabels.join("\n")}
-        <line x1="${lineX2}" y1="${lineY2}" x2="${tx}" y2="${ty}" stroke="#271c14" stroke-width="2"/>
-        <circle cx="${tx}" cy="${ty}" r="4" fill="#a87233" stroke="#fffdf8" stroke-width="2"/>
-      </svg>
+      ${buildWheelSVG(date)}
       <div class="wheel-side">
-        <div class="wheel-legend">
-          ${CATEGORIES.map(c => `
-            <span style="color:${categoryColor(c)}">
-              <span class="swatch" style="background:${categoryColor(c)}"></span>
-              ${capitalize(c)}
-            </span>
-          `).join("")}
-        </div>
+        ${buildWheelLegend()}
         ${active.length ? `
           <div class="wheel-now">
             <strong>Just nu:</strong> ${activeNames.join(", ")}${active.length > 4 ? "…" : ""}

@@ -9,12 +9,12 @@ import { renderSeasonWheel } from "./seasonWheel.js";
 import { monthCitation } from "./almanackCitat.js";
 import { initModal, openCardDeepDive, setModalDate } from "./modal.js";
 
-function onDateSelected(date) {
+function onDateSelected(date, displayMonth) {
   renderHero(document.getElementById("dayHero"), date);
   renderDaylightBarometer(document.getElementById("daylightBarometer"), date);
   renderSeasonWheel(document.getElementById("seasonWheel"), date);
   renderDayDetail(document.getElementById("dayDetail"), date);
-  renderMonthCitation(date);
+  renderMonthCitation(displayMonth || date);
   setModalDate(date);
   wireCardClicks(date);
 }
