@@ -1,0 +1,37 @@
+name: Update pollen forecast
+
+on:
+  schedule:
+    # 06:00 UTC dagligen (08:00 svensk sommartid)
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch pollen data
+        run: node scripts/fetch-pollen.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pollen.json
+          if git diff --staged --quiet; then
+            echo "Ingen ändring av pollendata."
+          else
+            git commit -m "Update pollen forecast ($(date -u +%Y-%m-%d))"
+            git push
+          fi

@@ -15,6 +15,7 @@ import { wordForDate } from "./wordOfDay.js";
 import { moonPhase, sunTimes, dayLengthLabel } from "./astronomy.js";
 import { seasonsActive, categoryColor } from "./seasonal.js";
 import { formatLongDate, isoWeek, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
+import { loadPollen, renderPollenFullForecast } from "./pollen.js";
 
 const modal = () => document.getElementById("modal");
 const modalBody = () => document.getElementById("modalBody");
@@ -211,8 +212,14 @@ function openSeasonDeepDive(date) {
     ${active.length
       ? `<p>Just nu är följande säsonger igång:</p>${sections}`
       : `<p>Ingen specifik svensk säsong är aktiv just nu — vinterns vila eller mellan blomningar.</p>`}
+    <div id="pollenForecast"></div>
     <p class="dd-meta" style="margin-top:18px">Säsongerna är ungefärliga och baserade på normalår i Mellansverige. Norr om Dalälven brukar de skifta 1-2 veckor senare; söder om Skåne lika mycket tidigare.</p>
   `);
+
+  loadPollen().then(data => {
+    const el = document.getElementById("pollenForecast");
+    if (el) el.innerHTML = renderPollenFullForecast(data, date);
+  });
 }
 
 function dateRange(start, end) {

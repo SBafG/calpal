@@ -4,6 +4,7 @@
 
 import { SEASONS, categoryColor, seasonsActive } from "./seasonal.js";
 import { ICONS } from "./icons.js";
+import { loadPollen, renderPollenStrip } from "./pollen.js";
 
 const CATEGORIES = ["svamp","bär","jakt","pollen","fågel"];
 const CAT_RADII = {
@@ -84,7 +85,14 @@ export function renderSeasonWheel(container, date) {
           </div>` : ""}
       </div>
     </div>
+    <div id="pollenStrip"></div>
   `;
+
+  // Lazy-load pollendata och rendera asynkront
+  loadPollen().then(pollenData => {
+    const strip = container.querySelector("#pollenStrip");
+    if (strip) strip.outerHTML = renderPollenStrip(pollenData, date);
+  });
 }
 
 function dayOfYearFrom(m, d) {

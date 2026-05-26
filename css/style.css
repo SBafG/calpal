@@ -1067,6 +1067,81 @@ button {
 }
 .wheel-now strong { color: var(--green); font-weight: 700; }
 
+/* Pollen-strip i Säsongshjulet-kortet */
+.pollen-strip {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+}
+.pollen-strip.pollen-empty {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  font-style: italic;
+  line-height: 1.5;
+}
+.pollen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.pollen-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+.pollen-region {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+.pollen-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pollen-pill {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink);
+}
+.pollen-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.pollen-bars {
+  display: inline-flex;
+  gap: 2px;
+}
+.pollen-bars .bar {
+  width: 6px; height: 8px;
+  background: var(--line);
+  border-radius: 1px;
+}
+
+/* Pollen-tabell i modal */
+.pollen-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin: 12px 0 8px;
+}
+.pollen-table th {
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 4px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.pollen-table th:first-child { text-align: left; padding-left: 0; }
+.pollen-table td {
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
 /* ============================================================
    Modal
    ============================================================ */
