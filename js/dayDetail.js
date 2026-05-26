@@ -72,7 +72,6 @@ export function renderHero(container, date) {
 // ============================================================
 export function renderDayDetail(container, date) {
   const parts = [];
-  parts.push(renderMoon(date));
   parts.push(renderHistory(date));
   parts.push(renderFood(date));
   parts.push(renderCulture(date));
@@ -80,25 +79,6 @@ export function renderDayDetail(container, date) {
   parts.push(renderBonde(date));
   parts.push(renderWord(date));
   container.innerHTML = parts.filter(Boolean).join("");
-}
-
-function renderMoon(date) {
-  const moon = moonPhase(date);
-  return `
-    <div class="card">
-      <div class="card-head">
-        <span class="card-icon purple">${ICONS.moon}</span>
-        <h4 class="card-title">Månens fas</h4>
-      </div>
-      <div class="moon-row">
-        <span class="moon-emoji">${moon.emoji}</span>
-        <div class="moon-info">
-          <div class="phase-name">${moon.name}</div>
-          <div class="phase-sub">${Math.round(moon.illumination * 100)} % belysning · ${moon.age.toFixed(1)} dagar in i cykeln</div>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 function renderHistory(date) {
@@ -111,7 +91,7 @@ function renderHistory(date) {
         <h4 class="card-title">På denna dag</h4>
       </div>
       <div class="history-list">
-        ${list.slice(0, 4).map(h => `
+        ${list.slice(0, 3).map(h => `
           <div class="history-item">
             <span class="year">${h.year}</span>
             <span class="text">${h.text}</span>
