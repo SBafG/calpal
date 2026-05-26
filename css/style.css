@@ -292,13 +292,12 @@ button {
   /* Topbar-element wrapas på mobil */
   .ext-link { margin-left: 0; padding: 6px 10px; font-size: 11.5px; }
 
-  /* Ekeron-strip på mobil */
-  .ekeron-strip { padding: 10px 12px; gap: 12px; margin-top: 10px; }
-  .es-car-mini { width: 60px; height: 32px; }
-  .es-line { font-size: 14px; }
-  .es-line #esMil { font-size: 18px; }
-  .es-line .es-context { display: block; font-size: 11.5px; margin-left: 0; margin-top: 1px; }
-  .es-arrow { width: 28px; height: 28px; }
+  /* Ad-slot på mobil */
+  .left-col { gap: 12px; }
+  .ad-slot { padding: 11px 14px 11px 11px; gap: 12px; max-width: 100%; }
+  .ad-image { width: 56px; height: 56px; }
+  .ad-title { font-size: 14px; }
+  .ad-pitch { font-size: 11px; }
   .footer { padding: 14px 16px; font-size: 11.5px; }
 }
 
@@ -1212,91 +1211,102 @@ input:focus { outline: 2px solid var(--gold); outline-offset: -1px; border-color
 }
 
 /* ============================================================
-   Ekeron-strip — kompakt liten banner direkt under kalendern
+   Left-col — calendar + ad
    ============================================================ */
-.ekeron-strip {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 14px;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #0c2244 0%, #1a3258 100%);
-  border-radius: var(--radius-sm);
-  color: #fff !important;
-  text-decoration: none !important;
-  transition: transform .15s, box-shadow .2s;
-  position: relative;
-  overflow: hidden;
-}
-.ekeron-strip:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(12,34,68,.22);
-}
-.ekeron-strip::after {
-  content: "";
-  position: absolute;
-  top: 0; right: -40px;
-  width: 200px; height: 100%;
-  background: radial-gradient(circle, rgba(75,160,231,.16) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.es-car-mini {
-  flex-shrink: 0;
-  width: 76px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-}
-.es-car-mini svg { width: 100%; height: auto; }
-
-.es-text-mini {
-  flex: 1;
+.left-col {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 14px;
   min-width: 0;
 }
 
-.es-tag-mini {
-  font-size: 9.5px;
+/* ============================================================
+   Ad-slot — diskret annons utanför kalenderkortet
+   Designad att se ut som en extern reklamplats, inte
+   en del av sidans egna innehåll.
+   ============================================================ */
+.ad-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px 12px 12px;
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink) !important;
+  text-decoration: none !important;
+  transition: border-color .15s, box-shadow .15s;
+  font-size: 13px;
+  max-width: 540px;
+  align-self: flex-start;
+}
+
+.ad-slot:hover {
+  border-color: var(--gold-bright);
+  border-style: solid;
+  box-shadow: 0 2px 10px rgba(75,160,231,.12);
+}
+
+.ad-label {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: var(--bg);
+  color: var(--ink-faint);
+  padding: 0 6px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2.2px;
-  color: #4ba0e7;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
-.es-line {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.2px;
-}
-.es-line #esMil { color: #ef4444; font-size: 22px; }
-.es-line .unit { color: #ef4444; font-weight: 600; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-right: 4px; }
-.es-line .es-context {
-  color: rgba(255,255,255,.7);
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: 13px;
-  margin-left: 4px;
+.ad-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  object-position: center 32%;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #000;
 }
 
-.es-arrow {
-  flex-shrink: 0;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: rgba(75,160,231,.18);
-  color: #4ba0e7;
-  display: grid;
-  place-items: center;
-  transition: background .15s, transform .15s;
+.ad-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.35;
 }
-.ekeron-strip:hover .es-arrow {
-  background: #4ba0e7;
-  color: #fff;
-  transform: translateX(2px);
+
+.ad-brand {
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.3px;
+  text-transform: lowercase;
+}
+
+.ad-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+}
+
+.ad-pitch {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.ad-link {
+  font-size: 11.5px;
+  color: var(--gold-bright);
+  font-weight: 600;
+  margin-top: 4px;
+  letter-spacing: 0.1px;
 }
 
 /* Footer */

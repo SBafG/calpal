@@ -30,26 +30,6 @@ function boot() {
   initCalendar(onDateSelected);
   initModal();
   onDateSelected(getSelectedDate());
-  renderEkeronShowcase();
-}
-
-// Räknar dynamiskt ut dagens "lagom-mil" för exempel-leasingen
-// (1 nov 2024 → 1 nov 2027, 4500 mil totalt)
-function renderEkeronShowcase() {
-  const milEl = document.getElementById("esMil");
-  if (!milEl) return;
-
-  const start = new Date(2024, 10, 1);
-  const end = new Date(2027, 10, 1);
-  const maxMil = 4500;
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  const totalDays = (end - start) / 86400000;
-  const daysIn = Math.max(0, Math.min(totalDays, (today - start) / 86400000));
-  const recommended = Math.round(maxMil * (daysIn / totalDays));
-
-  milEl.textContent = recommended.toLocaleString("sv-SE").replace(/,/g, " ");
 }
 
 if (document.readyState === "loading") {

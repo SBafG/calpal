@@ -32,45 +32,30 @@
   </header>
 
   <main class="layout">
-    <section class="calendar-pane" aria-label="Kalender">
-      <div class="calendar-head">
-        <button class="navarrow" id="prevMonth" aria-label="Föregående månad">‹</button>
-        <h2 id="monthLabel">—</h2>
-        <button class="navarrow" id="nextMonth" aria-label="Nästa månad">›</button>
-      </div>
+    <div class="left-col">
+      <section class="calendar-pane" aria-label="Kalender">
+        <div class="calendar-head">
+          <button class="navarrow" id="prevMonth" aria-label="Föregående månad">‹</button>
+          <h2 id="monthLabel">—</h2>
+          <button class="navarrow" id="nextMonth" aria-label="Nästa månad">›</button>
+        </div>
 
-      <div class="calendar-grid" id="calendarGrid" role="grid"></div>
+        <div class="calendar-grid" id="calendarGrid" role="grid"></div>
 
-      <div class="month-citation" id="monthCitation"></div>
+        <div class="month-citation" id="monthCitation"></div>
+      </section>
 
-      <a class="ekeron-strip" href="https://ekeron.com/" target="_blank" rel="noopener" aria-label="Ekeron — mil-koll för leasingbil">
-        <span class="es-car-mini" aria-hidden="true">
-          <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="carGradMini" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#fff"/>
-                <stop offset="100%" stop-color="#cbd5e1"/>
-              </linearGradient>
-            </defs>
-            <path d="M 18 64 Q 28 38 60 32 L 110 28 Q 140 26 160 42 L 180 48 Q 188 50 188 60 L 188 68 L 18 68 Z"
-                  fill="url(#carGradMini)" stroke="#fff" stroke-width="1"/>
-            <path d="M 55 36 L 105 32 L 145 35 L 152 50 L 50 50 Z" fill="rgba(75,160,231,0.35)" stroke="#fff" stroke-width="0.5"/>
-            <line x1="100" y1="32" x2="100" y2="50" stroke="#fff" stroke-width="0.5" opacity="0.7"/>
-            <circle cx="55" cy="68" r="11" fill="#0c2244"/>
-            <circle cx="55" cy="68" r="7" fill="#475569"/>
-            <circle cx="155" cy="68" r="11" fill="#0c2244"/>
-            <circle cx="155" cy="68" r="7" fill="#475569"/>
-          </svg>
-        </span>
-        <span class="es-text-mini">
-          <span class="es-tag-mini">EKERON · mil-koll för leasingbil</span>
-          <span class="es-line"><span id="esMil">—</span> <span class="unit">mil</span> <span class="es-context">borde du ha kört idag</span></span>
-        </span>
-        <span class="es-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <a class="ad-slot" href="https://ekeron.com/" target="_blank" rel="noopener sponsored" aria-label="Annons: Ekeron mil-koll för leasingbil">
+        <span class="ad-label">Annons</span>
+        <img class="ad-image" src="images/bmw1.png" alt="" loading="lazy"/>
+        <span class="ad-body">
+          <span class="ad-brand">ekeron.com</span>
+          <span class="ad-title">Mil-koll för leasingbilen</span>
+          <span class="ad-pitch">Se din rekommenderade körsträcka dag för dag — slipp straffavgift vid återlämning.</span>
+          <span class="ad-link">Räkna på ekeron.com →</span>
         </span>
       </a>
-    </section>
+    </div>
 
     <aside class="sidebar" aria-label="Detaljer för vald dag">
       <div id="dayHero"></div>
