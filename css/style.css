@@ -57,40 +57,6 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
 }
 
-/* Almanacka — varmt jordtonigt tema */
-:root[data-theme="warm"] {
-  --bg: #f3eee2;
-  --surface: #fffdf8;
-  --surface-soft: #faf5e9;
-  --ink: #271c14;
-  --ink-soft: #5b4d3f;
-  --ink-faint: #a0907d;
-  --line: #e3dac7;
-  --line-soft: #ede5d3;
-
-  --red: #9a3b3b;
-  --red-soft: #f3e3df;
-  --blue: #2d4663;
-  --blue-soft: #e2e8ee;
-  --gold: #a87233;
-  --gold-soft: #f1e3c4;
-  --gold-bright: #d4a342;
-  --green: #5a6b3b;
-  --green-soft: #e7ead8;
-  --purple: #6b4a7a;
-  --purple-soft: #e8e0ed;
-
-  --logo-bg: #271c14;
-  --logo-fg: #d4a342;
-  --logo-ring: #a87233;
-
-  --shadow-sm: 0 1px 2px rgba(39,28,20,.04);
-  --shadow: 0 1px 2px rgba(39,28,20,.05), 0 4px 14px rgba(39,28,20,.06);
-  --shadow-lg: 0 4px 24px rgba(39,28,20,.09);
-}
-
-html, body { transition: background-color .25s ease, color .25s ease; }
-.card, .day-hero, .topbar, .footer { transition: background-color .25s ease, box-shadow .25s ease; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -190,35 +156,6 @@ button {
 .navbtn:hover {
   background: var(--line-soft);
   color: var(--ink);
-}
-
-/* Tema-toggle */
-.theme-toggle {
-  display: inline-flex;
-  background: var(--line-soft);
-  border-radius: 999px;
-  padding: 3px;
-  margin-left: 6px;
-  gap: 2px;
-}
-
-.th-btn {
-  padding: 5px 11px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--ink-faint);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: background .15s, color .15s;
-  letter-spacing: 0.1px;
-}
-.th-btn:hover { color: var(--ink-soft); }
-.th-btn.active {
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: 0 1px 2px rgba(0,0,0,.06);
 }
 
 /* Extern länk i topnav */
@@ -353,9 +290,6 @@ button {
   .wheel-svg { width: 110px; height: 110px; }
 
   /* Topbar-element wrapas på mobil */
-  .theme-toggle { margin-left: 0; padding: 2px; }
-  .th-btn { padding: 4px 9px; font-size: 11px; }
-  .th-btn svg { display: none; }
   .ext-link { margin-left: 0; padding: 6px 10px; font-size: 11.5px; }
 
   /* Ekeron-banner på mobil — stack */

@@ -143,16 +143,15 @@ function openAbout() {
     <div class="ekeron-card">
       <div class="ek-icon">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
-          <circle cx="6.5" cy="16.5" r="2.5"/>
-          <circle cx="16.5" cy="16.5" r="2.5"/>
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
         </svg>
       </div>
       <div>
-        <h4>Ekeron — leasingkalkylator</h4>
-        <p>Räkna ut den verkliga månadskostnaden för din nästa firmabil eller privatleasing. Jämför bilmodeller, restvärden, ränta och förmånsvärde — på några sekunder.</p>
+        <h4>Ekeron — mil-koll för leasingbil</h4>
+        <p>När du leasar en bil får du en max körsträcka för perioden. Ekeron räknar ut <em>hur många mil du borde ha kört idag</em> för att ligga i fas mot återlämningsdagen — så du slipper otrevliga straffavgifter när bilen ska lämnas tillbaka.</p>
         <a class="ek-link" href="https://ekeron.com/" target="_blank" rel="noopener">
-          Öppna ekeron.com
+          Räkna på ekeron.com
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
