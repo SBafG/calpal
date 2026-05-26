@@ -59,11 +59,11 @@ export const SEASONS = [
 ];
 
 const CAT_COLORS = {
-  svamp:  "#a16e2d",   // varm brun-amber
-  bär:    "#8a2e3b",   // bär-vinrött
-  jakt:   "#6b4a25",   // jord-brun
-  pollen: "#b88a2c",   // gulgyllen
-  fågel:  "#3e5e74"    // dyster sjöblå
+  svamp:  "#b0651f",   // kanelbrun (skogsbotten)
+  bär:    "#a83248",   // bärrött
+  jakt:   "#3d6b3a",   // skogsgrön (tydligt skilt från svampbrun)
+  pollen: "#e0a830",   // varm gulguld
+  fågel:  "#2f7d8e"    // teal-blå (kallt, klart skilt från resten)
 };
 
 export function categoryColor(cat) { return CAT_COLORS[cat] || "#475569"; }
