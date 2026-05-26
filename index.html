@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CalPal — en svensk kalender med själ. Namnsdagar, helgdagar, månfaser, historia, säsong, kuriosa och mer." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>CalPal — den svenska kalendern med själ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23271c14'/%3E%3Cpath d='M 44 18 a 14 14 0 1 0 0 28' fill='none' stroke='%23d4a342' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='34' cy='32' r='3.6' fill='%23d4a342'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="11" fill="#271c14"/>
+          <!-- yttre tunn ring (årets cykel) -->
+          <circle cx="20" cy="20" r="14.5" fill="none" stroke="#a87233" stroke-width="0.6" opacity="0.55"/>
+          <!-- C/halvmåne i guld -->
+          <path d="M 27 12.5 a 9.5 9.5 0 1 0 0 15" fill="none" stroke="#d4a342" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- solpunkt -->
+          <circle cx="22.8" cy="20" r="2.3" fill="#d4a342"/>
+        </svg>
+      </span>
+      <h1>Cal<span class="ampersand">·</span>Pal</h1>
+      <span class="tagline">Den svenska kalendern med själ</span>
+    </div>
+    <nav class="topnav">
+      <button class="navbtn" id="todayBtn" title="Hoppa till idag">Idag</button>
+      <button class="navbtn" id="counterBtn" title="Personliga räknare">Räknare</button>
+      <button class="navbtn" id="squeezeBtn" title="Klämdags-radar">Klämdagar</button>
+      <button class="navbtn" id="aboutBtn" title="Om CalPal">Om</button>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section class="calendar-pane" aria-label="Kalender">
+      <div class="calendar-head">
+        <button class="navarrow" id="prevMonth" aria-label="Föregående månad">‹</button>
+        <h2 id="monthLabel">—</h2>
+        <button class="navarrow" id="nextMonth" aria-label="Nästa månad">›</button>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid" role="grid"></div>
+
+      <div class="month-citation" id="monthCitation"></div>
+    </section>
+
+    <aside class="sidebar" aria-label="Detaljer för vald dag">
+      <div id="dayHero"></div>
+      <div id="daylightBarometer"></div>
+      <div id="seasonWheel"></div>
+      <div id="dayDetail"></div>
+    </aside>
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Stäng">×</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>CalPal — byggd i Sverige · <a href="https://github.com/" id="ghLink" target="_blank" rel="noopener">GitHub</a></span>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

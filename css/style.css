@@ -1,0 +1,1002 @@
+/* ============================================================
+   CalPal — design system v2
+   Tydlig hierarki · luftig densitet · ikon-ledd struktur
+   ============================================================ */
+
+:root {
+  /* Färger — Svensk almanacka, jordtoner */
+  --bg: #f3eee2;            /* pergament */
+  --surface: #fffdf8;       /* varmvit */
+  --surface-soft: #faf5e9;
+  --ink: #271c14;           /* varmt mörkt brunsvart */
+  --ink-soft: #5b4d3f;
+  --ink-faint: #a0907d;
+  --line: #e3dac7;
+  --line-soft: #ede5d3;
+
+  /* Helgdag — dovt svenskt vinrött */
+  --red: #9a3b3b;
+  --red-soft: #f3e3df;
+
+  /* Flaggdag — djup kobolt */
+  --blue: #2d4663;
+  --blue-soft: #e2e8ee;
+
+  /* Almanack-guld — matt och varmt */
+  --gold: #a87233;
+  --gold-soft: #f1e3c4;
+  --gold-bright: #d4a342;   /* logo, brand */
+
+  /* Natur — mossgrönt */
+  --green: #5a6b3b;
+  --green-soft: #e7ead8;
+
+  /* Historia — dämpat lavendel */
+  --purple: #6b4a7a;
+  --purple-soft: #e8e0ed;
+
+  /* Layout */
+  --shadow-sm: 0 1px 2px rgba(39,28,20,.04);
+  --shadow: 0 1px 2px rgba(39,28,20,.05), 0 4px 14px rgba(39,28,20,.06);
+  --shadow-lg: 0 4px 24px rgba(39,28,20,.09);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+
+  /* Typografi */
+  --font-serif: "Iowan Old Style", "Sitka Text", "Apple Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* ============================================================
+   Topbar
+   ============================================================ */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.logo svg { display: block; width: 100%; height: 100%; }
+
+.brand h1 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 23px;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.brand h1 .ampersand {
+  color: var(--gold-bright);
+  font-style: italic;
+  font-weight: 500;
+  margin: 0 1px;
+}
+
+.tagline {
+  color: var(--ink-faint);
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 6px;
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+}
+
+.topnav { display: flex; gap: 4px; }
+
+.navbtn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  transition: background .15s, color .15s;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.navbtn:hover {
+  background: var(--line-soft);
+  color: var(--ink);
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  padding: 24px 32px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; max-width: 720px; }
+}
+
+@media (max-width: 720px) {
+  .topbar { padding: 12px 16px; }
+  .layout { padding: 16px; gap: 16px; }
+  .tagline { display: none; }
+}
+
+/* ============================================================
+   Calendar
+   ============================================================ */
+
+.calendar-pane {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 28px 24px;
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.calendar-head h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 30px;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  font-weight: 700;
+}
+
+.navarrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  transition: background .15s, color .15s;
+}
+
+.navarrow:hover {
+  background: var(--line-soft);
+  color: var(--ink);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 32px repeat(7, 1fr);
+  gap: 3px;
+}
+
+.wd-head, .wn-head {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 8px 0 10px;
+  font-weight: 700;
+}
+
+.weeknum {
+  display: grid;
+  place-items: center;
+  color: var(--ink-faint);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px;
+}
+
+.day {
+  position: relative;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 8px 10px 22px;
+  text-align: left;
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  transition: background .12s, border-color .12s, transform .08s;
+  cursor: pointer;
+}
+
+.day:hover {
+  background: var(--line-soft);
+  border-color: var(--line);
+}
+
+.day.muted { opacity: 0.32; }
+
+.day .num {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.day .nameday {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.3;
+  margin-top: 3px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Indikatorprickar längst ner i cellen */
+.day .dots {
+  position: absolute;
+  bottom: 7px;
+  left: 9px;
+  display: flex;
+  gap: 4px;
+}
+
+.day .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+}
+
+.day .dot.red    { background: var(--red); }
+.day .dot.blue   { background: var(--blue); }
+.day .dot.gold   { background: var(--gold); }
+.day .dot.green  { background: var(--green); }
+.day .dot.purple { background: var(--purple); }
+
+/* Helgdag */
+.day.holiday {
+  background: var(--red-soft);
+  border-color: rgba(185,28,28,.12);
+}
+.day.holiday .num { color: var(--red); }
+
+/* Flaggdag — markeras med blå pickel uppe i högra hörnet */
+.day .flag-mark {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  width: 4px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--blue);
+}
+
+/* Idag */
+.day.today {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.day.today .num { color: var(--gold-bright); }
+.day.today .nameday { color: rgba(255,253,248,.78); }
+.day.today.holiday { background: var(--red); border-color: var(--red); }
+.day.today.holiday .num { color: #fff; }
+.day.today .flag-mark { background: var(--gold-bright); }
+.day.today .dot { box-shadow: 0 0 0 1.5px rgba(255,253,248,.45); }
+
+/* Vald */
+.day.selected:not(.today) {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: -2px;
+}
+.day.today.selected {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: -2px;
+}
+
+.day.weekend:not(.today):not(.holiday) .num {
+  color: var(--ink-soft);
+}
+
+.month-citation {
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.month-citation .source {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Tooltip på dagsceller — visa fulla namn på hovr */
+.day[data-tooltip] {
+  /* Använder title-attribute istället */
+}
+
+/* ============================================================
+   Sidebar (sticky)
+   ============================================================ */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+/* ============================================================
+   Day Hero — översta blocket i detaljpanelen
+   ============================================================ */
+
+.day-hero {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 22px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-hero.is-today::before {
+  content: "Idag";
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--ink);
+  color: var(--gold-bright);
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.day-hero .weekday {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  margin: 0 0 4px;
+}
+
+.day-hero .date {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+.day-hero .date .month {
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 24px;
+}
+
+.day-hero .nameday-big {
+  margin: 14px 0 0;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--ink);
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.day-hero .nameday-big .label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.day-hero .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.2px;
+  background: var(--line-soft);
+  color: var(--ink-soft);
+}
+.badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+.badge.red    { background: var(--red-soft);    color: var(--red); }
+.badge.blue   { background: var(--blue-soft);   color: var(--blue); }
+.badge.gold   { background: var(--gold-soft);   color: var(--gold); }
+.badge.green  { background: var(--green-soft);  color: var(--green); }
+.badge.purple { background: var(--purple-soft); color: var(--purple); }
+
+.day-hero .stats {
+  display: flex;
+  gap: 18px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.day-hero .stat .num {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.day-hero .stat .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   Cards — content-sektioner med ikoner
+   ============================================================ */
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--line-soft);
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+.card-icon svg { width: 16px; height: 16px; }
+
+.card-icon.gold { background: var(--gold-soft); color: var(--gold); }
+.card-icon.blue { background: var(--blue-soft); color: var(--blue); }
+.card-icon.green { background: var(--green-soft); color: var(--green); }
+.card-icon.red { background: var(--red-soft); color: var(--red); }
+.card-icon.purple { background: var(--purple-soft); color: var(--purple); }
+
+.card-title {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--ink-faint);
+  font-weight: 700;
+  margin: 0;
+}
+
+.card-body { color: var(--ink); }
+.card-body p { margin: 0; line-height: 1.55; }
+.card-body p + p { margin-top: 10px; }
+.card-body .sub { color: var(--ink-soft); font-size: 12.5px; margin-top: 4px; line-height: 1.5; }
+
+.card-body strong { font-weight: 600; }
+
+/* Två kolumner (sol/månens) */
+.card-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 10px 0 6px;
+}
+
+.card-col {
+  text-align: center;
+}
+.card-col .icon-big {
+  font-size: 24px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.card-col .big {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.card-col .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* History-listan */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.history-item {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.history-item .year {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 42px;
+  letter-spacing: -0.3px;
+}
+.history-item .text {
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Bondepraktikan */
+.bonde-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.65;
+  padding: 6px 0 4px;
+}
+
+/* Dagens ord */
+.word-card .word {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  display: block;
+  margin-bottom: 6px;
+}
+.word-card .def {
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Mat */
+.food-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.food-row .dish-name {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Säsong-pills */
+.season-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.season-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.2px;
+}
+
+/* Månens visualisering */
+.moon-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.moon-emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+.moon-info .phase-name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.moon-info .phase-sub {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Widgets (Dagsljus-barometer & Säsongshjul)
+   ============================================================ */
+
+.daylight-svg {
+  width: 100%;
+  height: 130px;
+  display: block;
+}
+
+.daylight-times {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.daylight-times .col { text-align: center; }
+.daylight-times .col .big {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.daylight-times .col .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.daylight-delta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.daylight-delta strong {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 700;
+}
+.daylight-delta .delta {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+}
+.daylight-delta .delta.neg { color: var(--ink-soft); }
+
+/* Säsongshjul */
+.wheel-wrap { display: flex; justify-content: center; padding: 4px 0; }
+.wheel-svg { width: 200px; height: 200px; }
+
+.wheel-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+.wheel-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.wheel-legend .swatch {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.wheel-now {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--green-soft);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--green);
+  line-height: 1.5;
+}
+.wheel-now strong { color: var(--green); font-weight: 700; }
+
+/* ============================================================
+   Modal
+   ============================================================ */
+
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,.55);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  padding: 24px;
+  animation: fade .15s ease;
+}
+
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+.modal[hidden] { display: none; }
+
+.modal-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 60px rgba(0,0,0,.25);
+  max-width: 640px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+}
+.modal-close:hover { background: var(--line-soft); color: var(--ink); }
+
+.modal h2 {
+  font-family: var(--font-serif);
+  margin: 0 0 8px;
+  font-size: 26px;
+  letter-spacing: -0.3px;
+}
+
+.modal .intro {
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+  font-size: 14px;
+}
+
+.modal h3 {
+  font-family: var(--font-serif);
+  margin: 26px 0 12px;
+  font-size: 18px;
+}
+
+.modal-body .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Räknare */
+.hb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.hb-stat {
+  background: var(--surface-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+}
+.hb-stat .num {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.hb-stat .label {
+  font-size: 10px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+input[type="date"], input[type="text"], input[type="number"] {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
+  width: 100%;
+}
+
+input:focus { outline: 2px solid var(--gold); outline-offset: -1px; border-color: transparent; }
+
+.btn-primary {
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background .15s;
+  font-size: 13px;
+}
+.btn-primary:hover { background: var(--gold); }
+
+/* Klämdagar */
+.squeeze-list { list-style: none; padding: 0; margin: 0; }
+.squeeze-item {
+  padding: 14px 0;
+  border-top: 1px solid var(--line-soft);
+}
+.squeeze-item:first-child { border-top: 0; padding-top: 6px; }
+.squeeze-item .title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.squeeze-item .sub {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.squeeze-item .strategy {
+  background: var(--green-soft);
+  color: var(--green);
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  margin-top: 8px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+/* Milestones-rader */
+.milestone-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line-soft);
+}
+.milestone-row:first-child { border-top: 0; padding-top: 4px; }
+.milestone-row .ms-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+.milestone-row .ms-date {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+.milestone-row .ms-days {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--gold);
+  font-weight: 700;
+  text-align: right;
+}
+.milestone-row .ms-days small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+/* Footer */
+.footer {
+  padding: 16px 32px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 12px;
+}
+
+/* Scroll generellt */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
