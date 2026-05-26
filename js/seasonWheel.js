@@ -50,8 +50,11 @@ export function renderSeasonWheel(container, date) {
   const active = seasonsActive(date);
   const activeNames = active.map(s => s.name).slice(0, 4);
 
-  container.className = "card";
+  container.className = "card clickable";
+  container.setAttribute("data-detail", "season");
+  container.setAttribute("title", "Mer om säsongerna");
   container.innerHTML = `
+    <span class="expand-hint" aria-hidden="true">+</span>
     <div class="card-head">
       <span class="card-icon green">${ICONS.leaf}</span>
       <h4 class="card-title">Säsongshjulet</h4>

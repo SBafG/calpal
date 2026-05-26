@@ -48,7 +48,8 @@ export function renderHero(container, date) {
   const daysLeftYr = daysInYr - dayOfYear;
 
   container.innerHTML = `
-    <div class="day-hero ${today ? "is-today" : ""}">
+    <div class="day-hero clickable ${today ? "is-today" : ""}" data-detail="hero" title="Klicka för djupdykning om dagen">
+      <span class="expand-hint" aria-hidden="true">+</span>
       <p class="weekday">${wd}</p>
       <h2 class="date">${day} <span class="month">${month} ${year}</span></h2>
       ${names.length ? `
@@ -85,7 +86,8 @@ function renderHistory(date) {
   const list = historyForDate(date);
   if (!list.length) return "";
   return `
-    <div class="card">
+    <div class="card clickable" data-detail="history" title="Öppna Tidsmaskinen">
+      <span class="expand-hint" aria-hidden="true">+</span>
       <div class="card-head">
         <span class="card-icon">${ICONS.scroll}</span>
         <h4 class="card-title">På denna dag</h4>
@@ -157,7 +159,8 @@ function renderBonde(date) {
   const b = bondeForDate(date);
   if (!b) return "";
   return `
-    <div class="card">
+    <div class="card clickable" data-detail="bonde" title="Mer om Bondepraktikan">
+      <span class="expand-hint" aria-hidden="true">+</span>
       <div class="card-head">
         <span class="card-icon">${ICONS.cloud}</span>
         <h4 class="card-title">Bondepraktikan säger</h4>
@@ -170,7 +173,8 @@ function renderBonde(date) {
 function renderWord(date) {
   const w = wordForDate(date);
   return `
-    <div class="card word-card">
+    <div class="card word-card clickable" data-detail="word" title="Mer om svenska arvord">
+      <span class="expand-hint" aria-hidden="true">+</span>
       <div class="card-head">
         <span class="card-icon">${ICONS.feather}</span>
         <h4 class="card-title">Dagens svenska ord</h4>

@@ -14,8 +14,11 @@ export function renderDaylightBarometer(container, date) {
   const isToday = sameDay(date, new Date());
   const moon = moonPhase(date);
 
-  container.className = "card";
+  container.className = "card clickable";
+  container.setAttribute("data-detail", "moon");
+  container.setAttribute("title", "Mer om sol & måne");
   container.innerHTML = `
+    <span class="expand-hint" aria-hidden="true">+</span>
     <div class="card-head">
       <span class="card-icon gold">${ICONS.sun}</span>
       <h4 class="card-title">Sol & måne</h4>

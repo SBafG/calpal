@@ -4,10 +4,22 @@
 
 import { lifeStats, formatNumber, formatDateSv, upcomingMilestones } from "./counters.js";
 import { squeezeDaysForYear, formatSqueezeDay, strategyFor } from "./squeezeDays.js";
-import { holidaysForYear } from "./holidays.js";
+import { holidaysForYear, holidayInfo } from "./holidays.js";
+import { getNameday } from "./namedays.js";
+import { nameInfo } from "./namedayInfo.js";
+import { historyForDate } from "./history.js";
+import { birthsForDate, deathsForDate } from "./famousBirthdays.js";
+import { themesForDate } from "./themedays.js";
+import { bondeForDate } from "./bondepraktikan.js";
+import { wordForDate } from "./wordOfDay.js";
+import { moonPhase, sunTimes, dayLengthLabel } from "./astronomy.js";
+import { seasonsActive, categoryColor } from "./seasonal.js";
+import { formatLongDate, isoWeek, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
 
 const modal = () => document.getElementById("modal");
 const modalBody = () => document.getElementById("modalBody");
+
+let currentDate = new Date();
 
 export function initModal() {
   document.getElementById("modalClose").addEventListener("click", closeModal);
@@ -23,6 +35,23 @@ export function initModal() {
   document.getElementById("aboutBtn").addEventListener("click", openAbout);
 }
 
+export function setModalDate(date) {
+  currentDate = date;
+}
+
+// Öppna djupdykning för ett specifikt kort
+export function openCardDeepDive(detailKey, date) {
+  currentDate = date;
+  switch (detailKey) {
+    case "hero":      return openHeroDeepDive(date);
+    case "history":   return openTimemachineDeepDive(date);
+    case "moon":      return openSunMoonDeepDive(date);
+    case "season":    return openSeasonDeepDive(date);
+    case "bonde":     return openBondeDeepDive(date);
+    case "word":      return openWordDeepDive(date);
+  }
+}
+
 function openModal(html) {
   modalBody().innerHTML = html;
   modal().hidden = false;
@@ -30,6 +59,198 @@ function openModal(html) {
 
 function closeModal() {
   modal().hidden = true;
+}
+
+// ============================================================
+// Djupdykningar — klickbara kort i sidopanelen
+// ============================================================
+
+// ---------- Hero: Om dagen ----------
+function openHeroDeepDive(date) {
+  const names = getNameday(date);
+  const hol = holidayInfo(date);
+  const themes = themesForDate(date);
+  const births = birthsForDate(date);
+  const deaths = deathsForDate(date);
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(),0,0)) / 86400000);
+  const daysInYr = ((date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || date.getFullYear() % 400 === 0) ? 366 : 365;
+
+  let nameSection = "";
+  if (names.length) {
+    const nameBlocks = names.map(n => {
+      const info = nameInfo(n);
+      if (!info) {
+        return `<div class="dd-name">
+          <h4>${n}</h4>
+          <p class="dd-meta">Etymologi och berömda namnsdagsbärare saknas — bidra gärna på <a href="https://github.com/SBafG/calpal" target="_blank">GitHub</a>.</p>
+        </div>`;
+      }
+      const famous = info.famous?.length
+        ? `<ul class="dd-list">${info.famous.map(f => `<li>${f}</li>`).join("")}</ul>`
+        : "";
+      return `<div class="dd-name">
+        <h4>${n}</h4>
+        <p class="dd-meta"><strong>Ursprung:</strong> ${info.origin}<br/><strong>Betydelse:</strong> ${info.meaning}</p>
+        ${famous ? `<p class="dd-sub-label">Kända bärare:</p>${famous}` : ""}
+      </div>`;
+    }).join("");
+    nameSection = `<h3>Namnsdag</h3>${nameBlocks}`;
+  }
+
+  let badges = "";
+  if (hol) badges += `<span class="badge ${hol.type === 'red' ? 'red' : ''}"><span class="dot"></span>${hol.name}</span>`;
+  if (hol && hol.flagDay) badges += `<span class="badge blue"><span class="dot"></span>Flaggdag</span>`;
+  themes.forEach(t => badges += `<span class="badge gold"><span class="dot"></span>${t.name}</span>`);
+
+  const personSection = (births.length || deaths.length) ? `
+    <h3>Personer på detta datum</h3>
+    ${births.length ? `<p class="dd-sub-label">Födda denna dag:</p>
+      <ul class="dd-list">${births.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : ""}
+    ${deaths.length ? `<p class="dd-sub-label">Avled denna dag:</p>
+      <ul class="dd-list">${deaths.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : ""}
+  ` : "";
+
+  openModal(`
+    <h2>${formatLongDate(date)}</h2>
+    <p class="intro">Dag ${dayOfYear} av ${daysInYr} · vecka ${isoWeek(date)} · ${daysInYr - dayOfYear} dagar kvar av året</p>
+    ${badges ? `<div class="badges" style="margin-bottom:16px">${badges}</div>` : ""}
+    ${nameSection}
+    ${personSection}
+  `);
+}
+
+// ---------- Tidsmaskinen: Historia ----------
+function openTimemachineDeepDive(date) {
+  const events = historyForDate(date);
+  const births = birthsForDate(date);
+  const deaths = deathsForDate(date);
+
+  if (!events.length && !births.length && !deaths.length) {
+    openModal(`
+      <h2>Tidsmaskinen</h2>
+      <p class="intro">${formatLongDate(date)}</p>
+      <p>Inget historiskt registrerat för denna dag ännu. Bidra gärna på <a href="https://github.com/SBafG/calpal" target="_blank">GitHub</a>.</p>
+    `);
+    return;
+  }
+
+  const eventsHtml = events.length
+    ? `<ul class="dd-events">${events.map(e => `<li><strong>${e.year}</strong> · ${e.text}</li>`).join("")}</ul>`
+    : "";
+
+  const birthsHtml = births.length
+    ? `<h3>Födda denna dag</h3>
+       <ul class="dd-list">${births.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : "";
+
+  const deathsHtml = deaths.length
+    ? `<h3>Avled denna dag</h3>
+       <ul class="dd-list">${deaths.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : "";
+
+  openModal(`
+    <h2>Tidsmaskinen</h2>
+    <p class="intro">${formatLongDate(date)} genom historien</p>
+    ${events.length ? `<h3>Händelser</h3>${eventsHtml}` : ""}
+    ${birthsHtml}
+    ${deathsHtml}
+  `);
+}
+
+// ---------- Sol & Måne ----------
+function openSunMoonDeepDive(date) {
+  const moon = moonPhase(date);
+  const t = sunTimes(date);
+  const upStr = t.sunrise ? `${String(t.sunrise.getHours()).padStart(2,"0")}:${String(t.sunrise.getMinutes()).padStart(2,"0")}` : "—";
+  const downStr = t.sunset ? `${String(t.sunset.getHours()).padStart(2,"0")}:${String(t.sunset.getMinutes()).padStart(2,"0")}` : "—";
+
+  // Beräkna nästa fullmåne och nymåne
+  let nextFull = null, nextNew = null;
+  for (let i = 1; i <= 31; i++) {
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate() + i);
+    const m = moonPhase(d);
+    if (!nextFull && m.idx === 4) nextFull = d;
+    if (!nextNew && m.idx === 0) nextNew = d;
+    if (nextFull && nextNew) break;
+  }
+
+  openModal(`
+    <h2>Sol & måne</h2>
+    <p class="intro">${formatLongDate(date)} · för Stockholm</p>
+
+    <h3>Solen</h3>
+    <p><strong>Soluppgång:</strong> ${upStr} &nbsp;·&nbsp; <strong>Solnedgång:</strong> ${downStr}</p>
+    <p><strong>Dagsljus:</strong> ${dayLengthLabel(t.daylight)}</p>
+    <p class="dd-meta">Beräknat med NOAA-algoritmen för latitud 59,33°N (Stockholm). För andra orter varierar tiderna ±15-30 min.</p>
+
+    <h3>Månen</h3>
+    <p><span style="font-size:34px">${moon.emoji}</span> <strong>${moon.name}</strong> · ${Math.round(moon.illumination * 100)} % belyst · ${moon.age.toFixed(1)} dagar in i den 29,5-dagars månadcykeln.</p>
+    ${nextFull ? `<p><strong>Nästa fullmåne:</strong> ${formatLongDate(nextFull)}</p>` : ""}
+    ${nextNew ? `<p><strong>Nästa nymåne:</strong> ${formatLongDate(nextNew)}</p>` : ""}
+    <p class="dd-meta">Månfaserna beräknas med synodisk månad (29,53 dagar) räknat från känd referensnymåne 6 jan 2000.</p>
+  `);
+}
+
+// ---------- Säsongshjulet ----------
+function openSeasonDeepDive(date) {
+  const active = seasonsActive(date);
+  const grouped = {};
+  active.forEach(s => {
+    grouped[s.category] = grouped[s.category] || [];
+    grouped[s.category].push(s);
+  });
+
+  const sections = Object.entries(grouped).map(([cat, items]) => `
+    <h3 style="color:${categoryColor(cat)};text-transform:capitalize">${cat}</h3>
+    <ul class="dd-list">
+      ${items.map(s => `<li><strong>${s.name}</strong> — ${s.info || "&nbsp;"}<br/><span class="dd-meta">Säsong: ${dateRange(s.start, s.end)}</span></li>`).join("")}
+    </ul>
+  `).join("");
+
+  openModal(`
+    <h2>Säsongshjulet</h2>
+    <p class="intro">${formatLongDate(date)}</p>
+    ${active.length
+      ? `<p>Just nu är följande säsonger igång:</p>${sections}`
+      : `<p>Ingen specifik svensk säsong är aktiv just nu — vinterns vila eller mellan blomningar.</p>`}
+    <p class="dd-meta" style="margin-top:18px">Säsongerna är ungefärliga och baserade på normalår i Mellansverige. Norr om Dalälven brukar de skifta 1-2 veckor senare; söder om Skåne lika mycket tidigare.</p>
+  `);
+}
+
+function dateRange(start, end) {
+  return `${start[1]} ${MONTHS_SV[start[0]-1]} – ${end[1]} ${MONTHS_SV[end[0]-1]}`;
+}
+
+// ---------- Bondepraktikan ----------
+function openBondeDeepDive(date) {
+  const b = bondeForDate(date);
+  openModal(`
+    <h2>Bondepraktikan</h2>
+    <p class="intro">${formatLongDate(date)}</p>
+    ${b ? `<blockquote style="font-family:var(--font-serif);font-style:italic;font-size:18px;line-height:1.6;color:var(--ink);border-left:3px solid var(--gold);padding-left:18px;margin:18px 0">"${b.text}"</blockquote>` : ""}
+
+    <h3>Om Bondepraktikan</h3>
+    <p>Bondepraktikan är en svensk almanackalmanack med rötter från 1662, full av väderspomar, jordbruksråd och tideräkningar. Boken byggde på äldre tysk lore som var spridd i hela Europa under medeltiden, men förankrade reglerna i svensk klimat och namnsdagstradition.</p>
+    <p>Spomarna är inte vetenskap — men de bevarar århundraden av bonderfarenhet. I många fall är reglerna förvånansvärt träffsäkra för svenska normalår, troligen eftersom de bygger på faktiska väderstatistiska samband.</p>
+
+    <p class="dd-meta">"Bondepraktikan" trycktes första gången av Henrich Keyser i Stockholm 1662 och kom i nya upplagor ända fram till 1900-talet. Den var länge nästan obligatorisk i bondhushållen.</p>
+  `);
+}
+
+// ---------- Dagens ord ----------
+function openWordDeepDive(date) {
+  const w = wordForDate(date);
+  openModal(`
+    <h2>Dagens svenska ord</h2>
+    <p class="intro">${formatLongDate(date)}</p>
+    <div style="text-align:center;padding:24px 0">
+      <div style="font-family:var(--font-serif);font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-1px">${w.word}</div>
+    </div>
+    <h3>Betydelse</h3>
+    <p>${w.def}</p>
+
+    <h3>Om vårt språkarv</h3>
+    <p>Många svenska ord har trillat ur vardagsspråket de senaste 100 åren — vissa för att tekniken förändrats, andra för att vi börjat säga något annat. CalPal lyfter ett bortglömt ord per dag för att hålla språkminnet vid liv.</p>
+    <p class="dd-meta">Källor: Svenska Akademiens ordbok, dialektordböcker, äldre almanackor och bondalmanackor från 1800-1900-talet.</p>
+  `);
 }
 
 // ---------- Counter (hjärtslag + nedräkningar) ----------

@@ -1,0 +1,63 @@
+// ============================================================
+// namedayInfo.js — etymologi + berömda personer per namn
+// ============================================================
+
+export const NAME_INFO = {
+  // Lågkonjunktur av etymologisk research — vi täcker ca 50 vanliga namn.
+  // Övriga visar generisk fallback.
+
+  "Anna": { origin: "hebreiska Hannah", meaning: "'nåd' eller 'välsignad'", famous: ["Anna Lindh (1957–2003), utrikesminister", "Anna Anka, profil"] },
+  "Erik": { origin: "fornnordiska Eiríkr", meaning: "'evig härskare'", famous: ["Erik den helige, helgon", "Erik Lallerstedt, krögare"] },
+  "Karl": { origin: "fornhögtyska", meaning: "'fri man'", famous: ["Karl XII (1682–1718)", "Karl Bertil Jonsson, julstapelfigur"] },
+  "Maria": { origin: "hebreiska", meaning: "'den älskade' eller 'bitterhet'", famous: ["Maria Wern, fiktiv kommissarie", "Mariefred uppkallat efter henne"] },
+  "Sara": { origin: "hebreiska Sarah", meaning: "'furstinna'", famous: ["Sara Lidman (1923–2004), författare"] },
+  "Johan": { origin: "hebreiska Yôhanan", meaning: "'Gud är nådig'", famous: ["Johan III av Sverige (1537–1592)", "Johan Falk, fiktiv polis"] },
+  "Anders": { origin: "grekiska Andreas", meaning: "'manlig, modig'", famous: ["Anders Zorn (1860–1920), målare", "Anders Tegnell, epidemiolog"] },
+  "Lars": { origin: "latin Laurentius", meaning: "'krönt med lager'", famous: ["Lars Lerin, akvarellmålare", "Lars von Trier (om man räknar danskar)"] },
+  "Per": { origin: "grekiska Petros", meaning: "'klippa, sten'", famous: ["Per Albin Hansson (1885–1946), statsminister", "Per Gessle, musiker"] },
+  "Eva": { origin: "hebreiska Chawwah", meaning: "'liv' eller 'levande'", famous: ["Eva Dahlgren, sångerska", "Eva Rusz, psykolog"] },
+  "Astrid": { origin: "fornnordiska Ástríðr", meaning: "'gudomligt vacker'", famous: ["Astrid Lindgren (1907–2002), författare", "Drottning Astrid av Belgien"] },
+  "Greta": { origin: "fornsvenska, kortform av Margareta", meaning: "'pärla'", famous: ["Greta Garbo (1905–1990), skådespelerska", "Greta Thunberg, klimataktivist"] },
+  "Selma": { origin: "keltiska", meaning: "'vacker utsikt'", famous: ["Selma Lagerlöf (1858–1940), författare, Nobelpristagare"] },
+  "Ingrid": { origin: "fornnordiska Ingiríðr", meaning: "'vacker' av guden Ing", famous: ["Ingrid Bergman (1915–1982), skådespelerska", "Drottning Ingrid av Danmark"] },
+  "Olof": { origin: "fornnordiska Óláfr", meaning: "'ättling till sin förfader'", famous: ["Olof Palme (1927–1986), statsminister", "Olof Skötkonung, kung"] },
+  "Margareta": { origin: "grekiska margarítês", meaning: "'pärla'", famous: ["Drottning Margareta I av Danmark, Norge & Sverige", "Margareta Krook (1925–2001)"] },
+  "Birgitta": { origin: "iriska Brigit", meaning: "'den upphöjda'", famous: ["Heliga Birgitta (1303–1373)", "Birgitta Dahl, talman"] },
+  "Sigrid": { origin: "fornnordiska Sigríðr", meaning: "'vacker seger'", famous: ["Sigrid Storråda, drottning"] },
+  "Gunnar": { origin: "fornnordiska Gunnarr", meaning: "'krigskämpe'", famous: ["Gunnar Sträng (1906–1992), finansminister"] },
+  "Bengt": { origin: "latin Benedictus", meaning: "'välsignad'", famous: ["Bengt Ekerot, skådespelare", "Bengt Feldreich, programledare"] },
+  "Knut": { origin: "fornnordiska Knútr", meaning: "'knut' eller 'knöl' (kroppslig styrka)", famous: ["Knut den store, dansk kung", "Tjugondag Knut, julens slut"] },
+  "Valborg": { origin: "fornhögtyska Walburga", meaning: "'mäktigt skydd'", famous: ["Helgon Walburga", "Valborgsmässoafton firas till hennes ära"] },
+  "Lucia": { origin: "latin lux", meaning: "'ljus'", famous: ["Heliga Lucia av Syrakusa (283–304)", "Lucia-traditionen firas 13 dec"] },
+  "Tomas": { origin: "arameiska", meaning: "'tvilling'", famous: ["Aposteln Tomas tvivlaren", "Tomas Tranströmer (1931–2015), Nobelpristagare"] },
+  "Vilhelmina": { origin: "fornhögtyska Wilhelm", meaning: "'beslutsam beskyddare'", famous: ["Drottning Vilhelmina av Nederländerna", "Staden Vilhelmina i Lappland"] },
+  "Vilma": { origin: "kortform av Vilhelmina", meaning: "'beslutsam beskyddare'", famous: ["Vilma av Holland", "Wilma Flintstone (om man räknar fiktion)"] },
+  "Linnea": { origin: "uppkallat efter blomman", meaning: "'linnean' (uppkallad efter Carl von Linné)", famous: ["Blomman linnea, Sveriges nationalblomma"] },
+  "Karin": { origin: "grekiska, variant av Katarina", meaning: "'den rena'", famous: ["Karin Boye (1900–1941), poet", "Karin Bergöö Larsson, konstnär"] },
+  "Helena": { origin: "grekiska Heléne", meaning: "'fackla' eller 'glans'", famous: ["Heliga Helena, Konstantins mor", "Helena Bergström, skådespelerska"] },
+  "Stina": { origin: "kortform av Kristina", meaning: "'kristen'", famous: ["Stina Wirsén, illustratör", "Drottning Kristina"] },
+  "Sven": { origin: "fornnordiska Sveinn", meaning: "'yngling, pojke'", famous: ["Sven Hedin (1865–1952), upptäcktsresande", "Sven-Bertil Taube, sångare"] },
+  "Magnus": { origin: "latin", meaning: "'den store'", famous: ["Magnus Ladulås, kung", "Magnus Uggla, musiker"] },
+  "Henrik": { origin: "fornhögtyska Haimirich", meaning: "'härskare över hemmet'", famous: ["Henrik Schyffert, komiker"] },
+  "Sofia": { origin: "grekiska sophia", meaning: "'visdom'", famous: ["Prinsessan Sofia av Sverige", "Sofia Helin, skådespelerska"] },
+  "Emma": { origin: "fornhögtyska", meaning: "'helande, allomfattande'", famous: ["Emma Frans, vetenskapsjournalist"] },
+  "Patrik": { origin: "latin Patricius", meaning: "'av ädel börd'", famous: ["Patrik Sjöberg, höjdhoppare"] },
+  "Mikael": { origin: "hebreiska Mîkhā'ēl", meaning: "'vem är som Gud?'", famous: ["Ärkeängeln Mikael", "Mikael Persbrandt, skådespelare"] },
+  "Sebastian": { origin: "grekiska, från Sebastos", meaning: "'den vördade'", famous: ["Heliga Sebastian, martyr", "Sebastian Stakset"] },
+  "Albin": { origin: "latin Albinus", meaning: "'den vita'", famous: ["Albin Lee Meldau, musiker"] },
+  "Ester": { origin: "persiska/hebreiska", meaning: "'stjärna'", famous: ["Drottning Ester i Bibeln"] },
+  "Daniel": { origin: "hebreiska", meaning: "'Gud är min domare'", famous: ["Prins Daniel av Sverige", "Daniel Norgren, musiker"] },
+  "Hans": { origin: "kortform av Johannes", meaning: "'Gud är nådig'", famous: ["Hans Alfredson (1931–2017), komiker", "Hans Rosling (1948–2017), professor"] },
+  "Gabriel": { origin: "hebreiska", meaning: "'Guds kraft'", famous: ["Ärkeängeln Gabriel", "Gabriel Forss, dirigent"] },
+  "Adam": { origin: "hebreiska", meaning: "'jord' eller 'människa'", famous: ["Adam, den första människan enligt Bibeln", "Adam Tensta, rappare"] },
+  "Filip": { origin: "grekiska Philippos", meaning: "'hästälskare'", famous: ["Filip Hammar, programledare"] },
+  "Lisa": { origin: "kortform av Elisabeth", meaning: "'Gud är min ed'", famous: ["Lisa Nilsson, sångerska", "Lisa Ekdahl, sångerska"] },
+  "Beata": { origin: "latin", meaning: "'välsignad, salig'", famous: ["Beata Bermuda, prinsessa", "Drottning Beatrix av Nederländerna"] },
+  "Frida": { origin: "fornnordiska Fríðr", meaning: "'vacker' eller 'fred'", famous: ["Frida Lyngstad i ABBA"] },
+  "Marcus": { origin: "latin", meaning: "'tillägnad krigsguden Mars'", famous: ["Marcus Aurelius, kejsare"] },
+  "Stefan": { origin: "grekiska Stephanos", meaning: "'krona, lagerkrans'", famous: ["Stefan Löfven, statsminister", "Stefan Holm, höjdhoppare"] },
+};
+
+export function nameInfo(name) {
+  return NAME_INFO[name] || null;
+}
