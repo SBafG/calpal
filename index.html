@@ -42,6 +42,34 @@
       <div class="calendar-grid" id="calendarGrid" role="grid"></div>
 
       <div class="month-citation" id="monthCitation"></div>
+
+      <a class="ekeron-strip" href="https://ekeron.com/" target="_blank" rel="noopener" aria-label="Ekeron — mil-koll för leasingbil">
+        <span class="es-car-mini" aria-hidden="true">
+          <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="carGradMini" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fff"/>
+                <stop offset="100%" stop-color="#cbd5e1"/>
+              </linearGradient>
+            </defs>
+            <path d="M 18 64 Q 28 38 60 32 L 110 28 Q 140 26 160 42 L 180 48 Q 188 50 188 60 L 188 68 L 18 68 Z"
+                  fill="url(#carGradMini)" stroke="#fff" stroke-width="1"/>
+            <path d="M 55 36 L 105 32 L 145 35 L 152 50 L 50 50 Z" fill="rgba(75,160,231,0.35)" stroke="#fff" stroke-width="0.5"/>
+            <line x1="100" y1="32" x2="100" y2="50" stroke="#fff" stroke-width="0.5" opacity="0.7"/>
+            <circle cx="55" cy="68" r="11" fill="#0c2244"/>
+            <circle cx="55" cy="68" r="7" fill="#475569"/>
+            <circle cx="155" cy="68" r="11" fill="#0c2244"/>
+            <circle cx="155" cy="68" r="7" fill="#475569"/>
+          </svg>
+        </span>
+        <span class="es-text-mini">
+          <span class="es-tag-mini">EKERON · mil-koll för leasingbil</span>
+          <span class="es-line"><span id="esMil">—</span> <span class="unit">mil</span> <span class="es-context">borde du ha kört idag</span></span>
+        </span>
+        <span class="es-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </a>
     </section>
 
     <aside class="sidebar" aria-label="Detaljer för vald dag">
@@ -58,51 +86,6 @@
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
-
-  <section class="ekeron-showcase" aria-label="Ekeron — mil-koll för leasingbil">
-    <div class="es-inner">
-      <div class="es-left">
-        <span class="es-tag">EKERON</span>
-        <h3 class="es-title">Mil-koll för<br/>leasingbil</h3>
-        <p class="es-desc">Idag <span id="esToday">—</span> borde du ha kört</p>
-        <div class="es-bignum">
-          <span class="num" id="esMil">—</span>
-          <span class="unit">mil</span>
-        </div>
-        <p class="es-of">av <strong>4500 mil</strong> totalt — leasingbil uttagen 1 nov 2024, återlämnas 1 nov 2027</p>
-        <p class="es-pitch">Ekeron räknar ut din lagom-punkt varje dag, så du slipper otrevliga straffavgifter vid återlämning.</p>
-        <a class="es-cta" href="https://ekeron.com/" target="_blank" rel="noopener">
-          Skapa din egen mil-koll på ekeron.com
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-
-      <div class="es-right" aria-hidden="true">
-        <!-- BMW-silhuett -->
-        <svg class="es-car" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="carGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#fff"/>
-              <stop offset="100%" stop-color="#cbd5e1"/>
-            </linearGradient>
-          </defs>
-          <path d="M 18 64 Q 28 38 60 32 L 110 28 Q 140 26 160 42 L 180 48 Q 188 50 188 60 L 188 68 L 18 68 Z"
-                fill="url(#carGrad)" stroke="#fff" stroke-width="1"/>
-          <path d="M 55 36 L 105 32 L 145 35 L 152 50 L 50 50 Z" fill="rgba(75,160,231,0.35)" stroke="#fff" stroke-width="0.5"/>
-          <line x1="100" y1="32" x2="100" y2="50" stroke="#fff" stroke-width="0.5" opacity="0.7"/>
-          <circle cx="55" cy="68" r="11" fill="#0c2244"/>
-          <circle cx="55" cy="68" r="7" fill="#475569"/>
-          <circle cx="155" cy="68" r="11" fill="#0c2244"/>
-          <circle cx="155" cy="68" r="7" fill="#475569"/>
-          <rect x="92" y="72" width="16" height="5" fill="#fff" stroke="#0c2244" stroke-width="0.5" rx="1"/>
-        </svg>
-
-        <table class="es-table">
-          <tbody id="esTable"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
 
   <footer class="footer">
     <span>CalPal — byggd i Sverige · <a href="https://github.com/SBafG/calpal" target="_blank" rel="noopener">GitHub</a> · ett projekt av <a href="https://ekeron.com/" target="_blank" rel="noopener">Ekeron</a></span>

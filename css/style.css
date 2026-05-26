@@ -292,23 +292,13 @@ button {
   /* Topbar-element wrapas på mobil */
   .ext-link { margin-left: 0; padding: 6px 10px; font-size: 11.5px; }
 
-  /* Ekeron-showcase på mobil — stack */
-  .ekeron-showcase {
-    margin: 0 10px;
-    padding: 22px 18px;
-  }
-  .es-inner {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    text-align: left;
-  }
-  .es-title { font-size: 26px; }
-  .es-bignum .num { font-size: 56px; }
-  .es-bignum .unit { font-size: 22px; }
-  .es-right { order: -1; }
-  .es-car { width: 180px; }
-  .es-table { max-width: 280px; margin: 0 auto; }
-  .es-cta { width: 100%; justify-content: center; }
+  /* Ekeron-strip på mobil */
+  .ekeron-strip { padding: 10px 12px; gap: 12px; margin-top: 10px; }
+  .es-car-mini { width: 60px; height: 32px; }
+  .es-line { font-size: 14px; }
+  .es-line #esMil { font-size: 18px; }
+  .es-line .es-context { display: block; font-size: 11.5px; margin-left: 0; margin-top: 1px; }
+  .es-arrow { width: 28px; height: 28px; }
   .footer { padding: 14px 16px; font-size: 11.5px; }
 }
 
@@ -1222,170 +1212,92 @@ input:focus { outline: 2px solid var(--gold); outline-offset: -1px; border-color
 }
 
 /* ============================================================
-   Ekeron showcase — rik banner mellan kalender och footer
-   Mimickar ekeron.com (mörk bg, rött siffertal, mini-tabell)
+   Ekeron-strip — kompakt liten banner direkt under kalendern
    ============================================================ */
-.ekeron-showcase {
-  background: radial-gradient(ellipse at top right, #1a3258 0%, #0a1a30 60%, #050d1a 100%);
-  color: #fff;
-  padding: 28px 32px;
-  margin: 0 32px 24px;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 28px rgba(12,34,68,.18);
+.ekeron-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #0c2244 0%, #1a3258 100%);
+  border-radius: var(--radius-sm);
+  color: #fff !important;
+  text-decoration: none !important;
+  transition: transform .15s, box-shadow .2s;
   position: relative;
   overflow: hidden;
-  max-width: calc(1440px - 64px);
 }
-@media (min-width: 1505px) {
-  .ekeron-showcase { margin: 0 auto 24px; }
+.ekeron-strip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(12,34,68,.22);
 }
-
-.ekeron-showcase::before {
+.ekeron-strip::after {
   content: "";
   position: absolute;
-  top: -120px; right: -120px;
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, rgba(75,160,231,.22) 0%, transparent 70%);
+  top: 0; right: -40px;
+  width: 200px; height: 100%;
+  background: radial-gradient(circle, rgba(75,160,231,.16) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.es-inner {
-  display: grid;
-  grid-template-columns: 1fr 290px;
-  gap: 36px;
-  align-items: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.es-left { min-width: 0; }
-
-.es-tag {
-  display: inline-block;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: #4ba0e7;
-  background: rgba(75,160,231,.14);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(75,160,231,.4);
-  margin-bottom: 14px;
-}
-
-.es-title {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 18px;
-  line-height: 1.05;
-  letter-spacing: -0.5px;
-  color: #fff;
-}
-
-.es-desc {
-  margin: 0 0 8px;
-  font-size: 13px;
-  color: rgba(255,255,255,.7);
-  letter-spacing: 0.3px;
-}
-.es-desc span { color: #f87171; font-weight: 600; }
-
-.es-bignum {
+.es-car-mini {
+  flex-shrink: 0;
+  width: 76px;
+  height: 38px;
   display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin: 6px 0 10px;
-  font-family: var(--font-serif);
+  align-items: center;
 }
-.es-bignum .num {
-  font-size: 72px;
+.es-car-mini svg { width: 100%; height: auto; }
+
+.es-text-mini {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.es-tag-mini {
+  font-size: 9.5px;
   font-weight: 700;
-  color: #ef4444;
-  line-height: 1;
-  letter-spacing: -2px;
-  text-shadow: 0 0 30px rgba(239,68,68,.35);
-}
-.es-bignum .unit {
-  font-size: 26px;
-  font-weight: 600;
-  color: #ef4444;
-  letter-spacing: 4px;
+  letter-spacing: 2.2px;
+  color: #4ba0e7;
   text-transform: uppercase;
 }
 
-.es-of {
-  margin: 0 0 18px;
-  font-size: 12.5px;
-  color: rgba(255,255,255,.65);
-  line-height: 1.45;
-}
-.es-of strong { color: #fff; font-weight: 600; }
-
-.es-pitch {
-  margin: 0 0 18px;
-  font-size: 13px;
-  line-height: 1.55;
-  color: rgba(255,255,255,.78);
-  max-width: 460px;
-}
-
-.es-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 11px 20px;
-  border-radius: 999px;
-  background: #4ba0e7;
-  color: #fff !important;
-  font-size: 13.5px;
-  font-weight: 700;
-  text-decoration: none !important;
-  letter-spacing: 0.2px;
-  transition: background .15s, transform .15s, box-shadow .15s;
-  box-shadow: 0 4px 14px rgba(75,160,231,.4);
-}
-.es-cta:hover {
-  background: #6cb5f0;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(75,160,231,.5);
-}
-
-.es-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.es-car {
-  width: 220px;
-  height: auto;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,.4));
-}
-
-.es-table {
-  width: 100%;
-  border-collapse: collapse;
+.es-line {
   font-family: var(--font-serif);
-  font-size: 13px;
-  color: rgba(255,255,255,.85);
-}
-.es-table td {
-  padding: 6px 10px;
-  border-bottom: 1px solid rgba(239,68,68,.25);
-  text-align: center;
-  letter-spacing: 0.4px;
-}
-.es-table td:first-child { text-align: left; }
-.es-table td:last-child { text-align: right; font-weight: 600; }
-.es-table tr.now {
-  background: rgba(239,68,68,.85);
+  font-size: 17px;
+  font-weight: 700;
   color: #fff;
+  letter-spacing: -0.2px;
 }
-.es-table tr.now td { border-color: rgba(239,68,68,.85); font-weight: 700; }
-.es-table tr.now td:last-child { color: #fff; }
+.es-line #esMil { color: #ef4444; font-size: 22px; }
+.es-line .unit { color: #ef4444; font-weight: 600; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-right: 4px; }
+.es-line .es-context {
+  color: rgba(255,255,255,.7);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 4px;
+}
+
+.es-arrow {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(75,160,231,.18);
+  color: #4ba0e7;
+  display: grid;
+  place-items: center;
+  transition: background .15s, transform .15s;
+}
+.ekeron-strip:hover .es-arrow {
+  background: #4ba0e7;
+  color: #fff;
+  transform: translateX(2px);
+}
 
 /* Footer */
 .footer {
