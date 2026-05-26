@@ -131,7 +131,7 @@ function openSqueeze() {
 function openAbout() {
   openModal(`
     <h2>Om CalPal</h2>
-    <p>CalPal är en svensk kalender med själ — byggd för att uppmärksamma både det vardagliga och det vackra i Sveriges almanackatraditioner.</p>
+    <p class="intro">En svensk kalender med själ — byggd för att uppmärksamma både det vardagliga och det vackra i Sveriges almanackatraditioner.</p>
 
     <h3>Vad finns här?</h3>
     <p><strong>Grund:</strong> månadskalender med ISO-veckonummer, helgdagar (röda dagar), namnsdagar, flaggdagar och temadagar.</p>
@@ -139,6 +139,24 @@ function openAbout() {
     <p><strong>Säsong:</strong> svampar, bär, jakt, pollen och fågelflytt — visualiserat i ett årshjul.</p>
     <p><strong>Historia & kultur:</strong> "På denna dag" i svensk och världshistoria; mattradition, Nobel, Eurovision, Vasalopp.</p>
     <p><strong>Det unika:</strong> Bondepraktikans väderspomar, gamla almanack-citat, dagens bortglömda svenska ord, hjärtslagsräknare, klämdagar med semesterstrategier.</p>
+
+    <div class="ekeron-card">
+      <div class="ek-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
+          <circle cx="6.5" cy="16.5" r="2.5"/>
+          <circle cx="16.5" cy="16.5" r="2.5"/>
+        </svg>
+      </div>
+      <div>
+        <h4>Ekeron — leasingkalkylator</h4>
+        <p>Räkna ut den verkliga månadskostnaden för din nästa firmabil eller privatleasing. Jämför bilmodeller, restvärden, ränta och förmånsvärde — på några sekunder.</p>
+        <a class="ek-link" href="https://ekeron.com/" target="_blank" rel="noopener">
+          Öppna ekeron.com
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
 
     <h3>Bygd för GitHub Pages</h3>
     <p>Hela CalPal är ren HTML/CSS/JS utan beroenden. Push till en GitHub-repo, aktivera Pages, klar.</p>

@@ -8,6 +8,7 @@ import { renderDaylightBarometer } from "./daylightBarometer.js";
 import { renderSeasonWheel } from "./seasonWheel.js";
 import { monthCitation } from "./almanackCitat.js";
 import { initModal } from "./modal.js";
+import { initTheme } from "./theme.js";
 
 function onDateSelected(date) {
   renderHero(document.getElementById("dayHero"), date);
@@ -27,6 +28,7 @@ function renderMonthCitation(date) {
 }
 
 function boot() {
+  initTheme();
   initCalendar(onDateSelected);
   initModal();
   onDateSelected(getSelectedDate());
