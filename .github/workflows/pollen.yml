@@ -33,5 +33,8 @@ jobs:
             echo "Ingen ändring av pollendata."
           else
             git commit -m "Update pollen forecast ($(date -u +%Y-%m-%d))"
-            git push
+            for i in 1 2 3; do
+              git pull --rebase --autostash origin main && git push && break
+              echo "Push avvisades, försök $i..."; sleep 6
+            done
           fi

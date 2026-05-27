@@ -21,12 +21,12 @@ function onDateSelected(date, displayMonth) {
 
 function wireCardClicks(date) {
   document.querySelectorAll("[data-detail]").forEach(el => {
-    el.addEventListener("click", (e) => {
-      // Ignorera om klick var på annan klickbar element (a, button) inom kortet
+    // onclick (ej addEventListener) så handlers inte ackumuleras på
+    // element som lever kvar mellan renderingar (t.ex. månadscitatet)
+    el.onclick = (e) => {
       if (e.target.closest("a, button:not(.day)")) return;
-      const key = el.getAttribute("data-detail");
-      openCardDeepDive(key, date);
-    });
+      openCardDeepDive(el.getAttribute("data-detail"), date);
+    };
   });
 }
 
