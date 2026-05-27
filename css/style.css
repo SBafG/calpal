@@ -199,7 +199,7 @@ main { min-width: 0; }
   font-family: var(--cp-font-serif);
   font-weight: var(--cp-fw-light);
   font-style: italic;
-  font-size: var(--cp-fs-display-l);
+  font-size: 72px;
   margin: 4px 0 0;
   line-height: 0.9;
   letter-spacing: -0.03em;
@@ -207,11 +207,11 @@ main { min-width: 0; }
 }
 .month-name .month-year {
   font-style: normal;
-  font-size: 0.32em;
+  font-size: 0.34em;
   letter-spacing: 0.04em;
   color: var(--cp-ink-3);
-  margin-left: 0.18em;
-  vertical-align: 0.55em;
+  margin-left: 0.45em;
+  vertical-align: 0.5em;
 }
 .cal-header-right { text-align: right; }
 .month-nav {
@@ -658,16 +658,17 @@ input[type="date"], input[type="text"], input[type="number"] {
    Responsive
    ============================================================ */
 @media (max-width: 1279px) {
-  .wordmark { font-size: 112px; }
+  .wordmark { font-size: 88px; }
+  .month-name { font-size: 60px; }
   .cp-grid { grid-template-columns: 1fr 280px; gap: 48px; }
 }
 @media (max-width: 960px) {
-  .wordmark { font-size: 76px; }
+  .wordmark { font-size: 72px; }
   .masthead { padding: 36px 0 28px; }
   .today-stats { grid-template-columns: 1fr 1fr; }
   .stat-card:nth-child(3) { border-left: none; }
   .cp-grid { grid-template-columns: 1fr; gap: 48px; padding: 36px 0 24px; }
-  .month-name { font-size: 72px; }
+  .month-name { font-size: 56px; }
   .month-essay { grid-template-columns: 1fr; gap: 12px; }
 }
 @media (max-width: 600px) {
@@ -687,7 +688,7 @@ input[type="date"], input[type="text"], input[type="number"] {
   .day-name { font-size: 8.5px; }
   .day-holiday-name { display: none; }
   .day { min-height: 54px; padding: 8px 0 14px; }
-  .month-name { font-size: 56px; }
+  .month-name { font-size: 46px; }
   .modal-card { padding: 28px 22px; }
   .modal h2 { font-size: 30px; }
 }
