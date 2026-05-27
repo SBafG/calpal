@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"/>
+<title>Cal·Pal — Skandinavisk modernism</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+  html, body { margin: 0; padding: 0; min-height: 100%; background: #fafaf7; font-family: 'Inter', system-ui, sans-serif; }
+  #root { min-height: 100vh; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="shared-data.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="v3-final.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "season": "host",
+  "accentMode": "season",
+  "accent": "#8a3a1a",
+  "density": "comfy",
+  "showWeeks": true,
+  "showStats": true,
+  "masthead": "big"
+}/*EDITMODE-END*/;
+
+const SEASON_ACCENTS = {
+  var:    '#c44a2a',  // brick — default
+  sommar: '#d68a18',  // ochre
+  host:   '#8a3a1a',  // rust
+  vinter: '#2a4a6a',  // ink-blue
+};
+
+const App = () => {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const data = window.CalPal;
+  return (
+    <>
+      <SkandinaviskFinal data={data} tweaks={t}/>
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Säsong" />
+        <TweakRadio
+          label="Period"
+          value={t.season}
+          options={[
+            { value: 'vinter', label: 'Vinter' },
+            { value: 'var',    label: 'Vår' },
+            { value: 'sommar', label: 'Sommar' },
+            { value: 'host',   label: 'Höst' },
+          ]}
+          onChange={(v) => setTweak({ season: v, accent: SEASON_ACCENTS[v] || t.accent })}
+        />
+
+        <TweakSection label="Accent" />
+        <TweakRadio
+          label="Källa"
+          value={t.accentMode}
+          options={[
+            { value: 'season', label: 'Följ säsong' },
+            { value: 'manual', label: 'Egen färg' },
+          ]}
+          onChange={(v) => setTweak('accentMode', v)}
+        />
+        {t.accentMode === 'manual' && (
+          <TweakColor
+            label="Färg"
+            value={t.accent}
+            options={['#c44a2a', '#d68a18', '#8a3a1a', '#2a4a6a', '#0e0f0d', '#2d5a3a', '#7a1a4a']}
+            onChange={(v) => setTweak('accent', v)}
+          />
+        )}
+
+        <TweakSection label="Layout" />
+        <TweakRadio
+          label="Densitet"
+          value={t.density}
+          options={[
+            { value: 'compact', label: 'Tät' },
+            { value: 'regular', label: 'Normal' },
+            { value: 'comfy',   label: 'Luftig' },
+          ]}
+          onChange={(v) => setTweak('density', v)}
+        />
+        <TweakSelect
+          label="Masthead"
+          value={t.masthead}
+          options={[
+            { value: 'big',     label: 'Stor — magasinformat' },
+            { value: 'compact', label: 'Kompakt' },
+            { value: 'none',    label: 'Ingen' },
+          ]}
+          onChange={(v) => setTweak('masthead', v)}
+        />
+        <TweakToggle
+          label="Veckonummer"
+          value={t.showWeeks}
+          onChange={(v) => setTweak('showWeeks', v)}
+        />
+        <TweakToggle
+          label="Idag-rad (4 statistiska kort)"
+          value={t.showStats}
+          onChange={(v) => setTweak('showStats', v)}
+        />
+      </TweaksPanel>
+    </>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

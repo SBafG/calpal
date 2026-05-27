@@ -3,67 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="CalPal — en svensk kalender med själ. Namnsdagar, helgdagar, månfaser, historia, säsong, kuriosa och mer." />
-  <meta name="theme-color" content="#0f172a" />
-  <title>CalPal — den svenska kalendern med själ</title>
+  <meta name="description" content="CalPal — den svenska kalendern, med själ. Namnsdagar, helgdagar, månfaser, pollen, historia och almanackatradition i editorial form." />
+  <meta name="theme-color" content="#0e0f0d" />
+  <title>Cal·Pal — den svenska kalendern, med själ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23271c14'/%3E%3Cpath d='M 44 18 a 14 14 0 1 0 0 28' fill='none' stroke='%23d4a342' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='34' cy='32' r='3.6' fill='%23d4a342'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Crect width='12' height='12' fill='%23fafaf7'/%3E%3Cpath d='M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z' fill='%230e0f0d'/%3E%3C/svg%3E" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo" aria-hidden="true">
-        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <rect class="lg-bg" width="40" height="40" rx="11"/>
-          <circle class="lg-ring" cx="20" cy="20" r="14.5"/>
-          <path class="lg-c" d="M 27 12.5 a 9.5 9.5 0 1 0 0 15"/>
-          <circle class="lg-dot" cx="22.8" cy="20" r="2.3"/>
-        </svg>
-      </span>
-      <h1>Cal<span class="ampersand">·</span>Pal</h1>
-      <span class="tagline">Den svenska kalendern med själ</span>
-    </div>
-    <nav class="topnav">
-      <button class="navbtn" id="todayBtn" title="Hoppa till idag">Idag</button>
-      <button class="navbtn" id="counterBtn" title="Personliga räknare">Räknare</button>
-      <button class="navbtn" id="squeezeBtn" title="Klämdags-radar">Klämdagar</button>
-      <button class="navbtn" id="aboutBtn" title="Om CalPal">Om</button>
-    </nav>
-  </header>
+  <div class="cp-page" id="cpPage">
 
-  <main class="layout">
-    <div class="left-col">
-      <section class="calendar-pane" aria-label="Kalender">
-        <div class="calendar-head">
-          <button class="navarrow" id="prevMonth" aria-label="Föregående månad">‹</button>
-          <h2 id="monthLabel">—</h2>
-          <button class="navarrow" id="nextMonth" aria-label="Nästa månad">›</button>
+    <!-- TopStrip -->
+    <div class="topstrip">
+      <div class="topstrip-left">
+        <span class="star" aria-hidden="true"></span>
+        <span class="topstrip-date" id="topstripDate">—</span>
+      </div>
+      <nav class="topnav">
+        <a href="#" class="active" id="navToday">Idag</a>
+        <a href="#" id="navCounter">Räknare</a>
+        <a href="#" id="navSqueeze">Klämdagar</a>
+        <a href="#" id="navAbout">Arkiv</a>
+      </nav>
+    </div>
+
+    <div class="cp-inner">
+      <!-- Masthead -->
+      <header class="masthead">
+        <h1 class="wordmark">Cal<span class="mid-dot">·</span>Pal</h1>
+        <div class="edition">
+          <div class="edition-meta" id="editionMeta">NUMMER CXLVII · VÅR</div>
+          <div class="edition-tagline">Den svenska kalendern,&nbsp;med själ</div>
         </div>
+      </header>
 
-        <div class="calendar-grid" id="calendarGrid" role="grid"></div>
+      <!-- TodayStats -->
+      <div class="today-stats" id="todayStats"></div>
 
-        <div class="month-citation" id="monthCitation"></div>
-      </section>
+      <!-- Main grid -->
+      <div class="cp-grid">
+        <main>
+          <div class="cal-header">
+            <div class="cal-header-left">
+              <div class="eyebrow muted">Månaden</div>
+              <h2 class="month-name" id="monthName">—</h2>
+            </div>
+            <div class="cal-header-right">
+              <div class="month-nav" id="monthNav">
+                <button class="month-nav-btn" id="prevMonth" aria-label="Föregående månad">‹</button>
+                <span id="monthNavLabel">← / →</span>
+                <button class="month-nav-btn" id="nextMonth" aria-label="Nästa månad">›</button>
+              </div>
+              <div class="season-poem" id="seasonPoem"></div>
+            </div>
+          </div>
 
-      <a class="ad-slot" href="https://ekeron.com/" target="_blank" rel="noopener sponsored" aria-label="Annons: Ekeron mil-koll för leasingbil">
-        <span class="ad-label">Annons</span>
-        <img class="ad-image" src="images/bmw1.png" alt="" loading="lazy"/>
-        <span class="ad-body">
-          <span class="ad-brand">ekeron.com</span>
-          <span class="ad-title">Mil-koll för leasingbilen</span>
-          <span class="ad-pitch">Se din rekommenderade körsträcka dag för dag — slipp straffavgift vid återlämning.</span>
-          <span class="ad-link">Räkna på ekeron.com →</span>
-        </span>
-      </a>
+          <div class="cal-grid" id="calendarGrid" role="grid"></div>
+
+          <div class="month-essay" id="monthEssay"></div>
+        </main>
+
+        <aside class="sidebar" id="sidebar"></aside>
+      </div>
+
+      <!-- Footer -->
+      <footer class="cp-footer">
+        <div class="footer-left">
+          <span class="star" aria-hidden="true"></span>
+          <span>Cal·Pal &nbsp;·&nbsp; Stockholm &nbsp;·&nbsp; MMXXVI</span>
+        </div>
+        <span class="footer-aphorism">"Hwarken hast eller hvila — endast tid."</span>
+      </footer>
     </div>
-
-    <aside class="sidebar" aria-label="Detaljer för vald dag">
-      <div id="dayHero"></div>
-      <div id="daylightBarometer"></div>
-      <div id="seasonWheel"></div>
-      <div id="dayDetail"></div>
-    </aside>
-  </main>
+  </div>
 
   <div class="modal" id="modal" hidden>
     <div class="modal-card">
@@ -72,10 +89,6 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <span>CalPal — byggd i Sverige · <a href="https://github.com/SBafG/calpal" target="_blank" rel="noopener">GitHub</a> · ett projekt av <a href="https://ekeron.com/" target="_blank" rel="noopener">Ekeron</a></span>
-  </footer>
-
-  <script type="module" src="js/main.js?v=8"></script>
+  <script type="module" src="js/main.js?v=11"></script>
 </body>
 </html>

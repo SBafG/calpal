@@ -1,184 +1,84 @@
 // ============================================================
-// calendar.js — månadsvy med veckonummer, prickar för indikatorer
+// calendar.js — editorial månadsgrid (Skandinavisk modernism)
 // ============================================================
 
-import {
-  MONTHS_SV, WEEKDAYS_SV_SHORT, monthGridDays, isoWeek, sameDay, ymd, mondayIndex
-} from "./utils.js";
+import { monthGridDays, isoWeek, sameDay, ymd, mondayIndex } from "./utils.js";
 import { getNameday } from "./namedays.js";
 import { holidaysForYear } from "./holidays.js";
-import { themesForDate } from "./themedays.js";
-import { historyForDate } from "./history.js";
+import { squeezeDaysForYear } from "./squeezeDays.js";
 
-const grid = () => document.getElementById("calendarGrid");
-const label = () => document.getElementById("monthLabel");
+const WD = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
 
-let currentMonth = new Date();
-currentMonth.setDate(1);
+export function renderCalendar(container, displayMonth, today, onDayClick) {
+  const year = displayMonth.getFullYear();
+  const holidays = holidaysForYear(year);
+  const klamSet = new Set(squeezeDaysForYear(year).map(s => ymd(s.date)));
+  const days = monthGridDays(displayMonth);
 
-let selectedDate = new Date();
-let onSelectCallback = null;
-
-export function initCalendar(onSelect) {
-  onSelectCallback = onSelect;
-  document.getElementById("prevMonth").addEventListener("click", () => navigate(-1));
-  document.getElementById("nextMonth").addEventListener("click", () => navigate(1));
-  document.getElementById("todayBtn").addEventListener("click", () => {
-    currentMonth = new Date();
-    currentMonth.setDate(1);
-    selectedDate = new Date();
-    render();
+  // Weekday header
+  let html = `<div class="cal-weekhead"><div></div>`;
+  WD.forEach((w, i) => {
+    html += `<div class="wd${i >= 5 ? " weekend" : ""}">${w}</div>`;
   });
-  document.addEventListener("keydown", (e) => {
-    if (e.target.matches("input, textarea")) return;
-    if (e.key === "ArrowLeft")  navigate(-1);
-    if (e.key === "ArrowRight") navigate(1);
-    if (e.key === "t" || e.key === "T") {
-      currentMonth = new Date(); currentMonth.setDate(1);
-      selectedDate = new Date();
-      render();
-    }
-  });
-  render();
-}
+  html += `</div>`;
 
-function navigate(delta) {
-  currentMonth.setMonth(currentMonth.getMonth() + delta);
-  render();
-}
-
-export function getSelectedDate() { return selectedDate; }
-export function getCurrentMonth() { return currentMonth; }
-export function setSelectedDate(d) {
-  selectedDate = new Date(d);
-  currentMonth = new Date(d.getFullYear(), d.getMonth(), 1);
-  render();
-}
-
-function render() {
-  label().textContent = `${MONTHS_SV[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`;
-
-  const g = grid();
-  g.innerHTML = "";
-
-  // Header
-  const wnHead = document.createElement("div");
-  wnHead.className = "wn-head";
-  wnHead.textContent = "v";
-  g.appendChild(wnHead);
-
-  WEEKDAYS_SV_SHORT.forEach(wd => {
-    const h = document.createElement("div");
-    h.className = "wd-head";
-    h.textContent = wd;
-    g.appendChild(h);
-  });
-
-  const days = monthGridDays(currentMonth);
-  const holidays = holidaysForYear(currentMonth.getFullYear());
-  const todayDate = new Date();
-
+  // 6 weeks
   for (let row = 0; row < 6; row++) {
     const weekDays = days.slice(row * 7, row * 7 + 7);
-    const monday = weekDays[0];
-
-    const wnCell = document.createElement("div");
-    wnCell.className = "weeknum";
-    wnCell.textContent = isoWeek(monday);
-    g.appendChild(wnCell);
-
-    weekDays.forEach(d => {
-      const cell = renderDayCell(d, todayDate, holidays);
-      g.appendChild(cell);
-    });
+    const weekNum = isoWeek(weekDays[0]);
+    html += `<div class="cal-week"><div class="cal-weeknum">${weekNum}</div>`;
+    weekDays.forEach(d => { html += dayCell(d, displayMonth, today, holidays, klamSet); });
+    html += `</div>`;
   }
+  html += `<div class="cal-grid-close"></div>`;
 
-  if (onSelectCallback) onSelectCallback(selectedDate, currentMonth);
+  container.innerHTML = html;
+
+  // Wire day clicks
+  container.querySelectorAll(".day").forEach(el => {
+    el.onclick = () => {
+      const iso = el.getAttribute("data-date");
+      const [y, m, dd] = iso.split("-").map(Number);
+      onDayClick(new Date(y, m - 1, dd));
+    };
+  });
 }
 
-function renderDayCell(date, today, holidays) {
-  const cell = document.createElement("button");
-  cell.className = "day";
-  cell.type = "button";
-
-  const inMonth = date.getMonth() === currentMonth.getMonth();
-  if (!inMonth) cell.classList.add("muted");
-
-  const wd = mondayIndex(date);
-  if (wd >= 5) cell.classList.add("weekend");
-
+function dayCell(date, displayMonth, today, holidays, klamSet) {
+  const inMonth = date.getMonth() === displayMonth.getMonth();
   const key = ymd(date);
   const hol = holidays[key];
-  if (hol && hol.type === "red") cell.classList.add("holiday");
-
-  if (sameDay(date, today)) cell.classList.add("today");
-  if (sameDay(date, selectedDate)) cell.classList.add("selected");
-
-  // Datumnummer
-  const num = document.createElement("div");
-  num.className = "num";
-  num.textContent = date.getDate();
-  cell.appendChild(num);
-
-  // Namnsdag (textbaserad — alltid synlig)
+  const isRedHoliday = hol && hol.type === "red";
+  const isToday = sameDay(date, today);
+  const isKlam = klamSet.has(key) && inMonth;
   const names = getNameday(date);
-  if (names.length) {
-    const nd = document.createElement("div");
-    nd.className = "nameday";
-    nd.textContent = names.join(", ");
-    cell.appendChild(nd);
-  }
 
-  // Flagga uppe i högra hörnet
-  if (hol && hol.flagDay) {
-    const flag = document.createElement("div");
-    flag.className = "flag-mark";
-    cell.appendChild(flag);
-  }
+  const classes = ["day"];
+  if (!inMonth) classes.push("muted");
+  if (isRedHoliday) classes.push("holiday");
+  if (isToday) classes.push("today");
 
-  // Indikatorprickar längst ner
-  const dots = buildDots(date, hol);
-  if (dots.length) {
-    const dotWrap = document.createElement("div");
-    dotWrap.className = "dots";
-    dots.forEach(d => {
-      const el = document.createElement("span");
-      el.className = `dot ${d.color}`;
-      dotWrap.appendChild(el);
-    });
-    cell.appendChild(dotWrap);
-  }
+  let flags = "";
+  if (isToday) flags = `<span class="day-idag">idag</span>`;
+  else if (isRedHoliday) flags = `<span class="day-dot"></span>`;
+  else if (isKlam) flags = `<span class="day-klam">kläm</span>`;
 
-  // Title-tooltip med all info för dagen
-  cell.title = buildTooltip(date, hol);
+  // Helgdagsnamn (kort) — visa bara om röd dag eller flaggdag med namn
+  const holidayName = hol ? `<div class="day-holiday-name">${shorten(hol.name)}</div>` : "";
 
-  cell.addEventListener("click", () => {
-    selectedDate = date;
-    render();
-    if (onSelectCallback) onSelectCallback(selectedDate, currentMonth);
-  });
-
-  return cell;
+  return `
+    <button class="${classes.join(" ")}" data-date="${key}" type="button">
+      <div class="day-top">
+        <span class="day-num">${date.getDate()}</span>
+        <span class="day-flags">${flags}</span>
+      </div>
+      ${names.length ? `<div class="day-name">${names.join(", ")}</div>` : ""}
+      ${holidayName}
+    </button>
+  `;
 }
 
-function buildDots(date, hol) {
-  const dots = [];
-  if (hol && hol.type === "red") dots.push({ color: "red" });
-  // Tema-dag → guld
-  const themes = themesForDate(date);
-  if (themes.length) dots.push({ color: "gold" });
-  // Historia → lila om mer än 1 händelse
-  const history = historyForDate(date);
-  if (history.length > 0) dots.push({ color: "purple" });
-  return dots.slice(0, 3); // max 3 prickar
-}
-
-function buildTooltip(date, hol) {
-  const parts = [];
-  const names = getNameday(date);
-  if (names.length) parts.push("Namnsdag: " + names.join(", "));
-  if (hol) parts.push(hol.name + (hol.type === "red" ? " (röd dag)" : "") + (hol.flagDay ? " · flaggdag" : ""));
-  const themes = themesForDate(date);
-  themes.forEach(t => parts.push(t.name));
-  return parts.join("\n");
+function shorten(name) {
+  if (name.length <= 22) return name;
+  return name.slice(0, 21) + "…";
 }

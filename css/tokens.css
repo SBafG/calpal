@@ -1,0 +1,80 @@
+/* Cal·Pal — Design Tokens (Skandinavisk modernism)
+   Från design_handoff_calpal/tokens.css */
+
+:root {
+  /* Type */
+  --cp-font-serif: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --cp-font-sans:  "Inter", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+
+  --cp-fw-light: 300; --cp-fw-regular: 400; --cp-fw-medium: 500; --cp-fw-semi: 600; --cp-fw-bold: 700;
+
+  --cp-fs-display-xl: 192px;
+  --cp-fs-display-l: 108px;
+  --cp-fs-display-m: 64px;
+  --cp-fs-display-s: 58px;
+  --cp-fs-h1: 44px;
+  --cp-fs-h2: 36px;
+  --cp-fs-h3: 32px;
+  --cp-fs-day: 38px;
+  --cp-fs-day-today: 46px;
+  --cp-fs-quote-side: 26px;
+  --cp-fs-italic-l: 24px;
+  --cp-fs-body-l: 20px;
+  --cp-fs-body: 13px;
+  --cp-fs-small: 12px;
+  --cp-fs-meta: 11px;
+  --cp-fs-eyebrow: 10px;
+  --cp-fs-tag: 9px;
+
+  --cp-tracking-tight: -0.04em;
+  --cp-tracking-snug: -0.025em;
+  --cp-tracking-wide: 0.16em;
+  --cp-tracking-wider: 0.22em;
+  --cp-tracking-widest: 0.28em;
+
+  --cp-lh-tight: 0.84; --cp-lh-snug: 0.95; --cp-lh-body: 1.35; --cp-lh-prose: 1.55;
+
+  /* Structural color */
+  --cp-paper: #ffffff;
+  --cp-ink: #0e0f0d;
+  --cp-ink-2: #535551;
+  --cp-ink-3: #8a8c87;
+  --cp-rule: #e6e5df;
+
+  /* Default season = Vår */
+  --cp-bg: #fafaf7;
+  --cp-tint: #f4f6ee;
+  --cp-accent: #c44a2a;
+
+  /* Spacing */
+  --cp-sp-1: 4px; --cp-sp-2: 8px; --cp-sp-3: 12px; --cp-sp-4: 16px;
+  --cp-sp-5: 24px; --cp-sp-6: 32px; --cp-sp-7: 48px; --cp-sp-8: 56px; --cp-sp-9: 72px;
+
+  --cp-pad-x: 56px;
+  --cp-cal-day-min: 86px;
+  --cp-cal-day-pad: 14px;
+
+  --cp-border-hair: 1px solid var(--cp-rule);
+  --cp-border-strong: 2px solid var(--cp-ink);
+}
+
+/* Seasonal palettes */
+[data-season="var"], :root {
+  --cp-bg: #fafaf7; --cp-tint: #f4f6ee; --cp-accent: #c44a2a;
+}
+[data-season="sommar"] {
+  --cp-bg: #fbfaf3; --cp-tint: #f7f3e2; --cp-accent: #d68a18;
+}
+[data-season="host"] {
+  --cp-bg: #fbf8f4; --cp-tint: #f3ece1; --cp-accent: #8a3a1a;
+}
+[data-season="vinter"] {
+  --cp-bg: #f7f9fa; --cp-tint: #ecf0f3; --cp-accent: #2a4a6a;
+}
+
+@media (max-width: 1279px) {
+  :root { --cp-pad-x: 40px; }
+}
+@media (max-width: 600px) {
+  :root { --cp-pad-x: 18px; }
+}

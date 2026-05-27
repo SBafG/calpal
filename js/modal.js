@@ -39,9 +39,10 @@ export function initModal() {
     if (e.key === "Escape") closeModal();
   });
 
-  document.getElementById("counterBtn").addEventListener("click", openCounter);
-  document.getElementById("squeezeBtn").addEventListener("click", openSqueeze);
-  document.getElementById("aboutBtn").addEventListener("click", openAbout);
+  // Bakåtkompatibel knapp-wiring (om gamla ID:n finns)
+  document.getElementById("counterBtn")?.addEventListener("click", openCounter);
+  document.getElementById("squeezeBtn")?.addEventListener("click", openSqueeze);
+  document.getElementById("aboutBtn")?.addEventListener("click", openAbout);
 }
 
 export function setModalDate(date) {
@@ -407,7 +408,7 @@ function openAlmanackDeepDive(date) {
 }
 
 // ---------- Counter (hjärtslag + nedräkningar) ----------
-function openCounter() {
+export function openCounter() {
   const stored = localStorage.getItem("calpal:birth");
   openModal(`
     <h2>Räknare & milstolpar</h2>
@@ -471,7 +472,7 @@ function renderMilestones() {
 }
 
 // ---------- Klämdags-radar ----------
-function openSqueeze() {
+export function openSqueeze() {
   const year = new Date().getFullYear();
   const next = year + 1;
   const sq1 = squeezeDaysForYear(year);
@@ -502,7 +503,7 @@ function openSqueeze() {
 }
 
 // ---------- Om CalPal ----------
-function openAbout() {
+export function openAbout() {
   openModal(`
     <h2>Om CalPal</h2>
     <p class="intro">En svensk kalender med själ — byggd för att uppmärksamma både det vardagliga och det vackra i Sveriges almanackatraditioner.</p>
