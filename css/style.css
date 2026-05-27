@@ -422,25 +422,26 @@ main { min-width: 0; }
 }
 .side-season-sub { font-size: 11px; color: var(--cp-ink-3); margin-top: 6px; line-height: 1.5; }
 
-/* Season wheel (modal) */
+/* Season wheel (modal) — hjul centrerat överst, legend i rad under */
 .wheel-modal {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 28px;
-  padding: 12px 0 18px;
+  gap: 22px;
+  padding: 16px 0 22px;
   border-bottom: var(--cp-border-hair);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
-.wheel-modal-svg { flex-shrink: 0; }
-.wheel-modal .wheel-svg { width: 300px; height: 300px; display: block; }
+.wheel-modal-svg { width: 100%; display: flex; justify-content: center; }
+.wheel-modal .wheel-svg { width: 360px; height: 360px; max-width: 100%; display: block; }
 @media (max-width: 560px) {
-  .wheel-modal { flex-direction: column; gap: 16px; }
-  .wheel-modal .wheel-svg { width: 240px; height: 240px; }
+  .wheel-modal .wheel-svg { width: 280px; height: 280px; }
 }
 .wheel-modal .wheel-legend {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 11px;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 12px 24px;
+  width: 100%;
   font-size: 13px;
 }
 .wl-item { display: flex; align-items: flex-start; gap: 10px; cursor: help; }
