@@ -126,8 +126,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .stat-card {
   padding: 28px 24px;
   border-left: var(--cp-border-hair);
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  background: none;
+  cursor: pointer;
+  transition: background .12s;
 }
 .stat-card:first-child { border-left: none; }
+.stat-card:hover { background: var(--cp-tint); }
 .stat-card .stat-label {
   font-size: var(--cp-fs-eyebrow);
   letter-spacing: var(--cp-tracking-widest);

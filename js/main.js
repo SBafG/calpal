@@ -74,19 +74,27 @@ function renderTodayStats() {
   const seasonLabel = SEASON[seasonKey(today.getMonth())].label.toLowerCase();
 
   const cards = [
-    { label: "Idag", big: wd, sub: `${today.getDate()} ${MONTHS_SV[today.getMonth()]} · ${seasonLabel}`, accent: true, italic: true },
-    { label: "Namnsdag", big: names[0] || "—", sub: names.length > 1 ? `· ${names.slice(1).join(", ")}` : "", accent: false, italic: false },
-    { label: "Dag av året", big: String(doy), sub: `av ${daysInYear(today.getFullYear())}`, accent: false, italic: false },
-    { label: "Dagar kvar", big: String(left), sub: "till nyår", accent: false, italic: false }
+    { label: "Idag", big: wd, sub: `${today.getDate()} ${MONTHS_SV[today.getMonth()]} · ${seasonLabel}`, accent: true, italic: true, action: "hero", title: "Om dagen" },
+    { label: "Namnsdag", big: names[0] || "—", sub: names.length > 1 ? `· ${names.slice(1).join(", ")}` : "", accent: false, italic: false, action: "hero", title: "Om namnet" },
+    { label: "Dag av året", big: String(doy), sub: `av ${daysInYear(today.getFullYear())}`, accent: false, italic: false, action: "history", title: "Tidsmaskinen" },
+    { label: "Dagar kvar", big: String(left), sub: "till nyår", accent: false, italic: false, action: "counter", title: "Räknare & nedräkningar" }
   ];
 
   document.getElementById("todayStats").innerHTML = cards.map(c => `
-    <div class="stat-card${c.accent ? " accent" : ""}${c.italic ? " italic" : ""}">
+    <button type="button" class="stat-card${c.accent ? " accent" : ""}${c.italic ? " italic" : ""}" data-action="${c.action}" title="${c.title}">
       <div class="stat-label">${c.label}</div>
       <div class="stat-big">${c.big}</div>
       ${c.sub ? `<div class="stat-sub">${c.sub}</div>` : ""}
-    </div>
+    </button>
   `).join("");
+
+  document.querySelectorAll("#todayStats .stat-card").forEach(el => {
+    el.onclick = () => {
+      const a = el.getAttribute("data-action");
+      if (a === "counter") openCounter();
+      else openCardDeepDive(a, today);
+    };
+  });
 }
 
 function renderMonthHeader() {
