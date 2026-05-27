@@ -44,8 +44,9 @@ export function buildWheelSVG(date) {
       if (start <= end) {
         arcs.push(arc(cx, cy, rIn, rOut, start, end, col, title));
       } else {
-        arcs.push(arc(cx, cy, rIn, rOut, start, 365, col, title));
-        arcs.push(arc(cx, cy, rIn, rOut, 0, end, col, title));
+        // Säsong som korsar årsskiftet — rita som EN sammanhängande båge
+        // genom toppen (lägg ett helt år på slutdagen) i stället för två delar
+        arcs.push(arc(cx, cy, rIn, rOut, start, end + 365, col, title));
       }
     });
   }
