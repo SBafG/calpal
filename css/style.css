@@ -90,7 +90,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .wordmark {
   font-family: var(--cp-font-serif);
   font-weight: var(--cp-fw-light);
-  font-size: var(--cp-fs-display-xl);
+  font-size: 140px;
   margin: 0;
   line-height: var(--cp-lh-tight);
   letter-spacing: var(--cp-tracking-tight);
@@ -605,11 +605,11 @@ input[type="date"], input[type="text"], input[type="number"] {
    Responsive
    ============================================================ */
 @media (max-width: 1279px) {
-  .wordmark { font-size: 144px; }
+  .wordmark { font-size: 112px; }
   .cp-grid { grid-template-columns: 1fr 280px; gap: 48px; }
 }
 @media (max-width: 960px) {
-  .wordmark { font-size: 88px; }
+  .wordmark { font-size: 76px; }
   .masthead { padding: 36px 0 28px; }
   .today-stats { grid-template-columns: 1fr 1fr; }
   .stat-card:nth-child(3) { border-left: none; }
