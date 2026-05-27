@@ -24,12 +24,13 @@ export function buildWheelSVG(date) {
     const start = dayOfYearFrom(s.start[0], s.start[1]);
     const end = dayOfYearFrom(s.end[0], s.end[1]);
     const rad = CAT_RADII[s.category] || { inner: 50, outer: 60 };
+    const title = `${s.name} · ${capitalize(s.category)} · ${rangeLabel(s)}`;
 
     if (start <= end) {
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, end, categoryColor(s.category)));
+      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, end, categoryColor(s.category), title));
     } else {
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, 365, categoryColor(s.category)));
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, 0, end, categoryColor(s.category)));
+      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, 365, categoryColor(s.category), title));
+      arcs.push(arc(cx, cy, rad.inner, rad.outer, 0, end, categoryColor(s.category), title));
     }
   }
 
@@ -61,12 +62,20 @@ export function buildWheelSVG(date) {
   </svg>`;
 }
 
+const CAT_DESC = {
+  svamp: "kantarell, karl johan m.fl.",
+  bär: "smultron, blåbär, lingon, hjortron",
+  jakt: "älg, hare",
+  pollen: "björk, gräs, gråbo",
+  fågel: "tranor, storkar, svalor"
+};
+
 export function buildWheelLegend() {
   return `<div class="wheel-legend">
     ${CATEGORIES.map(c => `
-      <span style="color:${categoryColor(c)}">
-        <span class="swatch" style="background:${categoryColor(c)}"></span>
-        ${capitalize(c)}
+      <span class="wl-item" title="${capitalize(c)}: ${CAT_DESC[c] || ""}">
+        <span class="wl-swatch" style="background:${categoryColor(c)}"></span>
+        <span class="wl-text"><span class="wl-name">${capitalize(c)}</span><span class="wl-desc">${CAT_DESC[c] || ""}</span></span>
       </span>
     `).join("")}
   </div>`;
@@ -113,7 +122,7 @@ function dayToAngle(day) {
   return (day / 366) * 2 * Math.PI - Math.PI / 2;
 }
 
-function arc(cx, cy, rIn, rOut, startDay, endDay, color) {
+function arc(cx, cy, rIn, rOut, startDay, endDay, color, title) {
   const a0 = dayToAngle(startDay);
   const a1 = dayToAngle(endDay);
   const large = (a1 - a0) > Math.PI ? 1 : 0;
@@ -121,11 +130,17 @@ function arc(cx, cy, rIn, rOut, startDay, endDay, color) {
   const x1o = cx + Math.cos(a1) * rOut, y1o = cy + Math.sin(a1) * rOut;
   const x1i = cx + Math.cos(a1) * rIn,  y1i = cy + Math.sin(a1) * rIn;
   const x0i = cx + Math.cos(a0) * rIn,  y0i = cy + Math.sin(a0) * rIn;
-  return `<path d="M ${x0o} ${y0o}
+  const titleEl = title ? `<title>${title}</title>` : "";
+  return `<path class="wheel-arc" d="M ${x0o} ${y0o}
                   A ${rOut} ${rOut} 0 ${large} 1 ${x1o} ${y1o}
                   L ${x1i} ${y1i}
                   A ${rIn} ${rIn} 0 ${large} 0 ${x0i} ${y0i} Z"
-                  fill="${color}" opacity="0.75"/>`;
+                  fill="${color}" opacity="0.8">${titleEl}</path>`;
+}
+
+const MON_ABBR = ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"];
+function rangeLabel(s) {
+  return `${s.start[1]} ${MON_ABBR[s.start[0]-1]}–${s.end[1]} ${MON_ABBR[s.end[0]-1]}`;
 }
 
 function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }

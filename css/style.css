@@ -414,13 +414,45 @@ main { min-width: 0; }
   line-height: 1.55; font-family: var(--cp-font-serif); font-style: italic;
 }
 
-/* Season wheel */
+/* Season wheel (sidebar) */
 .side-season-row { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
 .side-season-label {
   font-family: var(--cp-font-serif); font-style: italic;
   font-size: var(--cp-fs-italic-l); color: var(--cp-ink); line-height: 1;
 }
 .side-season-sub { font-size: 11px; color: var(--cp-ink-3); margin-top: 6px; line-height: 1.5; }
+
+/* Season wheel (modal) */
+.wheel-modal {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 0 18px;
+  border-bottom: var(--cp-border-hair);
+  margin-bottom: 12px;
+}
+.wheel-modal-svg { flex-shrink: 0; }
+.wheel-modal .wheel-svg { width: 240px; height: 240px; display: block; }
+@media (max-width: 560px) {
+  .wheel-modal { flex-direction: column; gap: 16px; }
+  .wheel-modal .wheel-svg { width: 200px; height: 200px; }
+}
+.wheel-modal .wheel-legend {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11px;
+  font-size: 13px;
+}
+.wl-item { display: flex; align-items: flex-start; gap: 10px; cursor: help; }
+.wl-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; margin-top: 1px; }
+.wl-text { display: flex; flex-direction: column; line-height: 1.25; }
+.wl-name { font-weight: 600; color: var(--cp-ink); }
+.wl-desc { font-size: 11px; color: var(--cp-ink-3); font-style: italic; font-family: var(--cp-font-serif); }
+
+/* Hover-cue: dimma övriga bågar, framhäv den man pekar på */
+.wheel-arc { transition: opacity .12s; cursor: help; }
+.wheel-modal .wheel-svg:hover .wheel-arc { opacity: 0.35; }
+.wheel-modal .wheel-svg .wheel-arc:hover { opacity: 1; }
 
 /* ============================================================
    Footer
