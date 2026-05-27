@@ -20,18 +20,34 @@ export function buildWheelSVG(date) {
   const cx = 100, cy = 100, r = 100;
   const arcs = [];
 
-  for (const s of SEASONS) {
-    const start = dayOfYearFrom(s.start[0], s.start[1]);
-    const end = dayOfYearFrom(s.end[0], s.end[1]);
-    const rad = CAT_RADII[s.category] || { inner: 50, outer: 60 };
-    const title = `${s.name} · ${capitalize(s.category)} · ${rangeLabel(s)}`;
+  // Gruppera per kategori — varje art får en egen delbana inom kategorins ring
+  // så att överlappande arter (t.ex. flera jaktsäsonger) inte döljer varandra.
+  const byCat = {};
+  for (const s of SEASONS) { (byCat[s.category] ||= []).push(s); }
 
-    if (start <= end) {
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, end, categoryColor(s.category), title));
-    } else {
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, start, 365, categoryColor(s.category), title));
-      arcs.push(arc(cx, cy, rad.inner, rad.outer, 0, end, categoryColor(s.category), title));
-    }
+  for (const cat of CATEGORIES) {
+    const list = byCat[cat];
+    if (!list) continue;
+    const band = CAT_RADII[cat] || { inner: 50, outer: 60 };
+    const n = list.length;
+    const laneH = (band.outer - band.inner) / n;
+    const gap = n > 1 ? 0.9 : 0;
+
+    list.forEach((s, i) => {
+      const rIn = band.inner + i * laneH + gap / 2;
+      const rOut = band.inner + (i + 1) * laneH - gap / 2;
+      const start = dayOfYearFrom(s.start[0], s.start[1]);
+      const end = dayOfYearFrom(s.end[0], s.end[1]);
+      const title = `${s.name} · ${capitalize(s.category)} · ${rangeLabel(s)}`;
+      const col = categoryColor(cat);
+
+      if (start <= end) {
+        arcs.push(arc(cx, cy, rIn, rOut, start, end, col, title));
+      } else {
+        arcs.push(arc(cx, cy, rIn, rOut, start, 365, col, title));
+        arcs.push(arc(cx, cy, rIn, rOut, 0, end, col, title));
+      }
+    });
   }
 
   const today = (date - new Date(date.getFullYear(), 0, 1)) / 86400000;
