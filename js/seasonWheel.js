@@ -8,11 +8,11 @@ import { loadPollen, renderPollenStrip } from "./pollen.js";
 
 const CATEGORIES = ["svamp","bär","jakt","pollen","fågel"];
 const CAT_RADII = {
-  "svamp":  { inner: 72, outer: 84 },
-  "bär":    { inner: 58, outer: 70 },
-  "pollen": { inner: 44, outer: 56 },
-  "fågel":  { inner: 30, outer: 42 },
-  "jakt":   { inner: 86, outer: 98 }
+  "jakt":   { inner: 84, outer: 100 },
+  "svamp":  { inner: 66, outer: 82 },
+  "bär":    { inner: 48, outer: 64 },
+  "pollen": { inner: 32, outer: 46 },
+  "fågel":  { inner: 21, outer: 30 }
 };
 
 // Bygg själva SVG-grafiken — återanvänds av kort och modal
