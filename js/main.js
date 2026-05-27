@@ -98,7 +98,8 @@ function renderTodayStats() {
 }
 
 function renderMonthHeader() {
-  document.getElementById("monthName").textContent = MONTHS_SV[displayMonth.getMonth()];
+  document.getElementById("monthName").innerHTML =
+    `${MONTHS_SV[displayMonth.getMonth()]}<span class="month-year">${displayMonth.getFullYear()}</span>`;
   const prev = (displayMonth.getMonth() + 11) % 12;
   const next = (displayMonth.getMonth() + 1) % 12;
   document.getElementById("monthNavLabel").textContent = `← ${MONTHS_SV[prev]} / ${MONTHS_SV[next]} →`;

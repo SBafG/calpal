@@ -205,6 +205,14 @@ main { min-width: 0; }
   letter-spacing: -0.03em;
   text-transform: lowercase;
 }
+.month-name .month-year {
+  font-style: normal;
+  font-size: 0.32em;
+  letter-spacing: 0.04em;
+  color: var(--cp-ink-3);
+  margin-left: 0.18em;
+  vertical-align: 0.55em;
+}
 .cal-header-right { text-align: right; }
 .month-nav {
   display: flex;
