@@ -17,6 +17,13 @@ import { seasonsActive, categoryColor } from "./seasonal.js";
 import { formatLongDate, isoWeek, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
 import { loadPollen, renderPollenFullForecast } from "./pollen.js";
 import { buildWheelSVG, buildWheelLegend } from "./seasonWheel.js";
+import { fetchOnThisDay } from "./wikiOnThisDay.js";
+import { buildSunPathSVG, buildDaylightMonthChart } from "./sunPathChart.js";
+import { addDays, MONTHS_SV as MONTH_NAMES } from "./utils.js";
+import { daylightMinutes, sunTimes as sunTimesFn } from "./astronomy.js";
+import { monthCitation } from "./almanackCitat.js";
+import { extraCitationsForMonth, ALMANACK_HISTORY } from "./almanackExtras.js";
+import { loadApod, renderApod } from "./nasaApod.js";
 
 const modal = () => document.getElementById("modal");
 const modalBody = () => document.getElementById("modalBody");
@@ -51,6 +58,7 @@ export function openCardDeepDive(detailKey, date) {
     case "season":    return openSeasonDeepDive(date);
     case "bonde":     return openBondeDeepDive(date);
     case "word":      return openWordDeepDive(date);
+    case "almanack":  return openAlmanackDeepDive(date);
   }
 }
 
@@ -127,34 +135,64 @@ function openTimemachineDeepDive(date) {
   const births = birthsForDate(date);
   const deaths = deathsForDate(date);
 
-  if (!events.length && !births.length && !deaths.length) {
-    openModal(`
-      <h2>Tidsmaskinen</h2>
-      <p class="intro">${formatLongDate(date)}</p>
-      <p>Inget historiskt registrerat för denna dag ännu. Bidra gärna på <a href="https://github.com/SBafG/calpal" target="_blank">GitHub</a>.</p>
-    `);
-    return;
-  }
-
-  const eventsHtml = events.length
-    ? `<ul class="dd-events">${events.map(e => `<li><strong>${e.year}</strong> · ${e.text}</li>`).join("")}</ul>`
+  const localEventsHtml = events.length
+    ? `<h3>Svenska händelser</h3>
+       <ul class="dd-events">${events.map(e => `<li><strong>${e.year}</strong> · ${e.text}</li>`).join("")}</ul>`
     : "";
 
-  const birthsHtml = births.length
+  const localBirthsHtml = births.length
     ? `<h3>Födda denna dag</h3>
        <ul class="dd-list">${births.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : "";
 
-  const deathsHtml = deaths.length
+  const localDeathsHtml = deaths.length
     ? `<h3>Avled denna dag</h3>
        <ul class="dd-list">${deaths.map(p => `<li><strong>${p.year}</strong> · ${p.name} — <em>${p.role}</em></li>`).join("")}</ul>` : "";
 
   openModal(`
     <h2>Tidsmaskinen</h2>
     <p class="intro">${formatLongDate(date)} genom historien</p>
-    ${events.length ? `<h3>Händelser</h3>${eventsHtml}` : ""}
-    ${birthsHtml}
-    ${deathsHtml}
+    ${localEventsHtml}
+    ${localBirthsHtml}
+    ${localDeathsHtml}
+    <div id="wikiOnThisDay" class="wiki-section">
+      <h3>Från Wikipedia <span class="wiki-loading">laddar…</span></h3>
+      <p class="dd-meta">Från Wikipedias 'On this day'-arkiv — engelsk text.</p>
+    </div>
   `);
+
+  // Lazy-load Wikipedia
+  fetchOnThisDay(date).then(data => {
+    const el = document.getElementById("wikiOnThisDay");
+    if (!el) return;
+    if (!data.events.length && !data.births.length && !data.deaths.length) {
+      el.innerHTML = `<h3>Wikipedia</h3><p class="dd-meta">Kunde inte ladda data från Wikipedia.</p>`;
+      return;
+    }
+    el.innerHTML = `
+      <h3>Världen denna dag <span class="wiki-source">via Wikipedia</span></h3>
+      <p class="dd-meta">Från Wikipedias "On this day" (engelska).</p>
+      ${data.events.length ? `
+        <h4>Händelser</h4>
+        <ul class="dd-events">${data.events.map(e => wikiItem(e)).join("")}</ul>` : ""}
+      ${data.births.length ? `
+        <h4>Födda</h4>
+        <ul class="dd-events">${data.births.map(e => wikiItem(e)).join("")}</ul>` : ""}
+      ${data.deaths.length ? `
+        <h4>Döda</h4>
+        <ul class="dd-events">${data.deaths.map(e => wikiItem(e)).join("")}</ul>` : ""}
+    `;
+  });
+}
+
+function wikiItem(e) {
+  const linkText = e.title ? `<a href="${e.url}" target="_blank" rel="noopener">${e.title}</a>` : "";
+  return `<li>
+    ${e.image ? `<img class="wiki-thumb" src="${e.image}" alt="" loading="lazy"/>` : ""}
+    <div class="wiki-text">
+      <strong>${e.year}</strong> · ${e.text}
+      ${linkText ? `<div class="wiki-meta">${linkText}</div>` : ""}
+    </div>
+  </li>`;
 }
 
 // ---------- Sol & Måne ----------
@@ -174,21 +212,66 @@ function openSunMoonDeepDive(date) {
     if (nextFull && nextNew) break;
   }
 
+  // Jämförelse med samma datum för ett år sedan
+  const lastYearDate = new Date(date.getFullYear() - 1, date.getMonth(), date.getDate());
+  const todayMin = daylightMinutes(date);
+  const lastYearMin = daylightMinutes(lastYearDate);
+  let comparison = "";
+  if (todayMin != null && lastYearMin != null) {
+    const diff = todayMin - lastYearMin;
+    const absDiff = Math.abs(diff);
+    const sign = diff > 0 ? "+" : diff < 0 ? "−" : "";
+    const mins = Math.floor(absDiff);
+    const secs = Math.round((absDiff - mins) * 60);
+    comparison = `<p class="dd-meta">${sign}${mins} min ${String(secs).padStart(2,"0")} s jämfört med ${formatLongDate(lastYearDate)}.</p>`;
+  }
+
+  // Solhöjd-uppskattning (för Stockholm)
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(),0,0)) / 86400000);
+  const declination = 23.44 * Math.sin(2 * Math.PI * (dayOfYear - 81) / 365);
+  const maxAlt = Math.max(0, 90 - 59.33 + declination);
+  const shadowFactor = maxAlt > 0 ? (1 / Math.tan(maxAlt * Math.PI / 180)).toFixed(2) : "—";
+
   openModal(`
     <h2>Sol & måne</h2>
-    <p class="intro">${formatLongDate(date)} · för Stockholm</p>
+    <p class="intro">${formatLongDate(date)} · för Stockholm (59,33°N)</p>
 
-    <h3>Solen</h3>
-    <p><strong>Soluppgång:</strong> ${upStr} &nbsp;·&nbsp; <strong>Solnedgång:</strong> ${downStr}</p>
-    <p><strong>Dagsljus:</strong> ${dayLengthLabel(t.daylight)}</p>
-    <p class="dd-meta">Beräknat med NOAA-algoritmen för latitud 59,33°N (Stockholm). För andra orter varierar tiderna ±15-30 min.</p>
+    <h3>Solens väg över dygnet</h3>
+    <div class="sun-path-wrap">${buildSunPathSVG(date)}</div>
+
+    <div class="sun-stats">
+      <div><span class="sun-stat-label">Soluppgång</span><span class="sun-stat-val">${upStr}</span></div>
+      <div><span class="sun-stat-label">Solnedgång</span><span class="sun-stat-val">${downStr}</span></div>
+      <div><span class="sun-stat-label">Dagsljus</span><span class="sun-stat-val">${dayLengthLabel(t.daylight)}</span></div>
+      <div><span class="sun-stat-label">Max solhöjd</span><span class="sun-stat-val">${Math.round(maxAlt)}°</span></div>
+    </div>
+
+    <p class="dd-meta">En 2 m lång flaggstång kastar vid middagstid en skugga på ungefär <strong>${(shadowFactor === "—" ? "—" : (parseFloat(shadowFactor) * 2).toFixed(1) + " m")}</strong> (i Stockholm).</p>
+    ${comparison}
+
+    <h3>Daglängden i ${MONTH_NAMES[date.getMonth()]}</h3>
+    <div class="daylight-month-wrap">${buildDaylightMonthChart(date)}</div>
+    <p class="dd-meta">Daglängd för varje dag i månaden. Punkten visar idag.</p>
 
     <h3>Månen</h3>
     <p><span style="font-size:34px">${moon.emoji}</span> <strong>${moon.name}</strong> · ${Math.round(moon.illumination * 100)} % belyst · ${moon.age.toFixed(1)} dagar in i den 29,5-dagars månadcykeln.</p>
     ${nextFull ? `<p><strong>Nästa fullmåne:</strong> ${formatLongDate(nextFull)}</p>` : ""}
     ${nextNew ? `<p><strong>Nästa nymåne:</strong> ${formatLongDate(nextNew)}</p>` : ""}
-    <p class="dd-meta">Månfaserna beräknas med synodisk månad (29,53 dagar) räknat från känd referensnymåne 6 jan 2000.</p>
+
+    <p class="dd-meta">Soltider beräknade med NOAA-algoritmen. Månfaser via synodisk månad (29,53 dagar). Båda för latitud 59,33°N.</p>
+
+    <div id="apodSection">
+      <h3>Dagens astronomibild <span class="wiki-loading">laddar…</span></h3>
+    </div>
   `);
+
+  // Lazy-load NASA APOD
+  loadApod().then(data => {
+    const el = document.getElementById("apodSection");
+    if (!el) return;
+    if (!data) { el.innerHTML = ""; return; }
+    el.innerHTML = `<h3>Dagens astronomibild <span class="wiki-source">via NASA</span></h3>${renderApod(data)}`;
+  });
 }
 
 // ---------- Säsongshjulet ----------
@@ -252,6 +335,11 @@ function openBondeDeepDive(date) {
 // ---------- Dagens ord ----------
 function openWordDeepDive(date) {
   const w = wordForDate(date);
+  const example = w.example ? `<h3>Användning</h3><p style="font-style:italic;color:var(--ink-soft);line-height:1.55">"${w.example}"</p>` : "";
+  const related = w.related?.length
+    ? `<h3>Släktord</h3><div class="word-related">${w.related.map(r => `<span class="word-rel">${r}</span>`).join("")}</div>`
+    : "";
+
   openModal(`
     <h2>Dagens svenska ord</h2>
     <p class="intro">${formatLongDate(date)}</p>
@@ -260,10 +348,48 @@ function openWordDeepDive(date) {
     </div>
     <h3>Betydelse</h3>
     <p>${w.def}</p>
+    ${example}
+    ${related}
 
     <h3>Om vårt språkarv</h3>
     <p>Många svenska ord har trillat ur vardagsspråket de senaste 100 åren — vissa för att tekniken förändrats, andra för att vi börjat säga något annat. CalPal lyfter ett bortglömt ord per dag för att hålla språkminnet vid liv.</p>
     <p class="dd-meta">Källor: Svenska Akademiens ordbok, dialektordböcker, äldre almanackor och bondalmanackor från 1800-1900-talet.</p>
+  `);
+}
+
+// ---------- Almanach-citat djupdykning ----------
+function openAlmanackDeepDive(date) {
+  const main = monthCitation(date);
+  const extras = extraCitationsForMonth(date.getMonth());
+
+  const allCitations = [
+    { ...main, primary: true },
+    ...extras
+  ];
+
+  const citationsHtml = allCitations.map(c => `
+    <blockquote class="alm-quote ${c.primary ? "primary" : ""}">
+      <span class="alm-dropcap">${c.text.charAt(0)}</span>
+      <span class="alm-text">${c.text.substring(1)}</span>
+      <cite>— ${c.source}</cite>
+    </blockquote>
+  `).join("");
+
+  const historySections = ALMANACK_HISTORY.sections.map(s => `
+    <h3>${s.title}</h3>
+    <p>${s.text}</p>
+  `).join("");
+
+  openModal(`
+    <h2>Almanackmästarens månad</h2>
+    <p class="intro">${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()} · genom seklerna</p>
+
+    <h3>Citat genom åren</h3>
+    <div class="alm-citations">${citationsHtml}</div>
+
+    ${historySections}
+
+    <p class="dd-meta" style="margin-top:18px">Citaten är inspirerade av faktiska svenska almanackor från 1700-1900-talet. De återger andan i åren snarare än exakta ordalydelser — språket är moderniserat för läsbarhet.</p>
   `);
 }
 

@@ -33,7 +33,11 @@ function wireCardClicks(date) {
 function renderMonthCitation(date) {
   const cit = monthCitation(date);
   const el = document.getElementById("monthCitation");
+  el.classList.add("clickable");
+  el.setAttribute("data-detail", "almanack");
+  el.setAttribute("title", "Klicka för mer ur almanackatraditionen");
   el.innerHTML = `
+    <span class="expand-hint" aria-hidden="true">+</span>
     "${cit.text}"
     <span class="source">${cit.source}</span>
   `;

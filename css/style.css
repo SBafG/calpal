@@ -1120,6 +1120,164 @@ button {
   border-radius: 1px;
 }
 
+/* ── Solens väg + daglängdsgraf ── */
+.sun-path-wrap, .daylight-month-wrap {
+  background: var(--surface-soft);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  margin: 10px 0;
+}
+.sun-path-svg, .daylight-month-svg { width: 100%; height: auto; display: block; }
+
+.sun-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+.sun-stats > div {
+  text-align: center;
+  background: var(--surface-soft);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+}
+.sun-stat-label {
+  display: block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.sun-stat-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 3px;
+}
+@media (max-width: 480px) {
+  .sun-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Wikipedia "on this day" ── */
+.wiki-section { margin-top: 24px; }
+.wiki-loading {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.wiki-source {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-bright);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.modal-body h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-faint);
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+.dd-events li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.wiki-thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.wiki-text { flex: 1; min-width: 0; }
+.wiki-meta { margin-top: 2px; }
+.wiki-meta a { font-size: 12px; color: var(--gold-bright); }
+
+/* ── Almanach-citat djupdykning ── */
+.alm-citations { margin: 12px 0 20px; }
+.alm-quote {
+  position: relative;
+  background: var(--gold-soft);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px 14px;
+  margin: 0 0 12px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.alm-quote.primary {
+  background: linear-gradient(135deg, var(--gold-soft), var(--surface-soft));
+  border-left: 3px solid var(--gold-bright);
+}
+.alm-dropcap {
+  font-size: 38px;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin: 4px 8px 0 0;
+  color: var(--gold);
+  font-style: normal;
+}
+.alm-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  clear: both;
+}
+
+/* ── Dagens ord släktord ── */
+.word-related { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.word-rel {
+  font-size: 12.5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+/* ── NASA APOD ── */
+.apod {
+  margin-top: 10px;
+  background: #06101f;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.apod-media { line-height: 0; }
+.apod-img { width: 100%; height: auto; display: block; max-height: 340px; object-fit: cover; }
+.apod-video-link {
+  display: block; padding: 24px; text-align: center;
+  color: #4ba0e7 !important; font-weight: 600;
+}
+.apod-body { padding: 14px 16px 16px; color: #e5edf6; }
+.apod-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.apod-exp { font-size: 12.5px; line-height: 1.55; color: rgba(255,255,255,.75); margin: 0 0 10px; }
+.apod-link { font-size: 12px; color: #4ba0e7 !important; font-weight: 600; }
+.apod-credit { font-size: 10.5px; color: rgba(255,255,255,.45); margin-top: 6px; }
+
 /* Stort säsongshjul i modal */
 .wheel-modal {
   display: flex;

@@ -5,16 +5,64 @@
 import { hashStr } from "./utils.js";
 
 export const SWEDISH_WORDS = [
-  { word: "kura skymning", def: "Att i tystnad sitta tillsammans och se kvällen mörkna — utan elektriskt ljus." },
-  { word: "tjyvkika", def: "Att smygtitta, oftast i en bok eller på något man inte borde se." },
-  { word: "klabb", def: "En större bit kluven ved." },
-  { word: "tvist", def: "Garn eller tråd. Även: bråk." },
-  { word: "lagom", def: "Det berömda svenska 'precis rätt' — varken för mycket eller för lite." },
-  { word: "snålblåst", def: "En vass, isande vind som tränger igenom kläderna." },
-  { word: "jämställdsint", def: "Likgiltigt sinnelag, varken glad eller sur." },
-  { word: "fika", def: "Kaffe (eller te) med tilltugg — en svensk institution." },
-  { word: "kura", def: "Att sitta hopkrupen och tyst, ofta i mörker eller kyla." },
-  { word: "duktig", def: "Skicklig. Tidigare också: dugande till hårt arbete." },
+  {
+    word: "kura skymning",
+    def: "Att i tystnad sitta tillsammans och se kvällen mörkna — utan elektriskt ljus.",
+    example: "På söndagskvällen kurar vi skymning vid det öppna fönstret och hör trastens kvällssång.",
+    related: ["skymning", "kura", "stunden", "gryning"]
+  },
+  {
+    word: "tjyvkika",
+    def: "Att smygtitta, oftast i en bok eller på något man inte borde se.",
+    example: "Lillebror försökte tjyvkika i julklappspaketen.",
+    related: ["spana", "snoka", "pejla", "tjyvläsa"]
+  },
+  {
+    word: "klabb",
+    def: "En större bit kluven ved.",
+    example: "Han kastade ett klabb björk i braskaminen.",
+    related: ["vedklabb", "splint", "stubbe", "brasved"]
+  },
+  {
+    word: "tvist",
+    def: "Garn eller tråd. Även: bråk.",
+    example: "Mormor satt med sitt tvistgarn och nystade.",
+    related: ["garn", "tråd", "spinneri", "konflikt"]
+  },
+  {
+    word: "lagom",
+    def: "Det berömda svenska 'precis rätt' — varken för mycket eller för lite.",
+    example: "Maten var precis lagom kryddad.",
+    related: ["passligt", "tillräckligt", "balanserat", "moderat"]
+  },
+  {
+    word: "snålblåst",
+    def: "En vass, isande vind som tränger igenom kläderna.",
+    example: "Mars-snålblåsten gjorde att även den varmaste tröjan kändes tunn.",
+    related: ["blåst", "kåra", "ostan", "biting"]
+  },
+  {
+    word: "jämställdsint",
+    def: "Likgiltigt sinnelag, varken glad eller sur."
+  },
+  {
+    word: "fika",
+    def: "Kaffe (eller te) med tilltugg — en svensk institution.",
+    example: "Vi tar en fika kring tio.",
+    related: ["kaffepaus", "rast", "kaffekalas"]
+  },
+  {
+    word: "kura",
+    def: "Att sitta hopkrupen och tyst, ofta i mörker eller kyla.",
+    example: "Katten kurade ihop sig på fönsterbrädet i solskenet.",
+    related: ["krypa ihop", "huka", "trycka"]
+  },
+  {
+    word: "duktig",
+    def: "Skicklig. Tidigare också: dugande till hårt arbete.",
+    example: "Hon är duktig på att laga gröt, sa mormor godkännande.",
+    related: ["skicklig", "kompetent", "förtjänt"]
+  },
   { word: "öma", def: "Att känna ömhet eller medkänsla." },
   { word: "harkrank", def: "En större mygga som dyker upp på sommaren. 'Pappa långben' i folkmun." },
   { word: "fjälster", def: "Tarmen som korv stoppas i." },

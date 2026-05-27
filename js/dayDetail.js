@@ -84,7 +84,17 @@ export function renderDayDetail(container, date) {
 
 function renderHistory(date) {
   const list = historyForDate(date);
-  if (!list.length) return "";
+  const body = list.length
+    ? `<div class="history-list">
+        ${list.slice(0, 3).map(h => `
+          <div class="history-item">
+            <span class="year">${h.year}</span>
+            <span class="text">${h.text}</span>
+          </div>
+        `).join("")}
+      </div>`
+    : `<p class="card-body sub" style="margin:0">Klicka för att resa genom historien — händelser, födda och döda denna dag, från Sverige och världen.</p>`;
+
   return `
     <div class="card clickable" data-detail="history" title="Öppna Tidsmaskinen">
       <span class="expand-hint" aria-hidden="true">+</span>
@@ -92,14 +102,7 @@ function renderHistory(date) {
         <span class="card-icon">${ICONS.scroll}</span>
         <h4 class="card-title">På denna dag</h4>
       </div>
-      <div class="history-list">
-        ${list.slice(0, 3).map(h => `
-          <div class="history-item">
-            <span class="year">${h.year}</span>
-            <span class="text">${h.text}</span>
-          </div>
-        `).join("")}
-      </div>
+      ${body}
     </div>
   `;
 }
