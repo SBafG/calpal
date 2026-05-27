@@ -1242,6 +1242,35 @@ button {
   clear: both;
 }
 
+/* ── Almanack: hopfällbar generell historik ── */
+.alm-history {
+  margin-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 8px;
+}
+.alm-history summary {
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 6px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.alm-history summary::-webkit-details-marker { display: none; }
+.alm-history summary::before {
+  content: "▸";
+  color: var(--gold-bright);
+  transition: transform .15s;
+  display: inline-block;
+}
+.alm-history[open] summary::before { transform: rotate(90deg); }
+.alm-history summary:hover { color: var(--gold-bright); }
+.alm-history h3:first-of-type { margin-top: 10px; }
+
 /* ── Dagens ord släktord ── */
 .word-related { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .word-rel {

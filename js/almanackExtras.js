@@ -59,6 +59,74 @@ export function extraCitationsForMonth(monthIdx) {
   return EXTRA_CITATIONS[monthIdx + 1] || [];
 }
 
+// Månadsspecifik lore — namnursprung + märkesdagar (ändras per månad)
+export const MONTH_LORE = [
+  {
+    name: "Januari",
+    origin: "Uppkallad efter Janus, den romerska guden för dörrar och övergångar — avbildad med två ansikten, ett mot det gångna och ett mot det kommande. Passande för årets första månad.",
+    markers: "Trettondedag jul (6/1) avslutar de tretton juldagarna. Tjugondag Knut (13/1) är då julen 'dansas ut' och granen plundras. Kring Henriksmäss (19/1) sågs solen återvända i norr."
+  },
+  {
+    name: "Februari",
+    origin: "Av latinets februa, den romerska reningsfest som hölls denna månad. Februari var länge årets sista månad i den romerska kalendern — därför fick den färre dagar och bär skottdagen.",
+    markers: "Kyndelsmässodagen (2/2) firar Marias kyrkogång. Fettisdagen (rörlig) är semlans dag — traditionen sägs gå tillbaka till kung Adolf Fredriks dödsmåltid 1771. Februaris is 'bär mannen men icke åsnan'."
+  },
+  {
+    name: "Mars",
+    origin: "Uppkallad efter krigsguden Mars. I den gamla romerska kalendern var mars årets första månad — därav att september–december (sju till tio) ligger 'fel' i vår kalender.",
+    markers: "Vårdagjämningen kring 20/3 ger lika lång dag och natt. Marie bebådelsedag (25/3), 'Vårfrudagen', blev i folkmun 'Våffeldagen'. Gregorius (12/3) var märkesdag för islossning."
+  },
+  {
+    name: "April",
+    origin: "Ursprunget är osäkert — troligen av latinets aperire, 'att öppna', när knoppar och blommor öppnar sig. En annan tolkning kopplar den till kärleksgudinnan Venus.",
+    markers: "Första april är skämtens dag sedan 1500-talet. Tiburtius (14/3) bådade tranans återkomst. Månaden slutar med Valborgsmässoafton (30/4) — vårdkasar, körsång och vinterns flykt."
+  },
+  {
+    name: "Maj",
+    origin: "Uppkallad efter Maia, romersk fruktbarhets- och vårgudinna. Majmånad är blomningens och grönskans tid — i almanackorna 'blommornas drottning'.",
+    markers: "Första maj, arbetarrörelsens dag sedan 1890. Sankt Erik (18/5) var Sveriges skyddshelgon och björklövets dag. Mors dag firas sista söndagen i maj. Kristi himmelsfärd och pingst infaller ofta nu."
+  },
+  {
+    name: "Juni",
+    origin: "Uppkallad efter Juno, romersk gudinna och Jupiters gemål, beskyddare av äktenskap och familj. Juni bär årets ljusaste nätter.",
+    markers: "Sveriges nationaldag (6/6) minner om Gustav Vasas kungaval 1523 och 1809 års regeringsform. Midsommar — fredag 19–25 juni — är årets ljusfest med sill, färskpotatis och majstång."
+  },
+  {
+    name: "Juli",
+    origin: "Uppkallad efter Julius Caesar, som föddes denna månad och reformerade kalendern 46 f.Kr. Hette tidigare Quintilis ('den femte') i den romerska kalendern.",
+    markers: "Rötmånaden börjar 23/7 — den heta, 'ruttna' högsommaren då man förr trodde sjukdom spreds lätt. Olofsmäss (29/7) markerade höskördens fullbordan. Margareta (20/7) var en regnmärkesdag."
+  },
+  {
+    name: "Augusti",
+    origin: "Uppkallad efter kejsar Augustus, Roms förste kejsare. Hette tidigare Sextilis ('den sjätte'). Augustus lär ha lagt till en dag så hans månad inte skulle vara kortare än Caesars juli.",
+    markers: "Rötmånaden slutar 23/8. Kräftpremiären och surströmmingspremiären (tredje torsdagen) är augustis fester. Larsmäss (10/8) räknades länge som höstens första dag."
+  },
+  {
+    name: "September",
+    origin: "Av latinets septem, 'sju' — det var den sjunde månaden i den gamla romerska kalendern som började i mars. Behöll sitt nummernamn trots att den nu är den nionde.",
+    markers: "Höstdagjämningen kring 23/9. Mikaelsmäss (29/9) avslutade skördeåret och var en av årets stora marknads- och flyttdagar för tjänstefolk. Tranorna börjar dra söderut."
+  },
+  {
+    name: "Oktober",
+    origin: "Av latinets octo, 'åtta'. Romarna försökte flera gånger byta namn efter kejsare, men oktober behöll sitt nummernamn — till skillnad från juli och augusti.",
+    markers: "Kanelbullens dag (4/10), instiftad 1999. FN-dagen (24/10). Sista söndagen återgår vi till normaltid. Lukas (18/10) var en gammal väderprofet: 'varm Lukas, kall december'."
+  },
+  {
+    name: "November",
+    origin: "Av latinets novem, 'nio'. Den mörkaste månaden i Sverige — almanackorna talar om 'mörkrets manska' och få ljusa timmar på de nordliga breddgraderna.",
+    markers: "Allhelgona (1/11) — de dödas minnesdag, ljus på gravarna. Gustav Adolfsdagen (6/11) minner Gustav II Adolf som stupade 1632. Mårten Gås (11/11) med skånsk svartsoppa och stekt gås."
+  },
+  {
+    name: "December",
+    origin: "Av latinets decem, 'tio'. Årets sista månad bär vintersolståndet — då solen vänder och dagarna åter börjar växa, 'dras ur säcken' kring Tomasdagen (21/12).",
+    markers: "Lucia (13/12) lyser i årets längsta natt enligt den gamla kalendern. Vintersolståndet kring 21/12. Julafton (24/12) och Nobeldagen (10/12). Anna (9/12) var dagen då julskinkan började saltas."
+  }
+];
+
+export function monthLore(monthIdx) {
+  return MONTH_LORE[monthIdx] || null;
+}
+
 // Bakgrundstext om svenska almanackatraditionen
 export const ALMANACK_HISTORY = {
   intro: "Den svenska almanackan har en lång och stolt historia. Från medeltidens runstavar via 1500-talets tryckta kyrkalmanackor till den moderna kalendern på telefon — almanackan har följt svensken genom århundraden.",

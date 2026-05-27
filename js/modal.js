@@ -22,7 +22,7 @@ import { buildSunPathSVG, buildDaylightMonthChart } from "./sunPathChart.js";
 import { addDays, MONTHS_SV as MONTH_NAMES } from "./utils.js";
 import { daylightMinutes, sunTimes as sunTimesFn } from "./astronomy.js";
 import { monthCitation } from "./almanackCitat.js";
-import { extraCitationsForMonth, ALMANACK_HISTORY } from "./almanackExtras.js";
+import { extraCitationsForMonth, ALMANACK_HISTORY, monthLore } from "./almanackExtras.js";
 import { loadApod, renderApod } from "./nasaApod.js";
 
 const modal = () => document.getElementById("modal");
@@ -375,6 +375,14 @@ function openAlmanackDeepDive(date) {
     </blockquote>
   `).join("");
 
+  const lore = monthLore(date.getMonth());
+  const loreHtml = lore ? `
+    <h3>Namnet ${lore.name}</h3>
+    <p>${lore.origin}</p>
+    <h3>Märkesdagar i ${lore.name.toLowerCase()}</h3>
+    <p>${lore.markers}</p>
+  ` : "";
+
   const historySections = ALMANACK_HISTORY.sections.map(s => `
     <h3>${s.title}</h3>
     <p>${s.text}</p>
@@ -387,7 +395,12 @@ function openAlmanackDeepDive(date) {
     <h3>Citat genom åren</h3>
     <div class="alm-citations">${citationsHtml}</div>
 
-    ${historySections}
+    ${loreHtml}
+
+    <details class="alm-history">
+      <summary>Om den svenska almanackan</summary>
+      ${historySections}
+    </details>
 
     <p class="dd-meta" style="margin-top:18px">Citaten är inspirerade av faktiska svenska almanackor från 1700-1900-talet. De återger andan i åren snarare än exakta ordalydelser — språket är moderniserat för läsbarhet.</p>
   `);
