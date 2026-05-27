@@ -63,13 +63,24 @@ export function openCardDeepDive(detailKey, date) {
   }
 }
 
+let lastFocused = null;
+
 function openModal(html) {
+  lastFocused = document.activeElement;
   modalBody().innerHTML = html;
   modal().hidden = false;
+  // Flytta fokus till stäng-knappen för tangentbord/skärmläsare
+  requestAnimationFrame(() => document.getElementById("modalClose")?.focus());
 }
+
+// Publikt API så andra moduler kan visa egen modal-HTML
+export function showModal(html) { openModal(html); }
 
 function closeModal() {
   modal().hidden = true;
+  // Återställ fokus till elementet som öppnade modalen
+  if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+  lastFocused = null;
 }
 
 // ============================================================

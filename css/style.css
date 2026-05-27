@@ -19,6 +19,22 @@ body {
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
 
+/* Tangentbordsfokus — synlig ring för alla interaktiva element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible,
+.day:focus-visible,
+.stat-card:focus-visible,
+.side-block:focus-visible,
+.month-essay:focus-visible {
+  outline: 2px solid var(--cp-accent);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+/* Sidoblock/essä är klickbara divar — gör dem tangentbordsnåbara */
+.side-block.clickable, .month-essay.clickable { outline-offset: 4px; }
+
 .cp-page { min-height: 100vh; }
 .cp-inner { padding: 0 var(--cp-pad-x); }
 
@@ -335,6 +351,16 @@ main { min-width: 0; }
    Sidebar
    ============================================================ */
 .sidebar { display: flex; flex-direction: column; gap: 36px; }
+.side-today {
+  font-size: var(--cp-fs-eyebrow);
+  letter-spacing: var(--cp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cp-ink-3);
+  padding-bottom: 16px;
+  border-bottom: var(--cp-border-hair);
+  margin-bottom: -12px;
+}
+.side-today span { color: var(--cp-accent); }
 .side-block { }
 .side-block.clickable { cursor: pointer; }
 .side-head {
@@ -555,6 +581,24 @@ main { min-width: 0; }
 /* Word related */
 .word-related { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .word-rel { font-size: 12.5px; padding: 4px 11px; background: var(--cp-tint); color: var(--cp-ink-2); }
+
+/* Arkiv-väljare */
+.arch-year {
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px; margin: 18px 0 20px;
+}
+.arch-nav { font-size: 24px; color: var(--cp-ink-2); line-height: 1; }
+.arch-nav:hover { color: var(--cp-accent); }
+.arch-year-label { font-family: var(--cp-font-serif); font-size: 40px; font-weight: 300; color: var(--cp-ink); min-width: 100px; text-align: center; }
+.arch-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.arch-month {
+  padding: 14px 8px; border: var(--cp-border-hair);
+  font-family: var(--cp-font-serif); font-size: 17px; text-transform: capitalize;
+  color: var(--cp-ink); transition: background .12s, border-color .12s;
+}
+.arch-month:hover { background: var(--cp-tint); border-color: var(--cp-ink-3); }
+.arch-month.current { border-color: var(--cp-accent); color: var(--cp-accent); }
+@media (max-width: 480px) { .arch-months { grid-template-columns: repeat(2, 1fr); } }
 
 /* NASA APOD */
 .apod { margin-top: 10px; background: #06101f; }

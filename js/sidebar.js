@@ -3,7 +3,7 @@
 // ============================================================
 
 import { sunTimes, daylightMinutes, dayLengthLabel, deltaLabel, moonPhase } from "./astronomy.js";
-import { addDays, formatTime } from "./utils.js";
+import { addDays, formatTime, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
 import { bondeForDate } from "./bondepraktikan.js";
 import { wordForDate } from "./wordOfDay.js";
 import { loadPollen, pollenForDate } from "./pollen.js";
@@ -12,7 +12,10 @@ const POLLEN_PRIORITY = ["Björk", "Gräs", "Gråbo", "Ek", "Al", "Hassel", "Sä
 const SEV = ["ingen", "låg", "låg-måttlig", "måttlig", "måttlig-hög", "hög", "mycket hög"];
 
 export function renderSidebar(container, today, seasonLabel, seasonSub) {
+  const wd = WEEKDAYS_SV_LONG[mondayIndex(today)];
+  const ctx = `${wd} ${today.getDate()} ${MONTHS_SV[today.getMonth()]}`;
   container.innerHTML = `
+    <div class="side-today" aria-label="Sidopanelen gäller idag">Idag <span>·</span> ${ctx}</div>
     <div class="side-block clickable" data-detail="moon">${sunMoonBlock(today)}</div>
     <div class="side-block clickable" data-detail="season" id="pollenBlock">${pollenBlock(null)}</div>
     <div class="side-block side-bonde clickable" data-detail="bonde">${bondeBlock(today)}</div>
@@ -45,7 +48,7 @@ function sunMoonBlock(today) {
 
   return `
     <div class="side-head">Solhöjd</div>
-    <svg class="sun-arc-svg" viewBox="0 0 280 92">
+    <svg class="sun-arc-svg" viewBox="0 0 280 92" role="img" aria-label="Solens båge över dygnet, soluppgång ${t.sunrise ? formatTime(t.sunrise) : "—"} till solnedgång ${t.sunset ? formatTime(t.sunset) : "—"}">
       <line x1="0" y1="78" x2="280" y2="78" stroke="var(--cp-ink)" stroke-width="0.7"/>
       <path d="M14 78 Q 140 -10 266 78" stroke="var(--cp-ink)" stroke-width="0.5" fill="none"/>
       <circle cx="${sunX.toFixed(1)}" cy="${sunY.toFixed(1)}" r="6" fill="var(--cp-accent)"/>

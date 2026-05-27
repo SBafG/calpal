@@ -2,7 +2,7 @@
 // calendar.js — editorial månadsgrid (Skandinavisk modernism)
 // ============================================================
 
-import { monthGridDays, isoWeek, sameDay, ymd, mondayIndex } from "./utils.js";
+import { monthGridDays, isoWeek, sameDay, ymd, mondayIndex, MONTHS_SV, WEEKDAYS_SV_LONG } from "./utils.js";
 import { getNameday } from "./namedays.js";
 import { holidaysForYear } from "./holidays.js";
 import { squeezeDaysForYear } from "./squeezeDays.js";
@@ -16,9 +16,9 @@ export function renderCalendar(container, displayMonth, today, onDayClick) {
   const days = monthGridDays(displayMonth);
 
   // Weekday header
-  let html = `<div class="cal-weekhead"><div></div>`;
+  let html = `<div class="cal-weekhead" role="row"><div></div>`;
   WD.forEach((w, i) => {
-    html += `<div class="wd${i >= 5 ? " weekend" : ""}">${w}</div>`;
+    html += `<div class="wd${i >= 5 ? " weekend" : ""}" role="columnheader">${w}</div>`;
   });
   html += `</div>`;
 
@@ -26,12 +26,14 @@ export function renderCalendar(container, displayMonth, today, onDayClick) {
   for (let row = 0; row < 6; row++) {
     const weekDays = days.slice(row * 7, row * 7 + 7);
     const weekNum = isoWeek(weekDays[0]);
-    html += `<div class="cal-week"><div class="cal-weeknum">${weekNum}</div>`;
+    html += `<div class="cal-week" role="row"><div class="cal-weeknum" aria-label="Vecka ${weekNum}">${weekNum}</div>`;
     weekDays.forEach(d => { html += dayCell(d, displayMonth, today, holidays, klamSet); });
     html += `</div>`;
   }
   html += `<div class="cal-grid-close"></div>`;
 
+  container.setAttribute("role", "grid");
+  container.setAttribute("aria-label", `Kalender ${MONTHS_SV[displayMonth.getMonth()]} ${displayMonth.getFullYear()}`);
   container.innerHTML = html;
 
   // Wire day clicks
@@ -58,6 +60,16 @@ function dayCell(date, displayMonth, today, holidays, klamSet) {
   if (isRedHoliday) classes.push("holiday");
   if (isToday) classes.push("today");
 
+  // ARIA-etikett som beskriver hela dagen
+  const ariaParts = [
+    WEEKDAYS_SV_LONG[mondayIndex(date)],
+    `${date.getDate()} ${MONTHS_SV[date.getMonth()]}`,
+    names.length ? `namnsdag ${names.join(", ")}` : "",
+    hol ? hol.name : "",
+    isToday ? "idag" : ""
+  ].filter(Boolean);
+  const aria = ariaParts.join(", ");
+
   let flags = "";
   if (isToday) flags = `<span class="day-idag">idag</span>`;
   else if (isRedHoliday) flags = `<span class="day-dot"></span>`;
@@ -67,7 +79,7 @@ function dayCell(date, displayMonth, today, holidays, klamSet) {
   const holidayName = hol ? `<div class="day-holiday-name">${shorten(hol.name)}</div>` : "";
 
   return `
-    <button class="${classes.join(" ")}" data-date="${key}" type="button">
+    <button class="${classes.join(" ")}" data-date="${key}" type="button" role="gridcell" aria-label="${aria}">
       <div class="day-top">
         <span class="day-num">${date.getDate()}</span>
         <span class="day-flags">${flags}</span>

@@ -7,7 +7,7 @@ import { getNameday } from "./namedays.js";
 import { monthCitation } from "./almanackCitat.js";
 import { renderCalendar } from "./calendar.js";
 import { renderSidebar } from "./sidebar.js";
-import { initModal, openCardDeepDive, setModalDate, openCounter, openSqueeze, openAbout } from "./modal.js";
+import { initModal, openCardDeepDive, setModalDate, openCounter, openSqueeze, openAbout, showModal } from "./modal.js";
 
 const today = new Date();
 let displayMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -133,19 +133,59 @@ function onDayClick(date) {
 }
 
 function wireDeepDives() {
-  // Sidopanel-block + månadens essä
-  document.querySelectorAll("[data-detail]").forEach(el => {
-    el.onclick = (e) => {
-      if (e.target.closest("a")) return;
-      const key = el.getAttribute("data-detail");
-      const target = key === "almanack" ? displayMonth : today;
-      openCardDeepDive(key, target);
-    };
-  });
   const essay = document.getElementById("monthEssay");
   essay.classList.add("clickable");
   essay.setAttribute("data-detail", "almanack");
-  essay.onclick = () => openCardDeepDive("almanack", displayMonth);
+
+  // Sidopanel-block + månadens essä — klick + tangentbord
+  document.querySelectorAll("[data-detail]").forEach(el => {
+    const key = el.getAttribute("data-detail");
+    const open = (e) => {
+      if (e.target.closest("a")) return;
+      openCardDeepDive(key, key === "almanack" ? displayMonth : today);
+    };
+    el.onclick = open;
+    // Gör icke-knapp-element (divar) tangentbordsnåbara
+    if (el.tagName !== "BUTTON") {
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("role", "button");
+      el.onkeydown = (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(e); }
+      };
+    }
+  });
+}
+
+// ---------- Arkiv: hoppa till valfri månad/år ----------
+function openArchive() {
+  const y = displayMonth.getFullYear();
+  const months = MONTHS_SV.map((m, i) =>
+    `<button class="arch-month${i === displayMonth.getMonth() ? " current" : ""}" data-m="${i}">${m}</button>`
+  ).join("");
+
+  showModal(`
+    <h2>Arkiv</h2>
+    <p class="intro">Bläddra till valfri månad genom åren</p>
+    <div class="arch-year">
+      <button class="arch-nav" id="archPrevY" aria-label="Föregående år">‹</button>
+      <span class="arch-year-label" id="archYearLabel">${y}</span>
+      <button class="arch-nav" id="archNextY" aria-label="Nästa år">›</button>
+    </div>
+    <div class="arch-months" id="archMonths">${months}</div>
+    <p class="dd-meta" style="margin-top:18px">Tips: ← och → bläddrar månad direkt i kalendern.</p>
+  `);
+
+  let pickYear = y;
+  const label = document.getElementById("archYearLabel");
+  document.getElementById("archPrevY").onclick = () => { pickYear--; label.textContent = pickYear; };
+  document.getElementById("archNextY").onclick = () => { pickYear++; label.textContent = pickYear; };
+  document.querySelectorAll(".arch-month").forEach(b => {
+    b.onclick = () => {
+      displayMonth = new Date(pickYear, Number(b.getAttribute("data-m")), 1);
+      document.getElementById("modalClose").click();
+      renderAll();
+    };
+  });
 }
 
 function navigate(delta) {
@@ -166,6 +206,7 @@ function boot() {
   };
   document.getElementById("navCounter").onclick = (e) => { e.preventDefault(); openCounter(); };
   document.getElementById("navSqueeze").onclick = (e) => { e.preventDefault(); openSqueeze(); };
+  document.getElementById("navArchive").onclick = (e) => { e.preventDefault(); openArchive(); };
   document.getElementById("navAbout").onclick = (e) => { e.preventDefault(); openAbout(); };
 
   document.addEventListener("keydown", (e) => {

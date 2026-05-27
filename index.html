@@ -24,11 +24,11 @@
         <span class="star" aria-hidden="true"></span>
         <span class="topstrip-date" id="topstripDate">—</span>
       </div>
-      <nav class="topnav">
+      <nav class="topnav" aria-label="Huvudnavigation">
         <a href="#" class="active" id="navToday">Idag</a>
         <a href="#" id="navCounter">Räknare</a>
         <a href="#" id="navSqueeze">Klämdagar</a>
-        <a href="#" id="navAbout">Arkiv</a>
+        <a href="#" id="navArchive">Arkiv</a>
       </nav>
     </div>
 
@@ -75,7 +75,7 @@
       <footer class="cp-footer">
         <div class="footer-left">
           <span class="star" aria-hidden="true"></span>
-          <span>Cal·Pal &nbsp;·&nbsp; Stockholm &nbsp;·&nbsp; MMXXVI</span>
+          <span>Cal·Pal &nbsp;·&nbsp; Stockholm &nbsp;·&nbsp; MMXXVI &nbsp;·&nbsp; <a href="#" id="navAbout">Om</a></span>
         </div>
         <span class="footer-aphorism">"Hwarken hast eller hvila — endast tid."</span>
       </footer>
@@ -83,12 +83,12 @@
   </div>
 
   <div class="modal" id="modal" hidden>
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose" aria-label="Stäng">×</button>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalBody">
+      <button class="modal-close" id="modalClose" aria-label="Stäng dialog">×</button>
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=18"></script>
+  <script type="module" src="js/main.js?v=19"></script>
 </body>
 </html>
