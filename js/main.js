@@ -10,22 +10,26 @@ import { monthCitation } from "./almanackCitat.js";
 import { initModal, openCardDeepDive, setModalDate } from "./modal.js";
 
 function onDateSelected(date, displayMonth) {
+  const month = displayMonth || date;
   renderHero(document.getElementById("dayHero"), date);
   renderDaylightBarometer(document.getElementById("daylightBarometer"), date);
   renderSeasonWheel(document.getElementById("seasonWheel"), date);
   renderDayDetail(document.getElementById("dayDetail"), date);
-  renderMonthCitation(displayMonth || date);
+  renderMonthCitation(month);
   setModalDate(date);
-  wireCardClicks(date);
+  wireCardClicks(date, month);
 }
 
-function wireCardClicks(date) {
+function wireCardClicks(date, month) {
   document.querySelectorAll("[data-detail]").forEach(el => {
     // onclick (ej addEventListener) så handlers inte ackumuleras på
     // element som lever kvar mellan renderingar (t.ex. månadscitatet)
     el.onclick = (e) => {
       if (e.target.closest("a, button:not(.day)")) return;
-      openCardDeepDive(el.getAttribute("data-detail"), date);
+      const key = el.getAttribute("data-detail");
+      // Almanach-citatet följer visad månad, inte vald dag
+      const target = key === "almanack" ? month : date;
+      openCardDeepDive(key, target);
     };
   });
 }

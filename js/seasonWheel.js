@@ -40,16 +40,17 @@ export function buildWheelSVG(date) {
   const lineX2 = cx + Math.cos(todayAngle) * 22;
   const lineY2 = cy + Math.sin(todayAngle) * 22;
 
+  const MONTH_ABBR = ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"];
+  const MONTH_FULL = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"];
   const monthLabels = [];
   for (let m = 0; m < 12; m++) {
     const ang = dayToAngle(dayOfYearFrom(m + 1, 1) + 15);
-    const lx = cx + Math.cos(ang) * (r + 11);
-    const ly = cy + Math.sin(ang) * (r + 11) + 3;
-    const lbl = ["J","F","M","A","M","J","J","A","S","O","N","D"][m];
-    monthLabels.push(`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="8" fill="#a0907d" font-weight="600">${lbl}</text>`);
+    const lx = cx + Math.cos(ang) * (r + 14);
+    const ly = cy + Math.sin(ang) * (r + 14) + 2.5;
+    monthLabels.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#a0907d" font-weight="600"><title>${MONTH_FULL[m]}</title>${MONTH_ABBR[m]}</text>`);
   }
 
-  return `<svg class="wheel-svg" viewBox="0 0 220 220">
+  return `<svg class="wheel-svg" viewBox="-28 -28 256 256">
     ${arcs.join("\n")}
     <circle cx="${cx}" cy="${cy}" r="16" fill="#faf5e9" stroke="#e3dac7"/>
     <text x="${cx}" y="${cy - 1}" text-anchor="middle" font-size="8" fill="#a0907d" font-weight="600">DAG</text>
