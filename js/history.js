@@ -123,7 +123,23 @@ export const HISTORY = {
   "12-25": [
     { year: 800, text: "Karl den store kröns till romersk kejsare av påven Leo III." },
     { year: 1991, text: "Sovjetunionen upplöses formellt — Gorbatjov avgår." }
-  ]
+  ],
+
+  // ── Fler svenska märkesdagar ──
+  "01-14": [{ year: 1814, text: "Kielfreden — Danmark avträder Norge, som går i union med Sverige." }],
+  "02-05": [{ year: 1818, text: "Karl XIV Johan (Jean Baptiste Bernadotte) bestiger Sveriges tron." }],
+  "03-16": [{ year: 1792, text: "Gustav III skjuts på maskeradbal på Operan i Stockholm — dör 13 dagar senare." }],
+  "03-29": [{ year: 1792, text: "Kung Gustav III avlider av skottskadorna från maskeradbalen." }],
+  "04-13": [{ year: 1849, text: "Almqvists 'Det går an' präglar tidig svensk kvinnofrågedebatt." }],
+  "05-15": [{ year: 1948, text: "Sverige bygger ut barnbidrag och fri barnsjukvård — välfärdsbygget tar fart." }],
+  "07-22": [{ year: 1227, text: "Slaget vid Bornhöved — nordtyska förbund besegrar danskarna." }],
+  "08-10": [{ year: 1628, text: "Regalskeppet Vasa sjunker på sin jungfrutur i Stockholms hamn." }],
+  "08-19": [{ year: 1772, text: "Gustav III genomför sin statskupp och återinför kungligt envälde." }],
+  "09-07": [{ year: 1948, text: "Anders Celsius termometerskala (omvänd av Linné) är sedan länge svensk standard." }],
+  "10-21": [{ year: 1520, text: "Kristian II tågar in i Stockholm — upptakten till Stockholms blodbad." }],
+  "11-06": [{ year: 1632, text: "Gustav II Adolf stupar i slaget vid Lützen." }],
+  "11-08": [{ year: 1520, text: "Stockholms blodbad inleds — ett 80-tal avrättas på Stortorget." }],
+  "12-23": [{ year: 1907, text: "Oscar II avlider; Gustaf V blir kung." }]
 };
 
 export function historyForDate(date) {

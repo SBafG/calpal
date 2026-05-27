@@ -223,3 +223,10 @@ if (document.readyState === "loading") {
 } else {
   boot();
 }
+
+// PWA — registrera service worker för offline + installbarhet
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
