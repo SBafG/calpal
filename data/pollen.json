@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-05-27T09:36:53.445Z",
+  "fetchedAt": "2026-05-28T09:53:21.121Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-05-27",
-  "forecastEnd": "2026-05-28",
+  "forecastStart": "2026-05-28",
+  "forecastEnd": "2026-05-29",
   "text": "Vi väntar måttliga halter av ekpollen, låga till måttliga halter av gräspollen samt låga halter av björk- och videpollen.\r\n\r\nPollen från tall och gran förekommer i luften och lägger sig som ett gult damm på ytor utomhus. Tall- och granpollen anses inte vara allergena, men kan vid stora mängder irritera.",
   "days": [
-    {
-      "date": "2026-05-27",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 1,
-        "Alm": 0,
-        "Björk": 1,
-        "Bok": 0,
-        "Ek": 3,
-        "Gräs": 2,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-05-28",
       "values": {
@@ -61,7 +46,22 @@
         "Björk": 1,
         "Bok": 0,
         "Ek": 3,
-        "Gräs": 2,
+        "Gräs": 3,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-05-31",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 1,
+        "Alm": 0,
+        "Björk": 1,
+        "Bok": 0,
+        "Ek": 2,
+        "Gräs": 3,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
