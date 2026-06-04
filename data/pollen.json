@@ -1,37 +1,22 @@
 {
-  "fetchedAt": "2026-06-03T10:49:16.544Z",
+  "fetchedAt": "2026-06-04T09:48:46.455Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-06-03",
-  "forecastEnd": "2026-06-04",
-  "text": "Idag, onsdag, väntar vi låga till måttliga halter av gräspollen och låga halter av ek-, vide- och björkpollen. Imorgon torsdag väntar vi låga halter av gräs-, björk-, ek- och videpollen.",
+  "forecastStart": "2026-06-04",
+  "forecastEnd": "2026-06-05",
+  "text": "Vid uppehållsväder väntar vi låga till måttliga halter av gräspollen. Tall- och granpollen är under avtagande men finns fortfarande i luften, vilket syns som ett gult dammlager på ytor utomhus.",
   "days": [
-    {
-      "date": "2026-06-03",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 1,
-        "Alm": 0,
-        "Björk": 1,
-        "Bok": 0,
-        "Ek": 1,
-        "Gräs": 2,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-06-04",
       "values": {
         "Hassel": 0,
         "Al": 0,
-        "Sälg och viden": 1,
+        "Sälg och viden": 0,
         "Alm": 0,
         "Björk": 0,
         "Bok": 0,
-        "Ek": 1,
-        "Gräs": 1,
+        "Ek": 0,
+        "Gräs": 2,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
@@ -41,12 +26,12 @@
       "values": {
         "Hassel": 0,
         "Al": 0,
-        "Sälg och viden": 1,
+        "Sälg och viden": 0,
         "Alm": 0,
         "Björk": 0,
         "Bok": 0,
-        "Ek": 1,
-        "Gräs": 1,
+        "Ek": 0,
+        "Gräs": 2,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
@@ -56,12 +41,27 @@
       "values": {
         "Hassel": 0,
         "Al": 0,
-        "Sälg och viden": 1,
+        "Sälg och viden": 0,
         "Alm": 0,
         "Björk": 0,
         "Bok": 0,
-        "Ek": 1,
-        "Gräs": 1,
+        "Ek": 0,
+        "Gräs": 3,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-07",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 3,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
