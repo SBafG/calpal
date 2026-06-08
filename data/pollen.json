@@ -1,56 +1,11 @@
 {
-  "fetchedAt": "2026-06-07T08:48:59.117Z",
+  "fetchedAt": "2026-06-08T10:26:20.708Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-06-05",
-  "forecastEnd": "2026-06-08",
-  "text": "På fredag, lördag och måndag väntas låga till måttliga halter av gräspollen och låga halter av ekpollen på grund av fuktig luft och regn. Under söndagen väntas torrare väder och därmed måttliga halter av gräspollen och låga halter av ekpollen.\r\n\r\nTallpollen är under avtagande men finns fortfarande i luften, vilket syns som ett gult dammlager på ytor utomhus.",
+  "forecastStart": "2026-06-08",
+  "forecastEnd": "2026-06-09",
+  "text": "Vi väntar måttliga halter av gräspollen. \r\n\r\nTallpollen är under avtagande men finns fortfarande i luften och syns som ett gult dammlager på ytor utomhus. Få är dock allergiska mot tallpollen.",
   "days": [
-    {
-      "date": "2026-06-05",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 1,
-        "Gräs": 2,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
-    {
-      "date": "2026-06-06",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 1,
-        "Gräs": 2,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
-    {
-      "date": "2026-06-07",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 1,
-        "Gräs": 3,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-06-08",
       "values": {
@@ -60,8 +15,8 @@
         "Alm": 0,
         "Björk": 0,
         "Bok": 0,
-        "Ek": 1,
-        "Gräs": 2,
+        "Ek": 0,
+        "Gräs": 3,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
@@ -75,8 +30,38 @@
         "Alm": 0,
         "Björk": 0,
         "Bok": 0,
-        "Ek": 1,
+        "Ek": 0,
+        "Gräs": 3,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-10",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
         "Gräs": 2,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-11",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 3,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
