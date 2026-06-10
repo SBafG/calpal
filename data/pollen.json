@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-06-09T09:32:31.871Z",
+  "fetchedAt": "2026-06-10T09:47:36.327Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-06-09",
-  "forecastEnd": "2026-06-10",
-  "text": "Vi väntar måttliga till höga halter av gräspollen vid uppehållsväder.\r\n\r\nTallpollen är under avtagande men finns fortfarande i luften och syns som ett gult dammlager på ytor utomhus. Få är dock allergiska mot tallpollen.",
+  "forecastStart": "2026-06-10",
+  "forecastEnd": "2026-06-11",
+  "text": "Vi väntar måttliga halter av gräspollen men i närheten av gräsmarker kan halterna bli höga. Nederbörd sänker halterna tillfälligt.\r\n\r\nTallpollen är under avtagande men finns fortfarande i luften och syns som ett gult dammlager på ytor utomhus. Få är dock allergiska mot tallpollen.",
   "days": [
-    {
-      "date": "2026-06-09",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 4,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-06-10",
       "values": {
@@ -53,6 +38,21 @@
     },
     {
       "date": "2026-06-12",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 4,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-13",
       "values": {
         "Hassel": 0,
         "Al": 0,
