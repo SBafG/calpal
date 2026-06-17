@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-06-16T11:01:32.626Z",
+  "fetchedAt": "2026-06-17T10:45:41.623Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-06-16",
-  "forecastEnd": "2026-06-17",
-  "text": "Vi väntar idag låga halter av gräspollen och på onsdag måttliga till höga halter.",
+  "forecastStart": "2026-06-17",
+  "forecastEnd": "2026-06-18",
+  "text": "Vi väntar måttliga till höga halter av gräspollen.",
   "days": [
-    {
-      "date": "2026-06-16",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-06-17",
       "values": {
@@ -61,7 +46,22 @@
         "Björk": 0,
         "Bok": 0,
         "Ek": 0,
-        "Gräs": 5,
+        "Gräs": 4,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-20",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 4,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
