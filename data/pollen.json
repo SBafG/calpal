@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-06-24T08:58:02.167Z",
+  "fetchedAt": "2026-06-25T08:52:36.618Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-06-24",
-  "forecastEnd": "2026-06-25",
+  "forecastStart": "2026-06-25",
+  "forecastEnd": "2026-06-26",
   "text": "De närmaste dagarna väntas höga halter av gräspollen.",
   "days": [
-    {
-      "date": "2026-06-24",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 5,
-        "Gråbo": 0,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-06-25",
       "values": {
@@ -53,6 +38,21 @@
     },
     {
       "date": "2026-06-27",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 5,
+        "Gråbo": 0,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-06-28",
       "values": {
         "Hassel": 0,
         "Al": 0,
