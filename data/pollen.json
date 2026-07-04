@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-03T08:54:26.344Z",
+  "fetchedAt": "2026-07-04T08:29:16.987Z",
   "region": "Stockholm",
   "offSeason": false,
   "forecastStart": "2026-07-03",
   "forecastEnd": "2026-07-06",
-  "text": "Nederbörd gör att vi under prognosperioden väntar låga till måttliga halter av gräspollen under fredag och söndag, och måttliga halter under lördag och måndag. Vid uppehållsväder kan halterna tillfälligt stiga något.",
+  "text": "Nederbörd gör att vi under prognosperioden väntar låga till måttliga halter av gräspollen under fredag och söndag. På lördag väntar vi måttliga till höga halter och på måndag måttliga halter. Vid uppehållsväder kan halterna tillfälligt stiga något.",
   "days": [
     {
       "date": "2026-07-03",
@@ -31,7 +31,7 @@
         "Björk": 0,
         "Bok": 0,
         "Ek": 0,
-        "Gräs": 3,
+        "Gräs": 4,
         "Gråbo": 0,
         "Malörtsambrosia": 0
       }
