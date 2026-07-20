@@ -1,56 +1,11 @@
 {
-  "fetchedAt": "2026-07-18T07:39:50.726Z",
+  "fetchedAt": "2026-07-20T08:47:59.157Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-07-17",
-  "forecastEnd": "2026-07-20",
-  "text": "Idag fredag väntas måttliga till höga halter av gräspollen och låga till måttliga halter av gråbopollen. Under lördag till måndag väntas vid uppehållsväder måttliga halter av gräspollen och låga halter av gråbopollen.",
+  "forecastStart": "2026-07-20",
+  "forecastEnd": "2026-07-21",
+  "text": "Under prognosperioden väntas måttliga halter av gräspollen och låga till måttliga halter av gråbopollen.",
   "days": [
-    {
-      "date": "2026-07-17",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 4,
-        "Gråbo": 2,
-        "Malörtsambrosia": 0
-      }
-    },
-    {
-      "date": "2026-07-18",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 3,
-        "Gråbo": 1,
-        "Malörtsambrosia": 0
-      }
-    },
-    {
-      "date": "2026-07-19",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 3,
-        "Gråbo": 1,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-07-20",
       "values": {
@@ -62,7 +17,7 @@
         "Bok": 0,
         "Ek": 0,
         "Gräs": 3,
-        "Gråbo": 1,
+        "Gråbo": 2,
         "Malörtsambrosia": 0
       }
     },
@@ -77,7 +32,37 @@
         "Bok": 0,
         "Ek": 0,
         "Gräs": 3,
-        "Gråbo": 1,
+        "Gråbo": 2,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-07-22",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 3,
+        "Gråbo": 2,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 3,
+        "Gråbo": 2,
         "Malörtsambrosia": 0
       }
     }
