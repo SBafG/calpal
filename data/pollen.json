@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-07-28T08:23:38.180Z",
+  "fetchedAt": "2026-07-29T08:29:52.628Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-07-28",
-  "forecastEnd": "2026-07-29",
+  "forecastStart": "2026-07-29",
+  "forecastEnd": "2026-07-30",
   "text": "Vi väntar måttliga halter av gråbopollen och låga till måttliga halter av gräspollen.",
   "days": [
-    {
-      "date": "2026-07-28",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 2,
-        "Gråbo": 3,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-07-29",
       "values": {
@@ -53,6 +38,21 @@
     },
     {
       "date": "2026-07-31",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 2,
+        "Gråbo": 3,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-08-01",
       "values": {
         "Hassel": 0,
         "Al": 0,
