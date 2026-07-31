@@ -1,41 +1,11 @@
 {
-  "fetchedAt": "2026-07-29T08:29:52.628Z",
+  "fetchedAt": "2026-07-31T08:40:35.095Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-07-29",
-  "forecastEnd": "2026-07-30",
-  "text": "Vi väntar måttliga halter av gråbopollen och låga till måttliga halter av gräspollen.",
+  "forecastStart": "2026-07-31",
+  "forecastEnd": "2026-08-03",
+  "text": "Vi väntar måttliga halter av gråbopollen och låga till måttliga halter av gräspollen. Eventuell nederbörd sänker halterna tillfälligt.",
   "days": [
-    {
-      "date": "2026-07-29",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 2,
-        "Gråbo": 3,
-        "Malörtsambrosia": 0
-      }
-    },
-    {
-      "date": "2026-07-30",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 2,
-        "Gråbo": 3,
-        "Malörtsambrosia": 0
-      }
-    },
     {
       "date": "2026-07-31",
       "values": {
@@ -63,6 +33,51 @@
         "Ek": 0,
         "Gräs": 2,
         "Gråbo": 3,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-08-02",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 2,
+        "Gråbo": 3,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 2,
+        "Gråbo": 3,
+        "Malörtsambrosia": 0
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 2,
+        "Gråbo": 2,
         "Malörtsambrosia": 0
       }
     }
