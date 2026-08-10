@@ -731,12 +731,15 @@ input[type="date"], input[type="text"], input[type="number"] {
   .wordmark { font-size: 64px; }
   .edition { display: none; }
   .masthead { grid-template-columns: 1fr; }
-  .today-stats { grid-template-columns: 1fr 1fr; }
-  .cal-weekhead, .cal-week { grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .cal-weeknum { display: none; }
-  /* Göm även den tomma veckonummer-cellen i veckodagshuvudet så de 7
-     veckodagarna ligger i linje med dagcellerna */
-  .cal-weekhead > div:first-child { display: none; }
+  /* minmax(0,…) i stället för 1fr: annars sätter kortens min-content golvet
+     och de fyra korten sprängde gridet med några pixlar på 320px-skärmar. */
+  .today-stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .stat-card { padding: 14px 16px; }
+  .stat-card .stat-label { letter-spacing: 0.18em; }
+  /* Veckonumren får plats även på telefon — smalare kolumn, tätare
+     siffror och ingen letter-spacing, annars ryms inte tvåsiffriga tal. */
+  .cal-weekhead, .cal-week { grid-template-columns: 17px repeat(7, 1fr); gap: 3px; }
+  .cal-weeknum { padding-top: 10px; font-size: 9px; letter-spacing: 0; }
   /* De större pilknapparna gör månadsraden för bred för att samsas med
      månadsnamnet. Bryt till egna rader med bläddringen överst — man
      navigerar först och läser vilken månad man landat på efteråt.
