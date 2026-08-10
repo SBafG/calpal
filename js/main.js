@@ -5,7 +5,8 @@
 import { MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex, isoWeek, dayOfYear, daysInYear } from "./utils.js";
 import { getNameday } from "./namedays.js";
 import { monthCitation } from "./almanackCitat.js";
-import { renderCalendar } from "./calendar.js";
+import { renderCalendar, swedishFlag } from "./calendar.js";
+import { holidayInfo } from "./holidays.js";
 import { renderSidebar } from "./sidebar.js";
 import { initModal, openCardDeepDive, setModalDate, openCounter, openSqueeze, openAbout, showModal } from "./modal.js";
 
@@ -67,16 +68,21 @@ function renderTodayStats() {
   const wd = WEEKDAYS_SV_LONG[mondayIndex(today)];
   const seasonLabel = SEASON[seasonKey(today.getMonth())].label.toLowerCase();
 
+  // Är idag flaggdag flaggas hela Idag-kortet, inte bara dagrutan i gridet.
+  const hol = holidayInfo(today);
+  const flagDay = hol && hol.flagDay ? hol : null;
+
   const cards = [
-    { label: "Idag", big: wd, sub: `${today.getDate()} ${MONTHS_SV[today.getMonth()]} · ${seasonLabel}`, accent: true, italic: true, action: "hero", title: "Om dagen" },
+    { label: "Idag", big: wd, sub: `${today.getDate()} ${MONTHS_SV[today.getMonth()]} · ${seasonLabel}`, accent: true, italic: true, action: "hero", title: "Om dagen", flagDay },
     { label: "Namnsdag", big: names[0] || "—", sub: names.length > 1 ? `· ${names.slice(1).join(", ")}` : "", accent: false, italic: false, action: "hero", title: "Om namnet" },
     { label: "Dag av året", big: String(doy), sub: `av ${daysInYear(today.getFullYear())}`, accent: false, italic: false, action: "history", title: "Tidsmaskinen" },
     { label: "Dagar kvar", big: String(left), sub: "till nyår", accent: false, italic: false, action: "counter", title: "Räknare & nedräkningar" }
   ];
 
   document.getElementById("todayStats").innerHTML = cards.map(c => `
-    <button type="button" class="stat-card${c.accent ? " accent" : ""}${c.italic ? " italic" : ""}" data-action="${c.action}" title="${c.title}">
+    <button type="button" class="stat-card${c.accent ? " accent" : ""}${c.italic ? " italic" : ""}${c.flagDay ? " flagday" : ""}" data-action="${c.action}" title="${c.flagDay ? c.flagDay.name + " — allmän flaggdag" : c.title}">
       <div class="stat-label">${c.label}</div>
+      ${c.flagDay ? `<div class="stat-flag">${swedishFlag("today-flag")}<span>Flaggdag</span></div>` : ""}
       <div class="stat-big">${c.big}</div>
       ${c.sub ? `<div class="stat-sub">${c.sub}</div>` : ""}
     </button>
@@ -96,7 +102,10 @@ function renderMonthHeader() {
     `${MONTHS_SV[displayMonth.getMonth()]}<span class="month-year">${displayMonth.getFullYear()}</span>`;
   const prev = (displayMonth.getMonth() + 11) % 12;
   const next = (displayMonth.getMonth() + 1) % 12;
-  document.getElementById("monthNavLabel").textContent = `← ${MONTHS_SV[prev]} / ${MONTHS_SV[next]} →`;
+  // Pilarna sitter i knapparna — texten behöver dem inte längre.
+  document.getElementById("monthNavLabel").textContent = `${MONTHS_SV[prev]} / ${MONTHS_SV[next]}`;
+  document.getElementById("prevMonth").setAttribute("aria-label", `Föregående månad, ${MONTHS_SV[prev]}`);
+  document.getElementById("nextMonth").setAttribute("aria-label", `Nästa månad, ${MONTHS_SV[next]}`);
   document.getElementById("seasonPoem").textContent = SEASON[seasonKey(displayMonth.getMonth())].poem;
 }
 

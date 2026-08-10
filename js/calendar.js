@@ -10,10 +10,15 @@ import { squeezeDaysForYear } from "./squeezeDays.js";
 const WD = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
 
 // Svenska flaggan — 16:10 med korsarmarna på 5:2:9 respektive 4:2:4.
-const FLAG_SVG = `<svg class="day-flag" viewBox="0 0 16 10" aria-hidden="true" focusable="false">` +
-  `<rect width="16" height="10" fill="#006aa7"/>` +
-  `<rect x="5" width="2" height="10" fill="#fecc02"/>` +
-  `<rect y="4" width="16" height="2" fill="#fecc02"/></svg>`;
+// Storleken sätts av anroparens klass, inte här.
+export function swedishFlag(className) {
+  return `<svg class="${className}" viewBox="0 0 16 10" aria-hidden="true" focusable="false">` +
+    `<rect width="16" height="10" fill="#006aa7"/>` +
+    `<rect x="5" width="2" height="10" fill="#fecc02"/>` +
+    `<rect y="4" width="16" height="2" fill="#fecc02"/></svg>`;
+}
+
+const FLAG_SVG = swedishFlag("day-flag");
 
 export function renderCalendar(container, displayMonth, today, onDayClick) {
   const year = displayMonth.getFullYear();

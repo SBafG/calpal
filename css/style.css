@@ -169,6 +169,25 @@ input:focus-visible,
   letter-spacing: var(--cp-tracking-snug);
 }
 .stat-card.italic .stat-big { font-style: italic; }
+
+/* Flaggdag — Idag-kortet får en flagga i dubbla kalenderstorleken */
+.stat-card.flagday { background: var(--cp-tint); }
+.stat-card.flagday:hover { background: var(--cp-paper); }
+.stat-flag {
+  display: flex; align-items: center; gap: 9px;
+  margin-top: 10px;
+}
+.stat-flag .today-flag {
+  width: 32px; height: auto; display: block; flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(14,15,13,.12);
+}
+.stat-flag span {
+  font-size: var(--cp-fs-eyebrow);
+  font-weight: var(--cp-fw-bold);
+  letter-spacing: var(--cp-tracking-wide);
+  text-transform: uppercase;
+  color: #006aa7;
+}
 .stat-card .stat-sub {
   font-size: var(--cp-fs-small);
   color: var(--cp-ink-2);
@@ -218,20 +237,30 @@ main { min-width: 0; }
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 14px;
+  gap: 12px;
   font-size: var(--cp-fs-meta);
   letter-spacing: var(--cp-tracking-wider);
   text-transform: uppercase;
   color: var(--cp-ink-3);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
+/* Pilarna var 18px lösa tecken utan träffyta — otydliga att se och
+   svåra att pricka. Nu riktiga knappar med egen ram. */
 .month-nav-btn {
-  font-size: 18px;
-  color: var(--cp-ink-2);
-  line-height: 1;
-  transition: color .15s;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border: var(--cp-border-hair);
+  color: var(--cp-ink);
+  transition: background .12s, border-color .12s, color .12s;
 }
-.month-nav-btn:hover { color: var(--cp-accent); }
+.month-nav-btn svg { width: 22px; height: 22px; display: block; }
+.month-nav-btn:hover {
+  color: var(--cp-accent);
+  border-color: var(--cp-accent);
+  background: var(--cp-tint);
+}
+.month-nav-btn:active { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-paper); }
+#monthNavLabel { min-width: 148px; text-align: center; }
 .season-poem {
   font-size: var(--cp-fs-small);
   color: var(--cp-ink-2);
@@ -708,6 +737,16 @@ input[type="date"], input[type="text"], input[type="number"] {
   /* Göm även den tomma veckonummer-cellen i veckodagshuvudet så de 7
      veckodagarna ligger i linje med dagcellerna */
   .cal-weekhead > div:first-child { display: none; }
+  /* De större pilknapparna gör månadsraden för bred för att samsas med
+     månadsnamnet. Bryt till egna rader med bläddringen överst — man
+     navigerar först och läser vilken månad man landat på efteråt.
+     display:contents lyfter nav och poem ur wrappern så de kan ordnas var
+     för sig kring månadsnamnet. */
+  .cal-header { flex-direction: column; align-items: stretch; gap: 14px; }
+  .cal-header-right { display: contents; }
+  .month-nav { order: -1; justify-content: center; gap: 14px; margin-bottom: 0; }
+  #monthNavLabel { min-width: 0; }
+  .season-poem { order: 1; max-width: none; margin: 0 auto; text-align: center; }
   .day-num { font-size: 22px; }
   .day.today .day-num { font-size: 26px; }
   .day-name { font-size: 8.5px; }
