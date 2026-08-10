@@ -100,22 +100,34 @@ function openHeroDeepDive(date) {
   if (names.length) {
     const nameBlocks = names.map(n => {
       const info = nameInfo(n);
+      // Almanackan för några dagar en helg i namnets ställe — Juldagen,
+      // Skottdagen, Marie bebådelsedag. De har ingen etymologi att visa.
+      if (info && info.note) {
+        return `<div class="dd-name">
+          <h4>${n}</h4>
+          <p class="dd-meta">${info.note}</p>
+        </div>`;
+      }
       if (!info) {
         return `<div class="dd-name">
           <h4>${n}</h4>
-          <p class="dd-meta">Etymologi och berömda namnsdagsbärare saknas — bidra gärna på <a href="https://github.com/SBafG/calpal" target="_blank">GitHub</a>.</p>
+          <p class="dd-meta">Namnets härledning är ännu inte upptecknad.</p>
         </div>`;
       }
       const famous = info.famous?.length
         ? `<ul class="dd-list">${info.famous.map(f => `<li>${f}</li>`).join("")}</ul>`
         : "";
+      const omtvistad = info.uncertain
+        ? `<span class="dd-disputed" title="Namnforskningen är inte enig om härledningen">omtvistad</span>`
+        : "";
       return `<div class="dd-name">
-        <h4>${n}</h4>
+        <h4>${n}${omtvistad}</h4>
         <p class="dd-meta"><strong>Ursprung:</strong> ${info.origin}<br/><strong>Betydelse:</strong> ${info.meaning}</p>
         ${famous ? `<p class="dd-sub-label">Kända bärare:</p>${famous}` : ""}
       </div>`;
     }).join("");
-    nameSection = `<h3>Namnsdag</h3>${nameBlocks}`;
+    const allaHelg = names.every(n => nameInfo(n)?.note);
+    nameSection = `<h3>${allaHelg ? "Almanackans dag" : "Namnsdag"}</h3>${nameBlocks}`;
   }
 
   let badges = "";

@@ -561,7 +561,30 @@ main { min-width: 0; }
 .dd-events li:first-child { border-top: none; }
 .dd-events strong { font-family: var(--cp-font-serif); font-size: 16px; color: var(--cp-accent); margin-right: 4px; }
 .dd-name { margin: 14px 0; padding: 16px 18px; background: var(--cp-tint); }
+/* Etiketter överst i dagmodalen — helgdag, flaggdag, temadag.
+   Klassnamnen fanns i modal.js sedan gamla temat men var aldrig stilsatta,
+   så etiketterna rann ihop till en enda textsträng. */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--cp-ink-2);
+  border: var(--cp-border-hair); padding: 5px 10px;
+}
+.badge .dot { width: 5px; height: 5px; border-radius: 999px; background: var(--cp-ink-3); flex-shrink: 0; }
+.badge.red { color: var(--cp-accent); border-color: var(--cp-accent); }
+.badge.red .dot { background: var(--cp-accent); }
+.badge.gold .dot { background: var(--cp-accent); }
+.badge.blue { color: #006aa7; border-color: #006aa7; }
+.badge.blue .dot { background: #006aa7; }
+
 .dd-name h4 { font-family: var(--cp-font-serif); font-size: 20px; color: var(--cp-ink); margin: 0 0 6px; text-transform: none; letter-spacing: 0; font-weight: 400; }
+.dd-disputed {
+  font-family: var(--cp-font-sans); font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--cp-ink-3); border: 1px solid var(--cp-rule);
+  padding: 2px 6px; margin-left: 10px; vertical-align: 3px; cursor: help;
+}
 .wiki-thumb { width: 44px; height: 44px; object-fit: cover; flex-shrink: 0; }
 .wiki-text { flex: 1; min-width: 0; }
 .wiki-meta a, .wiki-meta { font-size: 12px; color: var(--cp-accent); }
