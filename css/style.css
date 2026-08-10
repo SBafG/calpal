@@ -306,6 +306,8 @@ main { min-width: 0; }
 
 .day-flags { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 .day-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--cp-accent); }
+.day-flag { width: 15px; height: auto; display: block; flex-shrink: 0; }
+.day.muted .day-flag { filter: saturate(0.5); }
 .day-klam { font-size: 9px; color: var(--cp-ink-3); letter-spacing: 0.18em; text-transform: uppercase; }
 .day-idag { font-size: 9px; color: var(--cp-ink); font-weight: var(--cp-fw-bold); letter-spacing: 0.2em; text-transform: uppercase; }
 
@@ -686,6 +688,7 @@ input[type="date"], input[type="text"], input[type="number"] {
   .day-num { font-size: 22px; }
   .day.today .day-num { font-size: 26px; }
   .day-name { font-size: 8.5px; }
+  .day-flag { width: 11px; }
   .day-holiday-name { display: none; }
   .day { min-height: 54px; padding: 8px 0 14px; }
   .month-name { font-size: 46px; }

@@ -9,11 +9,21 @@ import { squeezeDaysForYear } from "./squeezeDays.js";
 
 const WD = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
 
+// Svenska flaggan — 16:10 med korsarmarna på 5:2:9 respektive 4:2:4.
+const FLAG_SVG = `<svg class="day-flag" viewBox="0 0 16 10" aria-hidden="true" focusable="false">` +
+  `<rect width="16" height="10" fill="#006aa7"/>` +
+  `<rect x="5" width="2" height="10" fill="#fecc02"/>` +
+  `<rect y="4" width="16" height="2" fill="#fecc02"/></svg>`;
+
 export function renderCalendar(container, displayMonth, today, onDayClick) {
   const year = displayMonth.getFullYear();
-  const holidays = holidaysForYear(year);
-  const klamSet = new Set(squeezeDaysForYear(year).map(s => ymd(s.date)));
   const days = monthGridDays(displayMonth);
+
+  // Rutnätet spänner över årsskiftet i januari och december, så slå ihop
+  // angränsande år — annars saknar de överhängande cellerna helgdagsdata.
+  const years = [year - 1, year, year + 1];
+  const holidays = Object.assign({}, ...years.map(y => holidaysForYear(y)));
+  const klamSet = new Set(years.flatMap(y => squeezeDaysForYear(y)).map(s => ymd(s.date)));
 
   // Weekday header
   let html = `<div class="cal-weekhead" role="row"><div></div>`;
@@ -53,6 +63,7 @@ function dayCell(date, displayMonth, today, holidays, klamSet) {
   const isRedHoliday = hol && hol.type === "red";
   const isToday = sameDay(date, today);
   const isKlam = klamSet.has(key) && inMonth;
+  const isFlagDay = !!(hol && hol.flagDay);
   const names = getNameday(date);
 
   const classes = ["day"];
@@ -66,14 +77,16 @@ function dayCell(date, displayMonth, today, holidays, klamSet) {
     `${date.getDate()} ${MONTHS_SV[date.getMonth()]}`,
     names.length ? `namnsdag ${names.join(", ")}` : "",
     hol ? hol.name : "",
+    isFlagDay ? "allmän flaggdag" : "",
     isToday ? "idag" : ""
   ].filter(Boolean);
   const aria = ariaParts.join(", ");
 
-  let flags = "";
-  if (isToday) flags = `<span class="day-idag">idag</span>`;
-  else if (isRedHoliday) flags = `<span class="day-dot"></span>`;
-  else if (isKlam) flags = `<span class="day-klam">kläm</span>`;
+  // Flaggan är en egen signal vid sidan av röd dag — 6 juni är båda.
+  let flags = isFlagDay ? FLAG_SVG : "";
+  if (isToday) flags += `<span class="day-idag">idag</span>`;
+  else if (isRedHoliday) flags += `<span class="day-dot"></span>`;
+  else if (isKlam) flags += `<span class="day-klam">kläm</span>`;
 
   // Helgdagsnamn (kort) — visa bara om röd dag eller flaggdag med namn
   const holidayName = hol ? `<div class="day-holiday-name">${shorten(hol.name)}</div>` : "";
