@@ -14,13 +14,12 @@ import { bondeForDate } from "./bondepraktikan.js";
 import { wordForDate } from "./wordOfDay.js";
 import { moonPhase, sunTimes, dayLengthLabel } from "./astronomy.js";
 import { seasonsActive, categoryColor } from "./seasonal.js";
-import { formatLongDate, isoWeek, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
+import { formatLongDate, isoWeek, MONTHS_SV, MONTHS_SV as MONTH_NAMES, dayOfYear, daysInYear } from "./utils.js";
 import { loadPollen, renderPollenFullForecast } from "./pollen.js";
 import { buildWheelSVG, buildWheelLegend } from "./seasonWheel.js";
 import { fetchOnThisDay } from "./wikiOnThisDay.js";
 import { buildSunPathSVG, buildDaylightMonthChart } from "./sunPathChart.js";
-import { addDays, MONTHS_SV as MONTH_NAMES } from "./utils.js";
-import { daylightMinutes, sunTimes as sunTimesFn } from "./astronomy.js";
+import { daylightMinutes } from "./astronomy.js";
 import { monthCitation } from "./almanackCitat.js";
 import { extraCitationsForMonth, ALMANACK_HISTORY, monthLore } from "./almanackExtras.js";
 import { loadApod, renderApod } from "./nasaApod.js";
@@ -94,8 +93,8 @@ function openHeroDeepDive(date) {
   const themes = themesForDate(date);
   const births = birthsForDate(date);
   const deaths = deathsForDate(date);
-  const dayOfYear = Math.floor((date - new Date(date.getFullYear(),0,0)) / 86400000);
-  const daysInYr = ((date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || date.getFullYear() % 400 === 0) ? 366 : 365;
+  const doy = dayOfYear(date);
+  const daysInYr = daysInYear(date.getFullYear());
 
   let nameSection = "";
   if (names.length) {
@@ -134,7 +133,7 @@ function openHeroDeepDive(date) {
 
   openModal(`
     <h2>${formatLongDate(date)}</h2>
-    <p class="intro">Dag ${dayOfYear} av ${daysInYr} · vecka ${isoWeek(date)} · ${daysInYr - dayOfYear} dagar kvar av året</p>
+    <p class="intro">Dag ${doy} av ${daysInYr} · vecka ${isoWeek(date)} · ${daysInYr - doy} dagar kvar av året</p>
     ${badges ? `<div class="badges" style="margin-bottom:16px">${badges}</div>` : ""}
     ${nameSection}
     ${personSection}
@@ -239,8 +238,7 @@ function openSunMoonDeepDive(date) {
   }
 
   // Solhöjd-uppskattning (för Stockholm)
-  const dayOfYear = Math.floor((date - new Date(date.getFullYear(),0,0)) / 86400000);
-  const declination = 23.44 * Math.sin(2 * Math.PI * (dayOfYear - 81) / 365);
+  const declination = 23.44 * Math.sin(2 * Math.PI * (dayOfYear(date) - 81) / 365);
   const maxAlt = Math.max(0, 90 - 59.33 + declination);
   const shadowFactor = maxAlt > 0 ? (1 / Math.tan(maxAlt * Math.PI / 180)).toFixed(2) : "—";
 
@@ -334,7 +332,7 @@ function openBondeDeepDive(date) {
   openModal(`
     <h2>Bondepraktikan</h2>
     <p class="intro">${formatLongDate(date)}</p>
-    ${b ? `<blockquote style="font-family:var(--font-serif);font-style:italic;font-size:18px;line-height:1.6;color:var(--ink);border-left:3px solid var(--gold);padding-left:18px;margin:18px 0">"${b.text}"</blockquote>` : ""}
+    ${b ? `<blockquote style="font-family:var(--cp-font-serif);font-style:italic;font-size:18px;line-height:1.6;color:var(--cp-ink);border-left:3px solid var(--cp-accent);padding-left:18px;margin:18px 0">"${b.text}"</blockquote>` : ""}
 
     <h3>Om Bondepraktikan</h3>
     <p>Bondepraktikan är en svensk almanackalmanack med rötter från 1662, full av väderspomar, jordbruksråd och tideräkningar. Boken byggde på äldre tysk lore som var spridd i hela Europa under medeltiden, men förankrade reglerna i svensk klimat och namnsdagstradition.</p>
@@ -347,7 +345,7 @@ function openBondeDeepDive(date) {
 // ---------- Dagens ord ----------
 function openWordDeepDive(date) {
   const w = wordForDate(date);
-  const example = w.example ? `<h3>Användning</h3><p style="font-style:italic;color:var(--ink-soft);line-height:1.55">"${w.example}"</p>` : "";
+  const example = w.example ? `<h3>Användning</h3><p style="font-style:italic;color:var(--cp-ink-2);line-height:1.55">"${w.example}"</p>` : "";
   const related = w.related?.length
     ? `<h3>Släktord</h3><div class="word-related">${w.related.map(r => `<span class="word-rel">${r}</span>`).join("")}</div>`
     : "";
@@ -356,7 +354,7 @@ function openWordDeepDive(date) {
     <h2>Dagens svenska ord</h2>
     <p class="intro">${formatLongDate(date)}</p>
     <div style="text-align:center;padding:24px 0">
-      <div style="font-family:var(--font-serif);font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-1px">${w.word}</div>
+      <div style="font-family:var(--cp-font-serif);font-size:48px;font-weight:700;color:var(--cp-ink);letter-spacing:-1px">${w.word}</div>
     </div>
     <h3>Betydelse</h3>
     <p>${w.def}</p>
@@ -457,11 +455,11 @@ function recalcLifeStats() {
       <div class="hb-stat"><span class="num">${stats.years}</span><span class="label">År</span></div>
       <div class="hb-stat"><span class="num">${formatNumber(stats.smiles)}</span><span class="label">Antagna leenden</span></div>
     </div>
-    ${next ? `<p style="margin-top:16px;color:var(--ink-soft)">
-        Nästa milstolpe: <strong style="color:var(--accent)">${formatNumber(next.value)} dagar levt</strong>
+    ${next ? `<p style="margin-top:16px;color:var(--cp-ink-2)">
+        Nästa milstolpe: <strong style="color:var(--cp-accent)">${formatNumber(next.value)} dagar levt</strong>
         — ${next.daysAway} dagar kvar (${formatDateSv(next.date)}).
       </p>` : ""}
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">
+    <p style="font-size:12px;color:var(--cp-ink-3);margin-top:8px">
       Beräkningar utgår från 75 hjärtslag/min och 16 andetag/min — medeltal för vuxen.
     </p>
   `;
@@ -475,8 +473,8 @@ function renderMilestones() {
         <strong>${m.name}</strong>
         <div class="sub">${formatDateSv(m.date)}</div>
       </div>
-      <div style="font-family:var(--font-serif);font-size:22px;color:var(--accent);">
-        ${m.days} <span style="font-size:11px;color:var(--ink-faint);">dag${m.days === 1 ? "" : "ar"}</span>
+      <div style="font-family:var(--cp-font-serif);font-size:22px;color:var(--cp-accent);">
+        ${m.days} <span style="font-size:11px;color:var(--cp-ink-3);">dag${m.days === 1 ? "" : "ar"}</span>
       </div>
     </div>
   `).join("");
@@ -554,7 +552,7 @@ export function openAbout() {
       <span class="tag">Esc</span> stäng dialog
     </p>
 
-    <p style="margin-top:24px;font-style:italic;color:var(--ink-faint)">
+    <p style="margin-top:24px;font-style:italic;color:var(--cp-ink-3)">
       "Tomas drar dagen ur säcken." — gammal svensk almanackvisdom
     </p>
   `);

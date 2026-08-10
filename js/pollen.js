@@ -11,7 +11,7 @@ const LEVEL_LABEL = {
   4: "Måttlig-hög", 5: "Hög", 6: "Mycket hög"
 };
 const LEVEL_COLOR = {
-  0: "var(--ink-faint)",
+  0: "var(--cp-ink-3)",
   1: "#a3c884",
   2: "#cfb952",
   3: "#e0a830",
@@ -108,14 +108,14 @@ export function renderPollenFullForecast(data, date) {
   const rows = orderedNames.map(name => {
     const cells = data.days.map(d => {
       const lvl = d.values[name] ?? 0;
-      return `<td title="${LEVEL_LABEL[lvl]}" style="background:${lvl === 0 ? "transparent" : LEVEL_COLOR[lvl] + "33"};color:${lvl >= 4 ? LEVEL_COLOR[lvl] : "var(--ink)"};font-weight:${lvl >= 3 ? "700" : "500"}">${lvl}</td>`;
+      return `<td title="${LEVEL_LABEL[lvl]}" style="background:${lvl === 0 ? "transparent" : LEVEL_COLOR[lvl] + "33"};color:${lvl >= 4 ? LEVEL_COLOR[lvl] : "var(--cp-ink)"};font-weight:${lvl >= 3 ? "700" : "500"}">${lvl}</td>`;
     }).join("");
     return `<tr><th>${name}</th>${cells}</tr>`;
   }).join("");
 
   return `
     <h3>Pollenprognos — ${data.region}</h3>
-    ${data.text ? `<p style="font-style:italic;color:var(--ink-soft);line-height:1.55">${data.text.split("\r\n\r\n").map(p => `<span>${p}</span>`).join("<br/><br/>")}</p>` : ""}
+    ${data.text ? `<p style="font-style:italic;color:var(--cp-ink-2);line-height:1.55">${data.text.split("\r\n\r\n").map(p => `<span>${p}</span>`).join("<br/><br/>")}</p>` : ""}
     <table class="pollen-table">
       <thead>${header}</thead>
       <tbody>${rows}</tbody>

@@ -3,7 +3,7 @@
 // ============================================================
 
 import { sunTimes, daylightMinutes, dayLengthLabel, deltaLabel, moonPhase } from "./astronomy.js";
-import { addDays, formatTime, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex } from "./utils.js";
+import { addDays, formatTime, MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex, dayOfYear, daysInYear } from "./utils.js";
 import { bondeForDate } from "./bondepraktikan.js";
 import { wordForDate } from "./wordOfDay.js";
 import { loadPollen, pollenForDate } from "./pollen.js";
@@ -117,8 +117,7 @@ function ordBlock(today) {
 }
 
 function seasonBlock(today, seasonLabel, seasonSub) {
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(),0,0)) / 86400000);
-  const frac = dayOfYear / 365;
+  const frac = dayOfYear(today) / daysInYear(today.getFullYear());
   const ang = frac * 2 * Math.PI - Math.PI / 2;
   const x = 36 + Math.cos(ang) * 32;
   const y = 36 + Math.sin(ang) * 32;

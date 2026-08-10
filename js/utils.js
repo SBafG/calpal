@@ -63,6 +63,19 @@ export function addDays(date, days) {
   return d;
 }
 
+// Dagnummer 1-366. Räknas i UTC så att sommartidsskiftet inte äter en timme
+// och rundar ner dagen — en lokal millisekunddifferens blir 221,96 dygn
+// istället för 222 mellan vinter- och sommartid.
+export function dayOfYear(date) {
+  const day  = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  const jan0 = Date.UTC(date.getFullYear(), 0, 0);
+  return Math.round((day - jan0) / 86400000);
+}
+
+export function daysInYear(year) {
+  return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 366 : 365;
+}
+
 // Måndag-baserat veckodagsindex (0 = mån, 6 = sön)
 export function mondayIndex(date) {
   return (date.getDay() + 6) % 7;

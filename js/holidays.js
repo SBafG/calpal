@@ -7,8 +7,19 @@ import { easterSunday, addDays, ymd, pad, nthWeekdayOfMonth } from "./utils.js";
 // Returnerar map: "YYYY-MM-DD" -> { name, type: "red"|"observed", flagDay?: true }
 export function holidaysForYear(year) {
   const map = {};
+  // Två helgdagar kan hamna på samma datum: Alla helgons dag faller på
+  // Gustav Adolfsdagen 6 nov (2021, 2027, 2032…) och nationaldagen på
+  // pingstdagen (2049, 2055…). Utan sammanslagning skrev den sist tillagda
+  // tyst ut den andra. Röd dag vinner över observed, flaggdagen ärvs.
   const add = (date, name, type = "red", flagDay = false) => {
-    map[ymd(date)] = { name, type, flagDay };
+    const key = ymd(date);
+    const prev = map[key];
+    if (!prev) { map[key] = { name, type, flagDay }; return; }
+    map[key] = {
+      name: prev.name === name ? name : `${prev.name} / ${name}`,
+      type: (prev.type === "red" || type === "red") ? "red" : "observed",
+      flagDay: prev.flagDay || flagDay
+    };
   };
 
   // Fasta helgdagar
@@ -42,8 +53,10 @@ export function holidaysForYear(year) {
     add(addDays(midsummerEve, 1), "Midsommardagen", "red", true);
   }
 
-  // Alla helgons dag — lördag mellan 31 oktober och 6 november
-  for (let d = 31; d <= 36; d++) {
+  // Alla helgons dag — lördag mellan 31 oktober och 6 november.
+  // d går till 37 eftersom new Date(y, 9, 37) = 6 november; stannade loopen
+  // på 36 föll helgdagen bort helt de år den infaller sist i intervallet.
+  for (let d = 31; d <= 37; d++) {
     const candidate = new Date(year, 9, d); // oktober + d (kan rulla över till nov)
     if (candidate.getDay() === 6) {
       add(candidate, "Alla helgons dag", "red");

@@ -2,7 +2,7 @@
 // main.js — Cal·Pal (Skandinavisk modernism) entry point
 // ============================================================
 
-import { MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex, isoWeek } from "./utils.js";
+import { MONTHS_SV, WEEKDAYS_SV_LONG, mondayIndex, isoWeek, dayOfYear, daysInYear } from "./utils.js";
 import { getNameday } from "./namedays.js";
 import { monthCitation } from "./almanackCitat.js";
 import { renderCalendar } from "./calendar.js";
@@ -33,13 +33,6 @@ function toRoman(n) {
   return r;
 }
 
-function dayOfYear(d) {
-  return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
-}
-function daysInYear(y) {
-  return ((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0) ? 366 : 365;
-}
-
 function renderAll() {
   const sk = seasonKey(displayMonth.getMonth());
   document.documentElement.setAttribute("data-season", sk);
@@ -59,6 +52,7 @@ function renderTopStrip() {
   const wd = WEEKDAYS_SV_LONG[mondayIndex(today)];
   document.getElementById("topstripDate").textContent =
     `${wd} ${today.getDate()} ${MONTHS_SV[today.getMonth()]} ${today.getFullYear()} · v. ${isoWeek(today)} · Stockholm`;
+  document.getElementById("footerYear").textContent = toRoman(today.getFullYear());
 }
 
 function renderMasthead(sk) {
@@ -214,6 +208,10 @@ function boot() {
     if (e.target.matches("input, textarea")) return;
     if (e.key === "ArrowLeft") navigate(-1);
     if (e.key === "ArrowRight") navigate(1);
+    if (e.key === "t" || e.key === "T") {
+      displayMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      renderAll();
+    }
   });
 
   renderAll();
