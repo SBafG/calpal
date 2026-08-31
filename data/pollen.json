@@ -1,56 +1,11 @@
 {
-  "fetchedAt": "2026-08-30T11:03:27.534Z",
+  "fetchedAt": "2026-08-31T12:25:55.095Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-08-28",
-  "forecastEnd": "2026-08-31",
-  "text": "Vid uppehållsväder väntas under perioden låga halter av gräs- och gråbopollen. Låga halter av pollen från malörtsambrosia kan förekomma till följd av fjärrtransport från kontinenten.",
+  "forecastStart": "2026-08-31",
+  "forecastEnd": "2026-09-01",
+  "text": "Vi väntar låga halter av gräs- och gråbopollen. Låga halter av pollen från malörtsambrosia kan förekomma till följd av fjärrtransport.",
   "days": [
-    {
-      "date": "2026-08-28",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-08-29",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-08-30",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
     {
       "date": "2026-08-31",
       "values": {
@@ -78,7 +33,37 @@
         "Ek": 0,
         "Gräs": 1,
         "Gråbo": 1,
-        "Malörtsambrosia": 0
+        "Malörtsambrosia": 1
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 1,
+        "Gråbo": 1,
+        "Malörtsambrosia": 1
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 1,
+        "Gråbo": 1,
+        "Malörtsambrosia": 1
       }
     }
   ],
