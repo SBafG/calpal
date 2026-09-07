@@ -1,56 +1,11 @@
 {
-  "fetchedAt": "2026-09-06T10:05:59.710Z",
+  "fetchedAt": "2026-09-07T11:20:11.814Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-09-04",
-  "forecastEnd": "2026-09-07",
-  "text": "Vid uppehållsväder väntar vi låga halter av gräs- och gråbopollen. Låga halter av pollen från malörtsambrosia kan också förekomma.",
+  "forecastStart": "2026-09-07",
+  "forecastEnd": "2026-09-08",
+  "text": "Vi väntar låga halter av gråbo- och gräspollen. Även låga halter av pollen från malörtsambrosia kan förekomma. Regn sänker tillfälligt halterna.",
   "days": [
-    {
-      "date": "2026-09-04",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-09-05",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-09-06",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
     {
       "date": "2026-09-07",
       "values": {
@@ -68,6 +23,36 @@
     },
     {
       "date": "2026-09-08",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 1,
+        "Gråbo": 1,
+        "Malörtsambrosia": 1
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 1,
+        "Gråbo": 1,
+        "Malörtsambrosia": 1
+      }
+    },
+    {
+      "date": "2026-09-10",
       "values": {
         "Hassel": 0,
         "Al": 0,
