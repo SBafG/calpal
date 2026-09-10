@@ -1,26 +1,11 @@
 {
-  "fetchedAt": "2026-09-09T10:36:27.781Z",
+  "fetchedAt": "2026-09-10T10:24:18.279Z",
   "region": "Stockholm",
   "offSeason": false,
-  "forecastStart": "2026-09-09",
-  "forecastEnd": "2026-09-10",
+  "forecastStart": "2026-09-10",
+  "forecastEnd": "2026-09-11",
   "text": "Vid uppehållsväder kan det fortfarande finnas låga halter av pollen från gräs och gråbo i luften. Även låga halter av pollen från malörtsambrosia kan förekomma.",
   "days": [
-    {
-      "date": "2026-09-09",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
     {
       "date": "2026-09-10",
       "values": {
@@ -53,6 +38,21 @@
     },
     {
       "date": "2026-09-12",
+      "values": {
+        "Hassel": 0,
+        "Al": 0,
+        "Sälg och viden": 0,
+        "Alm": 0,
+        "Björk": 0,
+        "Bok": 0,
+        "Ek": 0,
+        "Gräs": 1,
+        "Gråbo": 1,
+        "Malörtsambrosia": 1
+      }
+    },
+    {
+      "date": "2026-09-13",
       "values": {
         "Hassel": 0,
         "Al": 0,
