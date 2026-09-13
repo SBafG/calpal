@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-12T09:55:39.143Z",
+  "fetchedAt": "2026-09-13T10:56:33.625Z",
   "region": "Stockholm",
   "offSeason": false,
   "forecastStart": "2026-09-11",
@@ -69,6 +69,8 @@
     {
       "date": "2026-09-15",
       "values": {
+        "Gråbo": 1,
+        "Malörtsambrosia": 1,
         "Hassel": 0,
         "Al": 0,
         "Sälg och viden": 0,
@@ -76,9 +78,7 @@
         "Björk": 0,
         "Bok": 0,
         "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
+        "Gräs": 1
       }
     }
   ],
