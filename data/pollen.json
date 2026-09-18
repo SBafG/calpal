@@ -1,72 +1,11 @@
 {
-  "fetchedAt": "2026-09-17T10:48:53.075Z",
+  "fetchedAt": "2026-09-18T10:24:19.497Z",
   "region": "Stockholm",
-  "offSeason": false,
-  "forecastStart": "2026-09-17",
+  "offSeason": true,
+  "forecastStart": "2026-09-18",
   "forecastEnd": "2026-09-18",
-  "text": "Vid uppehållsväder kan pollen från gräs, gråbo samt malörtsambrosia påträffas i låga halter.",
-  "days": [
-    {
-      "date": "2026-09-17",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-09-18",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-09-19",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    },
-    {
-      "date": "2026-09-20",
-      "values": {
-        "Hassel": 0,
-        "Al": 0,
-        "Sälg och viden": 0,
-        "Alm": 0,
-        "Björk": 0,
-        "Bok": 0,
-        "Ek": 0,
-        "Gräs": 1,
-        "Gråbo": 1,
-        "Malörtsambrosia": 1
-      }
-    }
-  ],
+  "text": "Pollen från gräs, gråbo och malörtsambrosia kan förekomma i luften ännu en tid.\r\n\r\nDet här är säsongens sista pollenprognos. Vi tackar för oss och återkommer med nya prognoser i vår.",
+  "days": [],
   "source": "https://pollenrapporten.se/ (Naturhistoriska Riksmuseet)",
   "levels": {
     "0": "Ingen",
